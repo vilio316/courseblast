@@ -24,7 +24,7 @@ export function Landing(){
                     <a className="p-2 text-center hover:underline">Courses</a>
                     <a className="p-2 text-center hover:underline">Instructors</a>
                     <a className="p-2 text-center hover:underline">Blog</a>
-                    <a className="p-2 text-center hover:underline bg-emerald-800  hover:bg-emerald-600 transition-colors rounded-2xl text-white">Register</a>
+                    <a className="p-2 text-center hover:underline bg-emerald-800  hover:bg-emerald-600 transition-colors rounded-2xl text-white" href='/sign-up'>Register</a>
                 </div>
 
             </div>
@@ -300,11 +300,11 @@ export function Landing(){
                     </p>
                     <ul className='marker:text-emerald-700 list-disc'>
                         <li>Access to 200+ Courses and Videos</li>
-                        <li>Post-Course Evaluation</li>
-                        <li>Certificates of Completion</li>
-                        <li>AI Summarizer and Quizbot</li>
-                        <li>Writing tutorials, courtesy of UScrawl</li>
-                        <li>In-app Instructor Chat</li>
+                        <li>Post-Course Evaluations</li>
+                        <li className='unavailable-perk opacity-75 text-red-700'><del>Certificates of Completion</del></li>
+                        <li className='unavailable-perk opacity-75 text-red-700'><del>AI Summarizer and Quizbot</del></li>
+                        <li className='unavailable-perk opacity-75 text-red-700'><del>Writing tutorials, courtesy of UScrawl</del></li>
+                        <li className='unavailable-perk opacity-75 text-red-700'><del>In-app Instructor Chat</del></li>
                     </ul>
                 </div>
 
@@ -333,6 +333,8 @@ export function Landing(){
                         $150 <span className='text-sm'>per month</span>
                     </p>
                     <ul className='marker:text-emerald-700 list-disc'>
+                        <li>Dynamic grading and report processing</li>
+                        <li>Allows for up to 5 instructors, all on one subscription</li>
                         <li>Access to 200+ Courses and Videos</li>
                         <li>Post-Course Evaluation</li>
                         <li>Certificates of Completion</li>
@@ -361,7 +363,7 @@ export function Landing(){
             </div>
         </section>
 
-        <section className="footer my-4 grid justify-items-center md:grid-cols-3">
+        <section className="footer my-4 grid justify-items-center md:grid-cols-4">
             <div>
                 <p className='text-3xl md:text-4xl font-bold text-emerald-700'>CourseBlast</p>
                 <p>&copy; 2024 CourseBlast Inc. All Rights Reserved</p>
@@ -373,6 +375,15 @@ export function Landing(){
                 <a  className='block'>Privacy and Information Policy</a>
                 <a className='block'>Terms and Conditions</a>
             </div>
+
+            <div>
+                <p className='text-xl underline'>CourseBlast for Instructors</p>
+                <a className='block'>Information Protection Policy</a>
+                <a className='block'>The Vetting Process</a>
+                <a className='block'>More about the Program</a>
+                <a className='block'>The Instructor Fund</a>
+            </div>
+
             <div>
                 <a>
                     Facebook
