@@ -4,7 +4,7 @@ export function Landing(){
 
     return(
         <>
-        <div className="landing p-8 m-auto box-border">
+        <div className="landing p-4 m-auto box-border">
         <div className="header grid grid-cols-12 items-center">
             <div className="col-span-10 md:col-span-4">
                 <p className="text-emerald-800 text-3xl font-bold">
@@ -229,6 +229,157 @@ export function Landing(){
                 </div>
 
             </div>
+        </section>
+
+        <section className="testimonials p-2my-4">
+            <p className="text-xl md:text-2xl font-bold">
+                Testimonials
+            </p>
+            <p>Don't just take our word for it. Here's a few testimonials from some of our favourite customers</p>
+
+            <div className='grid md:grid-cols-3 p-2 my-2 gap-4'>
+                <div className='testimonial p-2 shadow-sm shadow-emerald-700 rounded-lg'>
+                    <div className='grid grid-cols-12 items-center'>
+                        <div className='col-span-2'>
+                            <img src={logo} className='h-8 w-8 rounded-full'/>
+                        </div>
+                        <div className='col-span-10'>
+                                <p>John Smith</p>
+                                <p>Head of Operations, Dolor Inc. </p>
+                        </div>
+                    </div>
+                    <div>
+                        <p className='text-justify'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus nihil omnis unde voluptatem suscipit harum, quisquam asperiores saepe eveniet est numquam corporis quos illum quod, nobis voluptas exercitationem debitis qui!</p>
+                    </div>
+                </div>
+
+                <div className='testimonial p-2  shadow-sm shadow-emerald-700 rounded-lg'>
+                    <div className='grid grid-cols-12 items-center'>
+                        <div className='col-span-2'>
+                            <img src={logo} className='h-8 w-8 rounded-full'/>
+                        </div>
+                        <div className='col-span-10'>
+                                <p>John Smith</p>
+                                <p>Head of Operations, Dolor Inc. </p>
+                        </div>
+                    </div>
+                    <div>
+                        <p className='text-justify'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus nihil omnis unde voluptatem suscipit harum, quisquam asperiores saepe eveniet est numquam corporis quos illum quod, nobis voluptas exercitationem debitis qui!</p>
+                    </div>
+                </div>
+
+                <div className='testimonial p-2  shadow-sm shadow-emerald-700 rounded-lg'>
+                    <div className='grid grid-cols-12 items-center'>
+                        <div className='col-span-2'>
+                            <img src={logo} className='h-8 w-8 rounded-full'/>
+                        </div>
+                        <div className='col-span-10'>
+                                <p>John Smith</p>
+                                <p>Head of Operations, Dolor Inc. </p>
+                        </div>
+                    </div>
+                    <div>
+                        <p className='text-justify'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus nihil omnis unde voluptatem suscipit harum, quisquam asperiores saepe eveniet est numquam corporis quos illum quod, nobis voluptas exercitationem debitis qui!</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section className="pricing my-4 grid">
+            <h2 className='pricing text-xl md:text-2xl'>
+                Pricing Plans
+            </h2>
+            <div className='price_cards grid md:grid-cols-3 gap-4 p-4'>
+                <div className='price_card p-2 my-2'>
+                    <p className='text-emerald-700 md:text-center text-4xl text-bold'>
+                        Basic
+                    </p>
+                    <p className='text-emerald-700 text-lg md:text-center'>
+                        FREE
+                    </p>
+                    <ul className='marker:text-emerald-700 list-disc'>
+                        <li>Access to 200+ Courses and Videos</li>
+                        <li>Post-Course Evaluation</li>
+                        <li>Certificates of Completion</li>
+                        <li>AI Summarizer and Quizbot</li>
+                        <li>Writing tutorials, courtesy of UScrawl</li>
+                        <li>In-app Instructor Chat</li>
+                    </ul>
+                </div>
+
+                <div className='price_card p-2 my-2'>
+                    <p className='text-emerald-700 md:text-center text-4xl text-bold'>
+                        Pro
+                    </p>
+                    <p className='text-emerald-700 text-lg md:text-center px-1'>
+                        <s>$50</s> $19.99<span className='text-sm px-2'>per month</span>
+                    </p>
+                    <ul className='marker:text-emerald-700 list-disc'>
+                        <li>Access to 200+ Courses and Videos</li>
+                        <li>Post-Course Evaluation</li>
+                        <li>Certificates of Completion</li>
+                        <li>AI Summarizer and Quizbot</li>
+                        <li>Writing tutorials, courtesy of UScrawl</li>
+                        <li>In-app Instructor Chat</li>
+                    </ul>
+                </div>
+
+                <div className='price_card p-2 my-2'>
+                    <p className='text-emerald-700 md:text-center text-4xl text-bold'>
+                        Enterprise
+                    </p>
+                    <p className='text-emerald-700 text-lg md:text-center'>
+                        $150 <span className='text-sm'>per month</span>
+                    </p>
+                    <ul className='marker:text-emerald-700 list-disc'>
+                        <li>Access to 200+ Courses and Videos</li>
+                        <li>Post-Course Evaluation</li>
+                        <li>Certificates of Completion</li>
+                        <li>AI Summarizer and Quizbot</li>
+                        <li>Writing tutorials, courtesy of UScrawl</li>
+                        <li>In-app Instructor Chat</li>
+                    </ul>
+                </div>
+            </div>
+            <button className='justify-self-center p-2 text-xl w-10/12 md:w-3/12 my-2 rounded-2xl bg-emerald-700 text-white hover:bg-white hover:text-emerald-700'>
+                See All Plans
+            </button>
+        </section>
+
+        <section className='cta my-4'>
+            <div className='grid md:grid-cols-2'>
+            <div>
+
+            </div>
+            <div>
+                <p className="my-4 text-2xl md:text-4xl text-bold">
+                    What are you waiting for?
+                </p>
+                <p className='text-2xl'>Ignite your learning journey today!</p>
+            </div>
+            </div>
+        </section>
+
+        <section className="footer my-4 grid justify-items-center md:grid-cols-3">
+            <div>
+                <p className='text-3xl md:text-4xl font-bold text-emerald-700'>CourseBlast</p>
+                <p>&copy; 2024 CourseBlast Inc. All Rights Reserved</p>
+            </div>
+            <div>
+                <p className='text-xl underline'>About Us</p>
+                <a className='block'>Company Bio</a>
+                <a  className='block'>Our Staff </a>
+                <a  className='block'>Privacy and Information Policy</a>
+                <a className='block'>Terms and Conditions</a>
+            </div>
+            <div>
+                <a>
+                    Facebook
+                </a>
+                <a>Instagram</a>
+                <a>Twitter</a>
+                </div>
         </section>
         </div>
 
