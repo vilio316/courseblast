@@ -33,7 +33,7 @@ export function Landing(){
         <div className=" grid md:grid-cols-2">
             <div>
                 <p className="font-bold text-4xl my-2">Online Learning Solutions for Students and Instructors</p>
-                <p className="text-lg md:text-xl indent-6">
+                <p className="text-lg md:text-xl indent-6 text-justify">
                     At CourseBlast, we provide dynamic and unique learning solutions that can be used to meet the diverse educational needs of students and instructors alike. With self-paced, easy-to-monitor courses and cutting-edge delivery technologies, we remain the number 1 provider of e-learning facilities.
                 </p>
             </div>
@@ -173,9 +173,62 @@ export function Landing(){
                     <p className="est_time text-sm my-2"> Est. Completion Time: 9 hours</p>
                 </div>
             </div>
-            <button className='justify-self-center p-4 text-xl w-3/12 my-2 rounded-2xl bg-emerald-700 text-white hover:bg-white hover:text-emerald-700'>
+            <button className='justify-self-center p-2 text-xl w-10/12 md:w-3/12 my-2 rounded-2xl bg-emerald-700 text-white hover:bg-white hover:text-emerald-700'>
                 See All Courses
             </button>
+        </section>
+
+        <section className="my-4 reasons">
+            <h2 className='p-2 text-xl md:text-2xl font-bold'>Why You Should Choose CourseBlast</h2>
+            <div className='grid md:grid-cols-2'>
+                <div>
+                    <p className='p-2 text-xl font-bold'>Tailored Learning</p>
+                    <p>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
+                </div>
+
+                <div>
+                    {/* Insert Image/Illustration Here */}
+                </div>
+
+            </div>
+
+            <div className='grid md:grid-cols-2'>
+            <div>
+                    {/* Insert Image/Illustration Here */}
+                </div>
+               
+                <div>
+                    <p className='p-2 text-xl font-bold md:text-2xl'>Tailored Learning</p>
+                    <p>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
+                </div>
+
+               
+
+            </div>
+
+            <div className='grid md:grid-cols-2'>
+                <div>
+                    <p className='p-2 text-xl md:text-2xl font-bold'>Tailored Learning</p>
+                    <p>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
+                </div>
+
+                <div>
+                    {/* Insert Image/Illustration Here */}
+                </div>
+
+            </div>
+
+            <div className='grid md:grid-cols-2'>
+            <div>
+                    {/* Insert Image/Illustration Here */}
+                </div>
+                
+                <div>
+                    <p className='p-2 text-xl font-bold md:text-2xl'>Tailored Learning</p>
+                    <p>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
+                </div>
+
+            </div>
         </section>
         </div>
 
