@@ -1,10 +1,13 @@
 import { useState } from "react"
-
 import { FaApple, FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
+import login from '../assets/login_illustration.jpeg'
+
 
 export function SignUp(){
    let [password_show, changeState] = useState(false)
-   //let []
+   let [full_name, setName] = useState('')
+   let [email, setMail] = useState('')
+   let [pass, setPwd] = useState('')
 
     return(
         <>
@@ -68,8 +71,8 @@ export function SignUp(){
                         Sign Up 
                     </button>
                     </form>
-                    <div className="form_illustration">
-
+                    <div className="form_illustration md:col-span-4">
+                        <img src={login} alt="Login Illustration" className="h-full object-cover"/>
                     </div>
                     </div>
 
