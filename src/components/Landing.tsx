@@ -1,4 +1,8 @@
 import logo from '../assets/react.svg'
+import hero from '../assets/hero_illust.jpeg'
+import selfpaced from '../assets/self-paced.jpg'
+import security_illustration from '../assets/security_illustration.jpg'
+
 
 export function Landing(){
 
@@ -30,19 +34,20 @@ export function Landing(){
             </div>
         
         <section className="my-4 hero">
-        <div className=" grid md:grid-cols-2">
-            <div>
+        <div className=" grid md:grid-cols-2 items-center">
+            <div className='p-4'>
                 <p className="font-bold text-4xl my-2">Online Learning Solutions for Students and Instructors</p>
                 <p className="text-lg md:text-xl indent-6 text-justify">
                     At CourseBlast, we provide dynamic and unique learning solutions that can be used to meet the diverse educational needs of students and instructors alike. With self-paced, easy-to-monitor courses and cutting-edge delivery technologies, we remain the number 1 provider of e-learning facilities.
                 </p>
             </div>
-            {/* Add Illustration Here*/}
-            
+            <div>
+        <img src={hero} alt="Online Learning Illustration" className='lg:w-6/12 w-10/12 sm:w-9/12 mx-auto' />
+        </div>
         </div>
         </section>
 
-        <section className="course_selection my-4 grid">
+        <section className="course_selection my-4 grid p-4">
             <div className="grid md:grid-cols-12">
             <h2 className="text-3xl md:col-span-3">
                 Our Courses
@@ -52,7 +57,7 @@ export function Landing(){
             <p className="hidden md:block">Check through our extensive course library to start your learning journey, continue learning or even support your favourite instructors.</p>
             <p className="md:hidden">Find your next course here!</p>
 
-            <div className="course_select_pane grid grid-cols-1 md:grid-cols-4 my-2">
+            <div className="course_select_pane grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 my-2">
                 <div className='course border-2 rounded-xl shadow-md shadow-grey-300 p-4 my-4 mx-2'>
                     <p className="course_name overflow-hidden text-xl font-bold w-10/12 text-ellipsis whitespace-nowrap">
                     <a href='/courses/course_id'>Object-Oriented Programming with Python: Zero to Hero in 30 Days</a>
@@ -178,42 +183,42 @@ export function Landing(){
             </button>
         </section>
 
-        <section className="my-4 reasons">
+        <section className="my-4 reasons p-4">
             <h2 className='p-2 text-xl md:text-2xl font-bold'>Why You Should Choose CourseBlast</h2>
-            <div className='grid md:grid-cols-2'>
+            <div className='grid md:grid-cols-2 my-2'>
                 <div>
                     <p className='p-2 text-xl font-bold'>Tailored Learning</p>
                     <p>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
                 </div>
 
                 <div>
-                    {/* Insert Image/Illustration Here */}
+                    <img src={selfpaced} className='w-6/12 mx-auto'/>
                 </div>
 
             </div>
 
-            <div className='grid md:grid-cols-2'>
+            <div className='grid md:grid-cols-2 my-2'>
             <div>
                     {/* Insert Image/Illustration Here */}
                 </div>
                
                 <div>
-                    <p className='p-2 text-xl font-bold md:text-2xl'>Tailored Learning</p>
-                    <p>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
+                    <p className='p-2 text-xl font-bold md:text-2xl'>Flexibility</p>
+                    <p>All of our courses at CourseBlast are very user-friendly and can support any and all learning structure. Whether you prefer to binge-learn or study consistently, we're here for you. Our goal-based learning system also helps to ensure high completion and retention rates across the board.  </p>
                 </div>
 
                
 
             </div>
 
-            <div className='grid md:grid-cols-2'>
-                <div>
-                    <p className='p-2 text-xl md:text-2xl font-bold'>Tailored Learning</p>
-                    <p>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
+            <div className='grid md:grid-cols-2 my-2 items-center'>
+                <div className='p-2'>
+                    <p className='p-2 text-xl md:text-2xl font-bold'>Secure Learning</p>
+                    <p className='text-lg text-justify indent-2'>At CourseBlast, your safety is important. Our sign-in and sign-up systems are secure and support multi-factor authentication and use verified encryption policies to ensure that your data is safe with us. We also offer on-site security to combat the loss of sensitive data, such as credit card numbers, ID documents and course data. To our instructors, we assure you, your courses and earnings are safe with us. </p>
                 </div>
 
                 <div>
-                    {/* Insert Image/Illustration Here */}
+                    <img src={security_illustration} className='mx-auto w-9/12 rounded-xl'/>
                 </div>
 
             </div>
