@@ -1,4 +1,8 @@
+//import { useState } from "react"
+
 export function SignUp(){
+   // let [password_show, changeState] = useState(false)
+
 
     return(
         <>
@@ -7,7 +11,7 @@ export function SignUp(){
                 <p className="text-3xl font-bold text-emerald-700">CourseBlast</p>
                 <p className="text-xs italic ">Sign Up for CourseBlast</p>
                     <div className="grid h-5/6">
-                        <form className="my-2 grid">
+                        <form className="my-2">
                     <label htmlFor="name" className="block font-bold text-xl">Username</label>
                     <input id="name" type='name' required placeholder="Username" className="outline-none p-1 md:w-8/12 rounded-md border-2 border-emerald-700 indent-2"/>
 
