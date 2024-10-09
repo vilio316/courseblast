@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Landing } from './components/Landing'
-import { SignUp } from './components/SignUpIn'
+import { SignIn, SignUp } from './components/SignUpIn'
 
 const routes = createBrowserRouter([
   {
@@ -11,6 +11,10 @@ const routes = createBrowserRouter([
   {
     path:'/sign-up',
     element: <SignUp/>
+  },
+  {
+    path: "/sign-in",
+    element: <SignIn/>
   }
 ])
 
