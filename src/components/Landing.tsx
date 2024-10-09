@@ -2,27 +2,40 @@ import logo from '../assets/react.svg'
 import hero from '../assets/hero_illust.jpeg'
 import selfpaced from '../assets/self-paced.jpg'
 import security_illustration from '../assets/security_illustration.jpg'
+import { useState } from 'react'
 
 
 export function Landing(){
-
+    let [nav_state, showNav]  = useState(false)
     return(
         <>
         <div className="landing p-4 m-auto box-border">
-        <div className="header grid grid-cols-12 items-center">
+        <div className="header grid grid-cols-12 items-center relative">
             <div className="col-span-10 md:col-span-4">
                 <p className="text-emerald-800 text-3xl font-bold">
                     <a href='/' target='_blank'>CourseBlast</a>
                     </p>
             </div>
 
-            <div className='menu peer md:hidden col-span-2'>
+            {/*Mobile Navigation Bar*/}
+
+            <div className='menu peer md:hidden col-span-2' onClick={()=> showNav(true)}>
                     <span className="h-1 w-6/12 block my-1 rounded-lg bg-emerald-800"></span>
                     <span className="h-1 w-6/12 block my-1 rounded-lg bg-emerald-800"></span>
                     <span className="h-1 w-6/12 block my-1 rounded-lg bg-emerald-800"></span>
             </div>
+            <div className={`menu_content block md:hidden absolute top-0 z-10 bg-white ${nav_state? `mt-0`: `-mt-96`} w-full p-2 transition-all`}>
+               <span className='w-full text-end p-2 block' onClick={()=> showNav(false)}>X</span>
+                <a className='block p-2'>Home</a>
+                <a className='block'>About</a>
+                <a className='block'>Courses</a>
+                <a className='block'>Instructors</a>
+                <a className='block'>Blog</a>
+            </div>
 
-             
+
+            {/* Mobile Nav Bar ends here*/} 
+
            <div className="nav_links md:grid md:grid-cols-5 md:col-span-8 hidden text-xl">
                     <a className="p-2 text-center hover:underline">About</a>
                     <a className="p-2 text-center hover:underline">Courses</a>
@@ -35,7 +48,7 @@ export function Landing(){
         
         <section className="my-4 hero">
         <div className=" grid md:grid-cols-2 items-center">
-            <div className='p-4'>
+            <div className='md:p-4 p-2'>
                 <p className="font-bold text-4xl my-2">Online Learning Solutions for Students and Instructors</p>
                 <p className="text-lg md:text-xl indent-6 text-justify">
                     At CourseBlast, we provide dynamic and unique learning solutions that can be used to meet the diverse educational needs of students and instructors alike. With self-paced, easy-to-monitor courses and cutting-edge delivery technologies, we remain the number 1 provider of e-learning facilities.
