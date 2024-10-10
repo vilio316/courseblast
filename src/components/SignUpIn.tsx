@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { FaApple, FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
 import login from '../assets/login_illustration.jpeg'
+import { useAppDispatch } from "../redux/hooks";
+import { setEmailAddress, setFirstName, setLastName } from "../redux/userSlice";
 
 
 export function SignUp(){
@@ -8,6 +10,8 @@ export function SignUp(){
    let [full_name, setName] = useState('')
    let [email, setMail] = useState('')
    let [pass, setPwd] = useState('')
+   let [last_name, setLName] = useState('')
+   let dispatch = useAppDispatch()
 
     return(
         <>
@@ -18,8 +22,11 @@ export function SignUp(){
                     
                     <div className="grid h-5/6 md:grid-cols-12">
                         <form className="my-2 grid col-span-8">
-                    <label htmlFor="name" className="block font-bold text-lg">Full Name</label>
+                    <label htmlFor="name" className="block font-bold text-lg">First Name</label>
                     <input id="name" type='name' autoFocus value={full_name} onChange={(e)=> setName(e.target.value)} required placeholder="Full Name" className="outline-none p-2 md:w-8/12 rounded-md border-2 border-emerald-700 indent-2 my-2"/>
+
+                    <label htmlFor="lname" className="block font-bold text-lg">Last Name</label>
+                    <input type="text" name="lname" id="lname" onChange={(e)=> setLName(e.target.value)}autoFocus required placeholder="Last Name" className="outline-none p-2 md:w-8/12 rounded-md border-2 border-emerald-700 indent-2 my-2"/>
 
                     <label htmlFor="password" className="block font-bold text-lg">Password</label>
                     <div className="grid grid-cols-12 items-center">
@@ -68,7 +75,12 @@ export function SignUp(){
                     </div>
                     </div>
                         <button className="bg-emerald-700 w-10/12 md:w-6/12 my-2 p-2 rounded-3xl text-white justify-self-center self-end" onClick={(e)=> {
-                            e.preventDefault()
+                            e.preventDefault();
+                            dispatch(
+                                setFirstName(full_name)
+                            )
+                            dispatch(setLastName(last_name))
+                            dispatch(setEmailAddress(email))
                         }}>
                         Sign Up 
                     </button>
@@ -136,8 +148,8 @@ export function SignIn(){
                     </div>
 
             </form>
-            <p className="text-center text-sm my-2">
-                Don't have an account? <a href="/sign-up" className="font-bold">Sign up</a> here
+            <p className="text-center my-2">
+                Don't have an account? <a href="/sign-up" className="underline">Sign up</a> here
             </p>
             </div>
         </div>

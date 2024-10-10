@@ -2,7 +2,9 @@ import logo from '../assets/react.svg'
 import hero from '../assets/hero_illust.jpeg'
 import selfpaced from '../assets/self-paced.jpg'
 import security_illustration from '../assets/security_illustration.jpg'
+import expert_1 from '../assets/expert_1.jpg'
 import { useState } from 'react'
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
 
 
 export function Landing(){
@@ -24,13 +26,13 @@ export function Landing(){
                     <span className="h-1 w-6/12 block my-1 rounded-lg bg-emerald-800"></span>
                     <span className="h-1 w-6/12 block my-1 rounded-lg bg-emerald-800"></span>
             </div>
-            <div className={`menu_content block md:hidden absolute top-0 z-10 bg-white ${nav_state? `mt-0`: `-mt-96`} w-full p-2 transition-all`}>
-               <span className='w-full text-end p-2 block' onClick={()=> showNav(false)}>X</span>
+            <div className={`menu_content block md:hidden absolute top-0 z-10 bg-white bg-opacity-75 ${nav_state? `mt-0`: `-mt-96`} w-full p-2 transition-all`}>
+               <span className='w-full text-end p-2 block hover:text-red-500' onClick={()=> showNav(false)}>X</span>
                 <a className='block p-2'>Home</a>
-                <a className='block'>About</a>
-                <a className='block'>Courses</a>
-                <a className='block'>Instructors</a>
-                <a className='block'>Blog</a>
+                <a className='block p-2'>About</a>
+                <a className='block p-2'>Courses</a>
+                <a className='block p-2'>Instructors</a>
+                <a className='block p-2'>Blog</a>
             </div>
 
 
@@ -62,7 +64,7 @@ export function Landing(){
 
         <section className="course_selection my-4 grid p-4">
             <div className="grid md:grid-cols-12">
-            <h2 className="text-3xl md:col-span-3">
+            <h2 className="text-xl md:text-3xl md:col-span-3 font-bold">
                 Our Courses
             </h2>
             <input type="text" name="course_search" id="search" className="md:col-span-8 w-6/12 rounded-2xl text-xl border-emerald-700 border-2 p-2 outline-none focus:w-10/12 transition-all" maxLength={70} placeholder="Search Courses Here..." />
@@ -196,7 +198,7 @@ export function Landing(){
             </button>
         </section>
 
-        <section className="my-4 reasons p-4">
+        <section className="my-4 reasons md:p-4 p-2">
             <h2 className='p-2 text-xl md:text-2xl font-bold'>Why You Should Choose CourseBlast</h2>
             <div className='grid md:grid-cols-2 my-2'>
                 <div>
@@ -226,8 +228,8 @@ export function Landing(){
 
             <div className='grid md:grid-cols-2 my-2 items-center'>
                 <div className='p-2'>
-                    <p className='p-2 text-xl md:text-2xl font-bold'>Secure Learning</p>
-                    <p className='text-lg text-justify indent-2'>At CourseBlast, your safety is important. Our sign-in and sign-up systems are secure and support multi-factor authentication and use verified encryption policies to ensure that your data is safe with us. We also offer on-site security to combat the loss of sensitive data, such as credit card numbers, ID documents and course data. To our instructors, we assure you, your courses and earnings are safe with us. </p>
+                    <p className='p-2 text-lg md:text-xl font-bold'>Secure Learning</p>
+                    <p className='md:text-lg text-justify indent-2'>At CourseBlast, your safety is important. Our sign-in and sign-up systems are secure and support multi-factor authentication and use verified encryption policies to ensure that your data is safe with us. We also offer on-site security to combat the loss of sensitive data, such as credit card numbers, ID documents and course data. To our instructors, we assure you, your courses and earnings are safe with us. </p>
                 </div>
 
                 <div>
@@ -236,20 +238,20 @@ export function Landing(){
 
             </div>
 
-            <div className='grid md:grid-cols-2'>
+            <div className='grid md:grid-cols-2 items-center'>
             <div>
-                    {/* Insert Image/Illustration Here */}
+                    <img src={expert_1} alt="Expert Instructors" className='w-9/12 mx-auto rounded-xl' />
                 </div>
                 
                 <div>
-                    <p className='p-2 text-xl font-bold md:text-2xl'>Tailored Learning</p>
-                    <p>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
+                    <p className='p-2 text-lg font-bold md:text-xl'>Expert Instructors and Staff</p>
+                    <p className='text-lg md:text-xl'>At CourseBlast, we believe in providing high-quality education to all of our users. In line with this, we've gone the extra mile by ensuring that all of our instructors are certified and regularly testing and updating course material as at when necessary. </p>
                 </div>
 
             </div>
         </section>
 
-        <section className="testimonials p-2my-4">
+        <section className="testimonials p-2 md:p-4 my-4">
             <p className="text-xl md:text-2xl font-bold">
                 Testimonials
             </p>
@@ -304,8 +306,8 @@ export function Landing(){
 
         </section>
 
-        <section className="pricing my-4 grid">
-            <h2 className='pricing text-xl md:text-2xl'>
+        <section className="pricing my-4 grid p-4">
+            <h2 className='pricing text-xl md:text-3xl font-bold'>
                 Pricing Plans
             </h2>
             <div className='price_cards grid md:grid-cols-3 gap-4 p-4'>
@@ -368,7 +370,7 @@ export function Landing(){
         </section>
 
         <section className='cta my-4'>
-            <div className='grid md:grid-cols-2'>
+            <div className='grid md:grid-cols-2 md:items-center md:h-48'>
             <div>
 
             </div>
@@ -381,7 +383,7 @@ export function Landing(){
             </div>
         </section>
 
-        <section className="footer my-4 grid justify-items-center md:grid-cols-4">
+        <section className="footer my-4 grid justify-items-center md:grid-cols-4 gap-y-4">
             <div>
                 <p className='text-3xl md:text-4xl font-bold text-emerald-700'>CourseBlast</p>
                 <p>&copy; 2024 CourseBlast Inc. All Rights Reserved</p>
@@ -402,12 +404,11 @@ export function Landing(){
                 <a className='block'>The Instructor Fund</a>
             </div>
 
-            <div>
-                <a>
-                    Facebook
-                </a>
-                <a>Instagram</a>
-                <a>Twitter</a>
+            <div className='grid-cols-4 grid gap-x-4'>
+                <FaFacebook size={"2.5rem"} className='block' fill='blue'/>
+                <FaTwitter size={'2.5rem'} className="block" fill='blue'/>
+                <FaInstagram size={'2.5rem'} className='block' fill='pink'/>
+                <FaLinkedin size={"2.5rem"} className='block' fill="blue"/>
                 </div>
         </section>
         </div>
