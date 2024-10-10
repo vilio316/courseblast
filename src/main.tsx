@@ -4,6 +4,7 @@ import { Landing } from './components/Landing'
 import { SignIn, SignUp } from './components/SignUpIn'
 import { Provider } from 'react-redux'
 import { user_store } from './redux/store'
+import { Dashboard } from './components/UserDash'
 
 const routes = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const routes = createBrowserRouter([
   {
     path: "/sign-in",
     element: <SignIn/>
+  },
+  {
+    path: '/user',
+    element: <Dashboard/>
   }
 ])
 

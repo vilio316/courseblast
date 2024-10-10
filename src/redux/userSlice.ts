@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type nameType ={
+ name:  { 
     first_name: string,
     last_name: string, 
     email: string,
     id:string
+}
 }
 
 const userSlice = createSlice({
@@ -32,7 +34,7 @@ const userSlice = createSlice({
         }
     }
 })
-export const first_name = (state: nameType)=> state.first_name
-export const last_name = (state: nameType)=> state.last_name
+export const first_name = (state: nameType)=> state.name.first_name
+export const last_name = (state: nameType)=> state.name.last_name
 export const {setFirstName, setLastName, setEmailAddress, setID} = userSlice.actions
 export default userSlice.reducer
