@@ -2,7 +2,7 @@ import { useState } from "react"
 import { FaApple, FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
 import login from '../assets/login_illustration.jpeg'
 import { useAppDispatch } from "../redux/hooks";
-import { setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
+import { setID} from "../redux/userSlice";
 import supabase from "../supabase/clientSetup";
 import { useNavigate } from "react-router";
 

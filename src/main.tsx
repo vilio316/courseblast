@@ -3,8 +3,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Landing } from './components/Landing'
 import { SignIn, SignUp } from './components/SignUpIn'
 import { Provider } from 'react-redux'
-import { user_store } from './redux/store'
+import { persisted_store, user_store } from './redux/store'
 import { Dashboard } from './components/UserDash'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const routes = createBrowserRouter([
   {
@@ -27,6 +28,8 @@ const routes = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <Provider store={user_store}>
+    <PersistGate loading={null} persistor={persisted_store}>
   <RouterProvider router={routes} />
+  </PersistGate>
   </Provider>
 )
