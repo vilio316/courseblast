@@ -1,9 +1,9 @@
 import { FaHamburger, FaUser } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
-import { first_name } from "../redux/userSlice";
+import { last_name } from "../redux/userSlice";
 
 export function Dashboard(){
-    let firstName = useAppSelector(first_name)
+    let firstName = useAppSelector(last_name)
 
     return(
         <>
@@ -18,8 +18,9 @@ export function Dashboard(){
                 <FaHamburger size={"2rem"} fill="green" />
             </i>
         </div>
-        <p className="text-2xl">Welcome Back, {firstName} </p>
         </div>
+
+        <p className="text-2xl">Welcome Back, {firstName} </p>
         </div>
         </>
     )

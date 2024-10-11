@@ -2,7 +2,9 @@ import { useState } from "react"
 import { FaApple, FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
 import login from '../assets/login_illustration.jpeg'
 import { useAppDispatch } from "../redux/hooks";
-import { setEmailAddress, setFirstName, setLastName } from "../redux/userSlice";
+import { setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
+import supabase from "../supabase/clientSetup";
+import { useNavigate } from "react-router";
 
 
 export function SignUp(){
@@ -12,6 +14,29 @@ export function SignUp(){
    let [pass, setPwd] = useState('')
    let [last_name, setLName] = useState('')
    let dispatch = useAppDispatch()
+   let navigate = useNavigate()
+
+    async function signUp(email:string, pwd:string){
+        const {data, error} = await supabase.auth.signUp({
+            email: email,
+            password: pwd
+        })
+        console.log(data, error)
+        return data
+    }
+
+    async function setUpNewUser(email: string, pwd:  string){
+        const user_data = await signUp(email, pwd);
+        let user_id = user_data.user?.id
+        const {data, error} = await supabase.from("users").insert({
+            id: user_id,
+            user_first_name: full_name,
+            user_last_name: last_name,
+            email: email
+        })
+        console.log(data, error)
+    }
+
 
     return(
         <>
@@ -76,11 +101,9 @@ export function SignUp(){
                     </div>
                         <button className="bg-emerald-700 w-10/12 md:w-6/12 my-2 p-2 rounded-3xl text-white justify-self-center self-end" onClick={(e)=> {
                             e.preventDefault();
-                            dispatch(
-                                setFirstName(full_name)
-                            )
-                            dispatch(setLastName(last_name))
-                            dispatch(setEmailAddress(email))
+                            setUpNewUser(email, pass);
+                            navigate('/sign-in')
+
                         }}>
                         Sign Up 
                     </button>
@@ -101,7 +124,28 @@ export function SignUp(){
 }
 
 export function SignIn(){
+    let dispatch = useAppDispatch()
+    let navigate = useNavigate()
+    let [email, setEmail] = useState('')
+    let [pwd, setPass] = useState('')
 
+
+    async function signIn(email:string, pwd:string){
+        const {data, error} = await supabase.auth.signInWithPassword({
+            email: email,
+            password: pwd, 
+        })
+        if(data.user){
+            console.log(data)
+            dispatch(setID(data.user.id));
+            navigate('/user')
+        }
+        else{
+            console.log(error)
+
+        }
+
+    }
     return(
         <>
         <div className="grid place-items-center w-11/12 mx-auto h-screen">
@@ -111,12 +155,12 @@ export function SignIn(){
             <form className="grid">
                 <div>
                 <label className="text-lg font-bold block">Email Address</label>
-                <input id="email_add" type='email' required placeholder="Email Address" className=" peer p-2 md:w-8/12 rounded-md border-2 border-emerald-700 outline-none indent-2 my-2"/>
+                <input id="email_add" type='email' required placeholder="Email Address" className=" peer p-2 md:w-8/12 rounded-md border-2 border-emerald-700 outline-none indent-2 my-2" onChange={(e)=> setEmail(e.target.value)}/>
                 </div>
 
                 <div>
                 <label className="text-lg font-bold block">Password</label>
-                <input id="email_add" type='email' required placeholder="Password" className=" peer p-2 md:w-8/12 rounded-md border-2 border-emerald-700 outline-none indent-2 my-2"/>
+                <input id="email_add" type='password' required placeholder="Password" className=" peer p-2 md:w-8/12 rounded-md border-2 border-emerald-700 outline-none indent-2 my-2" onChange={(e)=> setPass(e.target.value)}/>
                 </div>
 
                 <div className="provider_bay grid justify-items-center md:grid-cols-3 gap-1 md:gap-4 p-2">
@@ -142,7 +186,12 @@ export function SignIn(){
                     </div>
                     </div>
                 <div className="justify-self-center grid w-10/12 md:w-6/12">
-                    <button className="bg-emerald-700 text-white rounded-2xl text-lg md:text-xl p-2 ">
+                    <button className="bg-emerald-700 text-white rounded-2xl text-lg md:text-xl p-2 " type="submit" onClick={
+                        (e)=>{
+                            e.preventDefault();
+                            signIn(email, pwd)
+                        }
+                    }>
                         Sign In
                     </button>
                     </div>
