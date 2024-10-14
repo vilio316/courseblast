@@ -49,12 +49,13 @@ export function Landing(){
             </div>
         
         <section className="my-4 hero">
-        <div className=" grid md:grid-cols-2 items-center">
+        <div className=" grid md:grid-cols-2 items-center justify-items-center">
             <div className='md:p-4 p-2'>
                 <p className="font-bold text-4xl my-2">Online Learning Solutions for Students and Instructors</p>
-                <p className="text-lg md:text-xl indent-6 text-justify">
+                <p className="text-lg md:text-xl indent-6 text-justify my-4">
                     At CourseBlast, we provide dynamic and unique learning solutions that can be used to meet the diverse educational needs of students and instructors alike. With self-paced, easy-to-monitor courses and cutting-edge delivery technologies, we remain the number 1 provider of e-learning facilities.
                 </p>
+                <a className="text-white bg-emerald-700 text-xl rounded-2xl block w-4/12 hover:opacity-65 text-center p-4 my-4 hover:underline font-bold transition-opacity ">Read More</a>
             </div>
             <div>
         <img src={hero} alt="Online Learning Illustration" className='lg:w-6/12 w-10/12 sm:w-9/12 mx-auto' />
