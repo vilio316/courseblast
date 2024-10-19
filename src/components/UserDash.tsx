@@ -2,6 +2,7 @@ import { FaUser } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
 import { last_name } from "../redux/userSlice";
 import react from '../assets/react.svg'
+import { useNavigate } from "react-router";
 
 export type UserCourseData = {
     course_title: string,
@@ -9,6 +10,7 @@ export type UserCourseData = {
     course_progress_percentage: number, 
     //course_pfp_src : string,
     course_blurb: string,
+    courseID : string, 
 }
 type propType = {
     object: UserCourseData
@@ -19,6 +21,7 @@ let dummyUCD : UserCourseData[] = [{
     course_instructor: "Amir Khan",
     course_title: "OOP Fundamentals",
     course_progress_percentage: 0,
+    courseID: "33acb-56f93"
     
 }, 
 {
@@ -26,7 +29,7 @@ course_blurb: "Understanding Active Server Pages in 30 days, with the special he
 course_instructor: "J.R.R. Tolkien",
 course_title: "Nothing but .NET: 30 Days of ASP.NET with your favourite Basketball Stars",
 course_progress_percentage: 35,
-
+courseID: "43red-45k67"
 }, 
 
 {
@@ -34,7 +37,7 @@ course_progress_percentage: 35,
     course_instructor: "Araki, Hirohiko",
     course_title: "Stando Power! : The Musical History of JoJo's Bizarre Adventure",
     course_progress_percentage: 60,
-    
+    courseID: '24eef-ru3y4'
     }, 
 
     {
@@ -42,14 +45,15 @@ course_progress_percentage: 35,
         course_instructor: "J.R.R. Tolkien",
         course_title: "Nothing but .NET: 30 Days of ASP.NET with your favourite Basketball Stars",
         course_progress_percentage: 56,
-        
+        courseID: '67uyr-ghe32'
         }, 
 
 
 ]
 
 function ShowCourse(props : propType){
-    let {course_blurb, course_instructor, course_progress_percentage, course_title} = props.object
+    let navigate = useNavigate()
+    let {course_blurb, course_instructor, course_progress_percentage, course_title, courseID} = props.object
     let initial = course_progress_percentage
     let convert = () =>{
         let newVal = initial / 100 
@@ -76,9 +80,9 @@ function ShowCourse(props : propType){
                 </div>
             </div>
             <p className="font-bold">{course_instructor}</p>
-            <p className="my-4 h-32 overflow-auto">{course_blurb}</p>
+            <p className="my-4 h-32 overflow-y-auto">{course_blurb}</p>
 
-            <button className="hidden group-hover:block p-2 rounded-2xl bg-emerald-700 text-white">
+            <button onClick={()=> navigate(`/user/courses/${courseID}`)}className="hidden group-hover:block p-2 rounded-2xl bg-emerald-700 text-white">
                 Continue
             </button>
         </div>
@@ -110,14 +114,14 @@ export function Dashboard(){
 
         <div className="grid grid-cols-4 items-center my-4">
             <div className="grid col-span-1 justify-items-center">
-            <img src={react} alt="User Profile Photograph" className="rounded-full w-6/12" />
+            <img src={react} alt="User Profile Photograph" className="rounded-full w-6/12 p-4" />
             </div>
-            <div className="grid col-span-3">
+            <div className="grid col-span-3 p-4">
                 <p className="font-bold text-2xl">Hi, {firstName} !</p>
                 <p>Pick up from where you left off!</p>
             </div>
         </div>
-        <p className="text-4xl font-bold">Your Courses</p>
+        <p className="text-4xl font-bold my-4">Your Courses</p>
 
         <div className="user-courses-my-4 grid grid-cols-3">
             {

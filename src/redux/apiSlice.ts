@@ -1,7 +1,7 @@
-import { createApi, fakeBaseQuery, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+/*import { createApi, fakeBaseQuery, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import supabase from "../supabase/clientSetup";
 
-/* const supabaseApiSlice = createApi({
+ const supabaseApiSlice = createApi({
     reducerPath: 'supabaseApi',
     baseQuery: fakeBaseQuery(),
     endpoints: (builder) =>({
@@ -17,12 +17,12 @@ import supabase from "../supabase/clientSetup";
             }
         })
     })
-}) */
+}) 
 export {}
 
 
 
-/* endpoints: (builder) => ({
+endpoints: (builder) => ({
     getBlogs: builder.query({
       queryFn: async () => {
         // Supabase conveniently already has `data` and `error` fields

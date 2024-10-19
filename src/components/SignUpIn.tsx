@@ -13,7 +13,7 @@ export function SignUp(){
    let [email, setMail] = useState('')
    let [pass, setPwd] = useState('')
    let [last_name, setLName] = useState('')
-   let dispatch = useAppDispatch()
+   //let dispatch = useAppDispatch()
    let navigate = useNavigate()
 
     async function signUp(email:string, pwd:string){
