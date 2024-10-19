@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { persisted_store, user_store } from './redux/store'
 import { Dashboard } from './components/UserDash'
 import { PersistGate } from 'redux-persist/integration/react'
+import { UserCourseDetails } from './components/UserCourseDetails'
 
 const routes = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const routes = createBrowserRouter([
   {
     path: '/user',
     element: <Dashboard/>
+  },
+  {
+    path: '/user/courses/:courseID',
+    element: <UserCourseDetails />
   }
 ])
 

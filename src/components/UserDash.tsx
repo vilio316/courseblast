@@ -3,6 +3,7 @@ import { useAppSelector } from "../redux/hooks";
 import { last_name } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
+import { useGetUsersQuery } from "../redux/apiSlice";
 
 export type UserCourseData = {
     course_title: string,
@@ -16,7 +17,7 @@ type propType = {
     object: UserCourseData
 }
 
-let dummyUCD : UserCourseData[] = [{
+let dummyCourseData : UserCourseData[] = [{
     course_blurb: "Go from Zero To OOP Hero in thirty days with this new and improved Python course. In this course, you will come to understand various concepts in the field of object-oriented programming, including polymorphism, encapsulation and abstraction. You will also learn various Python techniques, best practices and libraries to improve your understanding of Python programming concepts. ",
     course_instructor: "Amir Khan",
     course_title: "OOP Fundamentals",
@@ -53,6 +54,11 @@ courseID: "43red-45k67"
 
 function ShowCourse(props : propType){
     let navigate = useNavigate()
+    let users = useGetUsersQuery()
+    console.log(users.data)
+
+
+
     let {course_blurb, course_instructor, course_progress_percentage, course_title, courseID} = props.object
     let initial = course_progress_percentage
     let convert = () =>{
@@ -125,8 +131,8 @@ export function Dashboard(){
 
         <div className="user-courses-my-4 grid grid-cols-3">
             {
-                dummyUCD.map((course) => (
-                    <ShowCourse object = {course} />
+                dummyCourseData.map((course) => (
+                    <ShowCourse object = {course} key={course.courseID}  />
                 ))
             }
         </div>

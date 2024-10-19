@@ -41,7 +41,7 @@ export function SignUp(){
     return(
         <>
         <div className="grid place-items-center p-2 w-11/12 mx-auto">
-                <div className="w-11/12 shadow-md shadow-black rounded-xl p-4 m-4">
+                <div className="w-11/12 shadow-md shadow-black rounded-xl p-4">
                 <p className="text-3xl font-bold text-emerald-700">CourseBlast</p>
                 <p className="text-sm md:text-lg">Sign Up for CourseBlast!</p>
                     
@@ -79,20 +79,20 @@ export function SignUp(){
                     <p className="text-center my-2 font-bold">OR</p>
                     <div className="provider_bay grid justify-items-center md:grid-cols-3 gap-2 md:gap-4 p-2">
                     <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 
-                    border-2 md:w-full hover:bg-emerald-700 hover:text-white">
+                    border-2 w-full hover:bg-emerald-700 hover:text-white">
                         <div className="grid grid-cols-12 items-center">
                             <FaGoogle fill="red" size={"2rem"} className="col-span-2 justify-self-center"/>
                             <p className="col-span-6 text-center text-sm md:text-lg">Sign in with Google</p>
                         </div>
                     </div>
-                    <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 border-2 md:w-full hover:bg-emerald-700 hover:text-white">
+                    <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 border-2 w-full hover:bg-emerald-700 hover:text-white">
                         <div className="grid grid-cols-12 items-center">
                             <FaApple className="col-span-2 justify-self-center"size={'2rem'}/>
                             <p className="col-span-6 text-center text-sm md:text-lg">Sign in with Apple</p>
                         </div>
                     </div>
 
-                    <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 border-2 md:w-full hover:bg-emerald-700 hover:text-white">
+                    <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 border-2 w-full hover:bg-emerald-700 hover:text-white">
                         <div className="grid grid-cols-12 place-items-center">
                             <FaFacebook fill="blue" size={'2rem'} className="col-span-2 justify-self-center"/>
                             <p className="col-span-6 text-center text-sm md:text-lg">Sign in with Facebook</p>
@@ -148,7 +148,7 @@ export function SignIn(){
     }
     return(
         <>
-        <div className="grid place-items-center w-11/12 mx-auto h-screen">
+        <div className="grid place-items-center w-11/12 md:w-9/12 mx-auto h-screen">
             <div className="w-11/12 shadow-md shadow-black rounded-2xl p-4">
             <p className="text-3xl text-emerald-700 font-bold">CourseBlast</p>
             <p className="text-sm">Sign in to your account and continue learning!</p>
@@ -165,20 +165,20 @@ export function SignIn(){
 
                 <div className="provider_bay grid justify-items-center md:grid-cols-3 gap-1 md:gap-4 p-2">
                     <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 
-                    border-2 md:w-full hover:bg-emerald-700 hover:text-white">
+                    border-2 w-full hover:bg-emerald-700 hover:text-white">
                         <div className="grid grid-cols-12 items-center">
                             <FaGoogle fill="red" size={"1.5rem"} className="col-span-2 justify-self-center"/>
                             <p className="col-span-6 text-center text-sm md:text-lg">Sign in with Google</p>
                         </div>
                     </div>
-                    <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 border-2 md:w-full hover:bg-emerald-700 hover:text-white">
+                    <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 border-2 w-full hover:bg-emerald-700 hover:text-white">
                         <div className="grid grid-cols-12 items-center">
                             <FaApple className="col-span-2 justify-self-center"size={'1.5rem'}/>
                             <p className="col-span-6 text-center text-sm md:text-lg">Sign in with Apple</p>
                         </div>
                     </div>
 
-                    <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 border-2 md:w-full hover:bg-emerald-700 hover:text-white">
+                    <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 border-2 w-full hover:bg-emerald-700 hover:text-white">
                         <div className="grid grid-cols-12 place-items-center">
                             <FaFacebook fill="blue" size={'1.5rem'} className="col-span-2 justify-self-center"/>
                             <p className="col-span-6 text-center text-sm md:text-lg">Sign in with Facebook</p>

@@ -8,6 +8,7 @@ import { persistStore, persistReducer,  FLUSH,
     PURGE,
     REGISTER} from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { supabaseApi } from "./apiSlice";
 
 let persistConf = {
     key: 'courseblast',
@@ -19,12 +20,13 @@ const persistedUserReducer = persistReducer(persistConf, userReducer)
 export const user_store = configureStore({
     reducer:{
         name: persistedUserReducer,
+        [supabaseApi.reducerPath]: supabaseApi.reducer
     },
     middleware:  (getDefaultMiddleware) =>  getDefaultMiddleware({
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }),
+      }).concat(supabaseApi.middleware),
 })
 
 export const persisted_store = persistStore(user_store)
