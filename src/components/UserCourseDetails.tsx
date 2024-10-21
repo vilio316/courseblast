@@ -2,6 +2,7 @@ import { UserCourseData } from "./UserDash";
 import expert from '../assets/expert_2.jpg'
 import { useParams } from "react-router";
 
+
 interface UCD extends UserCourseData{
     course_units_count : number,
     course_unit_details : CourseUnit[]

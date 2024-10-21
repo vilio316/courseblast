@@ -1,11 +1,12 @@
 import { FaUser } from "react-icons/fa";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { first_name, last_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
+import { first_name, last_name, ID, setEmailAddress, setFirstName, setID, setLastName, setCourses } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
 import { useGetUsersQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 
 export type UserCourseData = {
     course_title: string,
@@ -132,7 +133,7 @@ export function Dashboard(){
                 <FaUser size={'2rem'} fill="blue" onClick={()=> {
                     signOut();
                     navigate('/');
-                    clearAll()
+                    clearAll();
                 }}/>
             </i>
 
@@ -149,7 +150,7 @@ export function Dashboard(){
             <img src={react} alt="User Profile Photograph" className="rounded-full w-6/12 p-4" />
             </div>
             <div className="grid col-span-3 p-4">
-                <p className="font-bold text-2xl">Hi, {firstName} !</p>
+                <p className="font-bold text-2xl">Hi, {firstName}!</p>
                 <p>Pick up from where you left off!</p>
             </div>
         </div>
