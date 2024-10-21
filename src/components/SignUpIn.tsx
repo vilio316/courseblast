@@ -128,7 +128,7 @@ export function SignIn(){
     let navigate = useNavigate()
     let [email, setEmail] = useState('')
     let [pwd, setPass] = useState('')
-
+    let [err, errorState] = useState(false)
 
     async function signIn(email:string, pwd:string){
         const {data, error} = await supabase.auth.signInWithPassword({
@@ -142,6 +142,7 @@ export function SignIn(){
         }
         else{
             console.log(error)
+            errorState(true)
 
         }
 
@@ -162,7 +163,7 @@ export function SignIn(){
                 <label className="text-lg font-bold block">Password</label>
                 <input id="email_add" type='password' required placeholder="Password" className=" peer p-2 md:w-8/12 rounded-md border-2 border-emerald-700 outline-none indent-2 my-2" onChange={(e)=> setPass(e.target.value)}/>
                 </div>
-
+                <p className="text-red-400 text-lg font-bold">{err? "Incorrect Username or Password Provided" : ''}</p>
                 <div className="provider_bay grid justify-items-center md:grid-cols-3 gap-1 md:gap-4 p-2">
                     <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 
                     border-2 w-full hover:bg-emerald-700 hover:text-white">

@@ -2,6 +2,7 @@ import { createApi, BaseQueryFn} from "@reduxjs/toolkit/query/react";
 import supabase from "../supabase/clientSetup";
 import { Json } from "../supabase";
 import { PostgrestError } from "@supabase/supabase-js";
+import { RootState, user_store } from "./store";
 
 type User = {
     id: string;
@@ -13,7 +14,7 @@ type User = {
   };
   
   // Define a custom base query function
-  let supabaseQuery: BaseQueryFn< void,
+  let supabaseUserQuery: BaseQueryFn< void,
   User[],
   PostgrestError|null > = async ()=> {
     const {data, error} = await supabase.from('users').select()
@@ -29,38 +30,31 @@ type User = {
     return {data : []}
   }
 
+  //Defining another custom base query. God abeg
+  /*let userDataQuery : BaseQueryFn< void , User[] | null, PostgrestError | null> = async() =>{
+    const state = user_store.getState() as RootState
+    let ID = state.user_information.id
+
+    const {data, error} = await supabase.from('users').select().eq('id', ID )
+    if(data){
+        return data
+    }
+    if(error){
+        return error
+    }
+
+    return {data: []}
+  }*/
+
   export const supabaseApi = createApi({
     reducerPath: 'supabaseApi',
-    baseQuery: supabaseQuery, // Use the custom base query function
+    baseQuery: supabaseUserQuery,
     endpoints: (builder) => ({
       getUsers: builder.query<User[], void>({
         query: () => (''),
-      }),
-    }),
+      })
+    })
   });
 
   export const { useGetUsersQuery } = supabaseApi;
 
-/* type User = {
-  id: string;
-  email: string | null;
-  user_courses: string[] | null;
-  user_first_name: string | null;
-  user_last_name: string | null;
-  user_points_balance: number | null;
-};
-
-// Define a custom base query function
-const supabaseQuery: BaseQueryFn<
-  { query: string }, // Args type
-  User[],           // Result type
-  PostgrestError    // Error type
-> = async ({ query }) => {
-  const { data, error } = await supabase.from('users').select(query);
-
-  if (error) {
-    return { error };
-  }
-
-  return { data };
-};*/

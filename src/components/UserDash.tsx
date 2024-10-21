@@ -1,9 +1,11 @@
 import { FaUser } from "react-icons/fa";
-import { useAppSelector } from "../redux/hooks";
-import { last_name } from "../redux/userSlice";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { first_name, last_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
 import { useGetUsersQuery } from "../redux/apiSlice";
+import supabase from "../supabase/clientSetup";
+import { useDispatch } from "react-redux";
 
 export type UserCourseData = {
     course_title: string,
@@ -54,11 +56,6 @@ courseID: "43red-45k67"
 
 function ShowCourse(props : propType){
     let navigate = useNavigate()
-    let users = useGetUsersQuery()
-    console.log(users.data)
-
-
-
     let {course_blurb, course_instructor, course_progress_percentage, course_title, courseID} = props.object
     let initial = course_progress_percentage
     let convert = () =>{
@@ -98,7 +95,32 @@ function ShowCourse(props : propType){
 
 
 export function Dashboard(){
-    let firstName = useAppSelector(last_name)
+    let firstName = useAppSelector(first_name)
+    let navigate = useNavigate()
+    let dispatch = useDispatch()    
+    let {data, isLoading}= useGetUsersQuery()
+    let id_value = useAppSelector(ID)
+    const new_arr = data?.filter((item) => item.id == id_value)
+    if(new_arr){
+        let {user_first_name, user_last_name, email} = new_arr[0]
+        dispatch(setFirstName(user_first_name));
+        dispatch(setLastName(user_last_name));
+        dispatch(setEmailAddress(email))  ;
+
+    }
+    else{
+        console.log("Oops")
+    }
+    const clearAll = () => {
+        dispatch(setID(''));
+        dispatch(setEmailAddress(''));
+        dispatch(setFirstName(''));
+        dispatch(setLastName(""));
+    }
+
+    let signOut = async() =>{
+        await supabase.auth.signOut()
+    } 
 
     return(
         <>
@@ -107,7 +129,11 @@ export function Dashboard(){
         <p className="text-emerald-700 text-3xl col-span-5 font-bold">Dashboard</p>
         <div className="col-span-1 grid grid-cols-2 justify-items-center">
             <i>
-                <FaUser size={'2rem'} fill="blue"/>
+                <FaUser size={'2rem'} fill="blue" onClick={()=> {
+                    signOut();
+                    navigate('/');
+                    clearAll()
+                }}/>
             </i>
 
 <div className="grid items-center">

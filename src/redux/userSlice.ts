@@ -1,13 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-type nameType ={
- name:  { 
-    first_name: string,
-    last_name: string, 
-    email: string,
-    id:string
-}
-}
+import { RootState } from "./store";
 
 const userSlice = createSlice({
     name:"user",
@@ -34,7 +26,8 @@ const userSlice = createSlice({
         }
     }
 })
-export const first_name = (state: nameType)=> state.name.first_name
-export const last_name = (state: nameType)=> state.name.last_name
+export const first_name = (state: RootState)=> state.user_information.first_name
+export const last_name = (state: RootState)=> state.user_information.last_name
+export const ID = (state: RootState) => state.user_information.id
 export const {setFirstName, setLastName, setEmailAddress, setID} = userSlice.actions
 export default userSlice.reducer

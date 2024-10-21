@@ -19,7 +19,7 @@ const persistedUserReducer = persistReducer(persistConf, userReducer)
 
 export const user_store = configureStore({
     reducer:{
-        name: persistedUserReducer,
+        user_information: persistedUserReducer,
         [supabaseApi.reducerPath]: supabaseApi.reducer
     },
     middleware:  (getDefaultMiddleware) =>  getDefaultMiddleware({
