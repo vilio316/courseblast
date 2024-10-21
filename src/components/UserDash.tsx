@@ -96,17 +96,17 @@ function ShowCourse(props : propType){
 
 
 export function Dashboard(){
+    let {data, isLoading}= useGetUsersQuery()
     let firstName = useAppSelector(first_name)
-    useEffect(()=> tired, [])
+    useEffect(()=> tired(), [])
 
     let navigate = useNavigate()
     let dispatch = useDispatch()    
-    let {data, isLoading}= useGetUsersQuery()
     let id_value = useAppSelector(ID)
-
+    const new_arr = data?.filter((item) => item.id == id_value)
+    console.log(new_arr)
 
     function tired(){
-    const new_arr = data?.filter((item) => item.id == id_value)
     if(new_arr){
         let {user_first_name, user_last_name, email} = new_arr[0]
         dispatch(setFirstName(user_first_name));
@@ -153,8 +153,15 @@ export function Dashboard(){
             <img src={react} alt="User Profile Photograph" className="rounded-full w-6/12 p-4" />
             </div>
             <div className="grid col-span-3 p-4">
+                {isLoading?
+                <>
+                <p className='text-xl font-bold'>Loading....</p>
+                </> :
+                <>
                 <p className="font-bold text-2xl">Hi, {firstName}!</p>
                 <p>Pick up from where you left off!</p>
+                </>
+}
             </div>
         </div>
         <p className="text-4xl font-bold my-4">Your Courses</p>
