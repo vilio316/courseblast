@@ -97,21 +97,24 @@ function ShowCourse(props : propType){
 
 export function Dashboard(){
     let firstName = useAppSelector(first_name)
+    useEffect(()=> tired, [])
+
     let navigate = useNavigate()
     let dispatch = useDispatch()    
     let {data, isLoading}= useGetUsersQuery()
     let id_value = useAppSelector(ID)
+
+
+    function tired(){
     const new_arr = data?.filter((item) => item.id == id_value)
     if(new_arr){
         let {user_first_name, user_last_name, email} = new_arr[0]
         dispatch(setFirstName(user_first_name));
         dispatch(setLastName(user_last_name));
         dispatch(setEmailAddress(email))  ;
+    }
+}
 
-    }
-    else{
-        console.log("Oops")
-    }
     const clearAll = () => {
         dispatch(setID(''));
         dispatch(setEmailAddress(''));
