@@ -2,7 +2,7 @@ import { useState } from "react"
 import { FaApple, FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
 import login from '../assets/login_illustration.jpeg'
 import { useAppDispatch } from "../redux/hooks";
-import { setFirstName, setID} from "../redux/userSlice";
+import { setID } from "../redux/userSlice";
 import supabase from "../supabase/clientSetup";
 import { useNavigate } from "react-router";
 
@@ -13,7 +13,6 @@ export function SignUp(){
    let [email, setMail] = useState('')
    let [pass, setPwd] = useState('')
    let [last_name, setLName] = useState('')
-   //let dispatch = useAppDispatch()
    let navigate = useNavigate()
 
     async function signUp(email:string, pwd:string){

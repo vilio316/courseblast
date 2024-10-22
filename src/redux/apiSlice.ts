@@ -12,12 +12,14 @@ type User = {
     user_last_name: string | null;
     user_points_balance: number | null;
   };
-  
+
   // Define a custom base query function
-  let supabaseUserQuery: BaseQueryFn< void,
-  User[],
+  let supabaseUserQuery : BaseQueryFn< void,
+  User[] | null, 
   PostgrestError|null > = async ()=> {
-    const {data, error} = await supabase.from('users').select()
+    let state = user_store.getState() as RootState
+    let ID = state.user_information.id
+    const {data, error} = await supabase.from('users').select().eq('id', ID)
 
     if(data){
         return {data}
@@ -51,7 +53,7 @@ type User = {
     baseQuery: supabaseUserQuery,
     endpoints: (builder) => ({
       getUsers: builder.query<User[], void>({
-        query: () => (''),
+        query: () => ('')
       })
     })
   });

@@ -97,8 +97,6 @@ function ShowCourse(props : propType){
 
 
 export function Dashboard(){
-    let {data, isSuccess}= useGetUsersQuery()
-    
     let [menuState, changeMenu] = useState(false)
     let [prof, changeProf] = useState(false)
     let firstName = useAppSelector(first_name)
@@ -114,8 +112,10 @@ export function Dashboard(){
     let navigate = useNavigate()
     let dispatch = useDispatch()    
     let id_value = useAppSelector(ID)
+    console.log(id_value)
+    let {data, isSuccess}= useGetUsersQuery()
     const new_arr = data?.filter((item) => item.id == id_value)
-
+    console.log(typeof new_arr)
 
    
 
