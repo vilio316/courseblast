@@ -40,7 +40,7 @@ courseID: "43red-45k67"
     course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguierowefoihiiiiiiiiiiii. Steel Ball Run!",
     course_instructor: "Araki, Hirohiko",
     course_title: "Stando Power! : The Musical History of JoJo's Bizarre Adventure",
-    course_progress_percentage: 60,
+    course_progress_percentage: 46,
     courseID: '24eef-ru3y4'
     }, 
 
@@ -48,9 +48,10 @@ courseID: "43red-45k67"
         course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguierowefoihiiiiiiiiiiii. Steel Ball Run!",
         course_instructor: "J.R.R. Tolkien",
         course_title: "Nothing but .NET: 30 Days of ASP.NET with your favourite Basketball Stars",
-        course_progress_percentage: 56,
+        course_progress_percentage: 21,
         courseID: '67uyr-ghe32'
         }, 
+        
 
 
 ]
@@ -96,24 +97,28 @@ function ShowCourse(props : propType){
 
 
 export function Dashboard(){
-    let {data, isLoading}= useGetUsersQuery()
+    let {data, isSuccess}= useGetUsersQuery()
+    
+    let [menuState, changeMenu] = useState(false)
+    let [prof, changeProf] = useState(false)
     let firstName = useAppSelector(first_name)
-    useEffect(()=> tired(), [])
+    useEffect(()=> {
+        if(new_arr){
+            let {user_first_name, user_last_name, email} = new_arr[0]
+            dispatch(setFirstName(user_first_name));
+            dispatch(setLastName(user_last_name));
+            dispatch(setEmailAddress(email))  ;
+        }
+    })
 
     let navigate = useNavigate()
     let dispatch = useDispatch()    
     let id_value = useAppSelector(ID)
     const new_arr = data?.filter((item) => item.id == id_value)
-    console.log(new_arr)
 
-    function tired(){
-    if(new_arr){
-        let {user_first_name, user_last_name, email} = new_arr[0]
-        dispatch(setFirstName(user_first_name));
-        dispatch(setLastName(user_last_name));
-        dispatch(setEmailAddress(email))  ;
-    }
-}
+
+   
+
 
     const clearAll = () => {
         dispatch(setID(''));
@@ -131,19 +136,31 @@ export function Dashboard(){
         <div className="w-11/12 p-4 my-4 mx-auto">
         <div className="hidden md:grid md:grid-cols-6"> 
         <p className="text-emerald-700 text-3xl col-span-5 font-bold">Dashboard</p>
-        <div className="col-span-1 grid grid-cols-2 justify-items-center">
+        <div className="col-span-1 grid grid-cols-2 justify-items-center relative">
             <i>
-                <FaUser size={'2rem'} fill="blue" onClick={()=> {
+                <FaUser size={'2rem'} fill="blue" onClick={()=> changeProf(true)}/>
+            </i>
+<div className={`user_nav absolute top-0 left-0 z-20 opacity-85 bg-white transition-all w-9/12 ${prof? `mt-0`: `-mt-96`}   `}>
+<span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeProf(false)}> x </span>
+    <a className="block text-lg my-4 p-2">Your Profile</a>
+    <a className="block text-lg my-4 p-2">Your Profile</a>
+    <a className="block text-lg my-4 p-2">Your Profile</a>
+    <button className="outline-none border-none rounded-2xl p-2 font-bold block text-white bg-emerald-700" onClick={()=> {
                     signOut();
                     navigate('/');
-                    clearAll();
-                }}/>
-            </i>
+                    clearAll();}}> Sign Out</button>
 
-<div className="grid items-center">
-            <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
+</div>
+<div className="grid items-center" onClick={()=> changeMenu(true)}>
                     <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
                     <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
+                    <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
+</div>
+<div className={`absolute z-10 top-0 right-0 bg-white ${menuState ? `mt-0` : `-mt-96`} opacity-75 transition-all p-4 w-9/12 h-full`} >
+    <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeMenu(false)}> x </span>
+    <a className="text-xl font-bold block hover:italic my-4">Home</a>
+    <a className="text-xl font-bold block hover:italic my-4">Your Courses</a>
+    <a className="text-xl font-bold block hover:italic my-4">Search</a>
 </div>
         </div>
         </div>
@@ -153,7 +170,7 @@ export function Dashboard(){
             <img src={react} alt="User Profile Photograph" className="rounded-full w-6/12 p-4" />
             </div>
             <div className="grid col-span-3 p-4">
-                {isLoading?
+                {!isSuccess?
                 <>
                 <p className='text-xl font-bold'>Loading....</p>
                 </> :
