@@ -1,6 +1,7 @@
 import { UserCourseData } from "./UserDash";
 import expert from '../assets/expert_2.jpg'
 import { useParams } from "react-router";
+import { useState } from "react";
 
 
 interface UCD extends UserCourseData{
@@ -34,7 +35,7 @@ const dummyCourseProgression : UCD=
                 unit_status: false
             }, 
             {
-                unit_title: "Introduction",
+                unit_title: "Definition of Terms",
                 unit_blurb: "Introducton to the course matter, key concepts and recommended technologies",
                 unit_number: 2,
                 unit_status: true
@@ -67,14 +68,30 @@ export function UserCourseDetails(){
 function CourseUnit(props : compProps){
     let {course_unit_details} = props.object
 
+    function Unit(props: {object : CourseUnit}){
+        let [blurb_state, setBlurbState] = useState(false)
+        let {unit_blurb, unit_number, unit_status, unit_title } = props.object
+        return(
+            <>
+            <div key={`unit_${unit_number}`} className="hover:bg-gray-400 p-2 rounded-xl">
+            <div className="grid peer items-center w-full grid-cols-12 my-2 p-2 rounded-xl" onClick={()=> {
+                setBlurbState(!blurb_state)
+            }}> 
+                <p className="font-bold">{unit_number}.</p>
+                <p className="p-4 col-span-10 text-lg my-2 font-bold ">{unit_title}</p>
+                <input type="checkbox" name="val" id="strr" checked={unit_status} readOnly />
+            </div>
+            <p className={`my-1 ${blurb_state ? 'block' : 'hidden'} whitespace-nowrap w-10/12 transition-all`}>{unit_blurb}</p>
+            </div>
+            </>
+        )
+
+    }
+
     return(
         <>
-        {course_unit_details.map(({unit_status, unit_number, unit_title}) => (
-            <div className="grid items-center w-full grid-cols-12" key={`unit_${unit_number}`}>
-                <p>{unit_number}.</p>
-                <p className="p-4 col-span-6 text-2xl my-4 font-bold ">{unit_title}</p>
-                <input type="checkbox" name="val" id="vlad" checked={unit_status} readOnly />
-            </div>
+        {course_unit_details.map((unit : CourseUnit) => (
+            <Unit object={unit} key={unit.unit_number} />
         ))}
         </>
     )
