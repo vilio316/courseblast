@@ -1,6 +1,6 @@
 import { FaUser } from "react-icons/fa";
-import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { first_name, last_name, ID, setEmailAddress, setFirstName, setID, setLastName, setCourses } from "../redux/userSlice";
+import { useAppSelector } from "../redux/hooks";
+import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
 import { useGetUsersQuery } from "../redux/apiSlice";
