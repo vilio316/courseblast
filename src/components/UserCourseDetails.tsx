@@ -1,6 +1,5 @@
 import { MainNav, UserCourseData } from "./UserDash";
 import expert from '../assets/expert_2.jpg'
-import { useLocation, useParams } from "react-router";
 import { useState } from "react";
 import { FaBookOpen, FaClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";

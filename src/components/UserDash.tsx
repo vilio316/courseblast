@@ -30,7 +30,7 @@ export let dummyCourseData : UserCourseData[] = [{
     
 }, 
 {
-course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguierowefoihiiiiiiiiiiii. Steel Ball Run!",
+course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguiei. Steel Ball Run!",
 course_instructor: "J.R.R. Tolkien",
 course_title: "Nothing but .NET: 30 Days of ASP.NET with your favourite Basketball Stars",
 course_progress_percentage: 35,
@@ -38,7 +38,7 @@ courseID: "43red-45k67"
 }, 
 
 {
-    course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguierowefoihiiiiiiiiiiii. Steel Ball Run!",
+    course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguiii. Steel Ball Run!",
     course_instructor: "Araki, Hirohiko",
     course_title: "Stando Power! : The Musical History of JoJo's Bizarre Adventure",
     course_progress_percentage: 46,
@@ -46,7 +46,7 @@ courseID: "43red-45k67"
     }, 
 
     {
-        course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguierowefoihiiiiiiiiiiii. Steel Ball Run!",
+        course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguierowii. Steel Ball Run!",
         course_instructor: "J.R.R. Tolkien",
         course_title: "Nothing but .NET: 30 Days of ASP.NET with your favourite Basketball Stars",
         course_progress_percentage: 21,
@@ -161,7 +161,7 @@ export function MainNav(){
 <div className={`absolute z-10 top-0 right-0 bg-white ${menuState ? `mt-0` : `-mt-96`} opacity-75 transition-all p-4 w-9/12 h-full`} >
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeMenu(false)}> x </span>
 <a className="text-xl font-bold block hover:italic my-4">Home</a>
-<a className="text-xl font-bold block hover:italic my-4">Your Courses</a>
+<a className="text-xl font-bold block hover:italic my-4" href='/courses'>All Courses</a>
 <a className="text-xl font-bold block hover:italic my-4">Search</a>
 </div>
     </div>
@@ -185,10 +185,8 @@ export function Dashboard(){
     
     let dispatch = useDispatch()    
     let id_value = useAppSelector(ID)
-    console.log(id_value)
     let {data, isSuccess}= useGetUsersQuery()
     const new_arr = data?.filter((item) => item.id == id_value)
-    console.log(typeof new_arr)
 
     return(
         <>
