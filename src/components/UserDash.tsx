@@ -1,4 +1,4 @@
-import { FaUser } from "react-icons/fa";
+import { FaCreditCard, FaUser } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
 import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
@@ -7,6 +7,7 @@ import { useGetUsersQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { FaFile } from "react-icons/fa6";
 
 export type UserCourseData = {
     course_title: string,
@@ -72,7 +73,7 @@ function ShowCourse(props : propType){
     }
     return(
         <>
-                <div className="rounded-2xl p-4 hover:bg-gray-200 group">
+            <div className="rounded-2xl p-4 hover:bg-gray-200 group">
             <p className="font-bold text-xl w-10/12 overflow-hidden text-ellipsis whitespace-nowrap">{course_title}</p>
             <div className="grid-cols-3 gap-4">
                 <div className="grid col-span-2 progress-bar">
@@ -140,22 +141,43 @@ export function Dashboard(){
             <i>
                 <FaUser size={'2rem'} fill="blue" onClick={()=> changeProf(true)}/>
             </i>
-<div className={`user_nav absolute top-0 left-0 z-20 opacity-85 bg-white transition-all w-9/12 ${prof? `mt-0`: `-mt-96`}   `}>
+
+            {/* User Profile Modal Here */}
+<div className={`user_nav absolute top-0 left-0 p-4 rounded-xl z-20 bg-white transition-all ${prof? `mt-0`: `-mt-96`}   `}>
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeProf(false)}> x </span>
-    <a className="block text-lg my-4 p-2">Your Profile</a>
-    <a className="block text-lg my-4 p-2">Your Profile</a>
-    <a className="block text-lg my-4 p-2">Your Profile</a>
-    <button className="outline-none border-none rounded-2xl p-2 font-bold block text-white bg-emerald-700" onClick={()=> {
+    <div className="grid justify-center">
+    <img src={react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
+    </div>
+
+    <div className="flex gap-x-2 items-center">
+    <FaUser size={'1.5rem'} />
+    <a className="block text-lg p-2">Your Profile</a>
+    </div>
+
+    <div className="flex gap-x-2 items-center">
+    <FaFile size={'1.5rem'} fill="blue"/>
+    <a className="block text-lg p-2">Your Courses</a>
+    </div>
+    
+
+    <div className="flex gap-x-2 items-center">
+    <FaCreditCard size={'1.5rem'} fill='green'/>
+    <a className="block text-lg p-2">Payment History</a>
+    </div>
+    <button className="outline-none border-none rounded-2xl my-4 p-2 font-bold block text-white bg-emerald-700" onClick={()=> {
                     signOut();
                     navigate('/');
                     clearAll();}}> Sign Out</button>
-
 </div>
+
+
 <div className="grid items-center" onClick={()=> changeMenu(true)}>
                     <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
                     <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
                     <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
 </div>
+
+{/* Dashboard Navigation Here*/}
 <div className={`absolute z-10 top-0 right-0 bg-white ${menuState ? `mt-0` : `-mt-96`} opacity-75 transition-all p-4 w-9/12 h-full`} >
     <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeMenu(false)}> x </span>
     <a className="text-xl font-bold block hover:italic my-4">Home</a>
@@ -181,9 +203,9 @@ export function Dashboard(){
 }
             </div>
         </div>
-        <p className="text-4xl font-bold my-4">Your Courses</p>
+        <p className="text-4xl font-bold my-4">Your Courses ({dummyCourseData.length})</p>
 
-        <div className="user-courses-my-4 grid grid-cols-3">
+        <div className="user-courses-my-4 grid grid-cols-3 gap-4">
             {
                 dummyCourseData.map((course) => (
                     <ShowCourse object = {course} key={course.courseID}  />
