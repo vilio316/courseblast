@@ -1,6 +1,6 @@
-import { UserCourseData } from "./UserDash";
+import { MainNav, UserCourseData } from "./UserDash";
 import expert from '../assets/expert_2.jpg'
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { useState } from "react";
 import { FaBookOpen, FaClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
@@ -24,7 +24,7 @@ type compProps ={
     object : UCD
 }
 
-const dummyCourseProgression : UCD= 
+export const dummyCourseProgression : UCD= 
     {
         course_instructor: "Amir Rash",
         course_blurb: "Go from Zero To OOP Hero in thirty days with this new and improved Python course. In this course, you will come to understand various concepts in the field of object-oriented programming, including polymorphism, encapsulation and abstraction. You will also learn various Python techniques, best practices and libraries to improve your understanding of Python programming concepts. ",
@@ -53,8 +53,7 @@ const dummyCourseProgression : UCD=
 
 
 export function UserCourseDetails(){
-    let param = useParams()
-    console.log(param)
+    //let param = useParams()
     let {course_title , course_units_count, course_duration, course_progress_percentage} = dummyCourseProgression
 
     function CourseUnit(props : compProps){
@@ -95,7 +94,8 @@ export function UserCourseDetails(){
     return(
         <>
         <div className="container mx-auto p-4">
-            <div className="img_container w-full grid">
+        <MainNav/>
+            <div className="img_container w-full grid  my-4">
                 <img src = {expert} className="w-full md:h-48 object-cover" alt="Course Image"/>
             </div>
             <p className="text-2xl font-bold my-4">{course_title}</p>

@@ -21,7 +21,7 @@ type propType = {
     object: UserCourseData
 }
 
-let dummyCourseData : UserCourseData[] = [{
+export let dummyCourseData : UserCourseData[] = [{
     course_blurb: "Go from Zero To OOP Hero in thirty days with this new and improved Python course. In this course, you will come to understand various concepts in the field of object-oriented programming, including polymorphism, encapsulation and abstraction. You will also learn various Python techniques, best practices and libraries to improve your understanding of Python programming concepts. ",
     course_instructor: "Amir Khan",
     course_title: "OOP Fundamentals",
@@ -97,30 +97,11 @@ function ShowCourse(props : propType){
 }
 
 
-export function Dashboard(){
+export function MainNav(){
     let [menuState, changeMenu] = useState(false)
     let [prof, changeProf] = useState(false)
-    let firstName = useAppSelector(first_name)
-    useEffect(()=> {
-        if(new_arr){
-            let {user_first_name, user_last_name, email} = new_arr[0]
-            dispatch(setFirstName(user_first_name));
-            dispatch(setLastName(user_last_name));
-            dispatch(setEmailAddress(email))  ;
-        }
-    })
-
     let navigate = useNavigate()
     let dispatch = useDispatch()    
-    let id_value = useAppSelector(ID)
-    console.log(id_value)
-    let {data, isSuccess}= useGetUsersQuery()
-    const new_arr = data?.filter((item) => item.id == id_value)
-    console.log(typeof new_arr)
-
-   
-
-
     const clearAll = () => {
         dispatch(setID(''));
         dispatch(setEmailAddress(''));
@@ -134,58 +115,85 @@ export function Dashboard(){
 
     return(
         <>
-        <div className="w-11/12 p-4 my-4 mx-auto">
-        <div className="hidden md:grid md:grid-cols-6"> 
-        <p className="text-emerald-700 text-3xl col-span-5 font-bold">Dashboard</p>
-        <div className="col-span-1 grid grid-cols-2 justify-items-center relative">
-            <i>
-                <FaUser size={'2rem'} fill="blue" onClick={()=> changeProf(true)}/>
-            </i>
+         <div className="hidden md:grid md:grid-cols-6"> 
+    <p className="text-emerald-700 text-3xl col-span-5 font-bold">Dashboard</p>
+    <div className="col-span-1 grid grid-cols-2 justify-items-center relative">
+        <i>
+            <FaUser size={'2rem'} fill="blue" onClick={()=> changeProf(true)}/>
+        </i>
 
-            {/* User Profile Modal Here */}
+        {/* User Profile Modal Here */}
 <div className={`user_nav absolute top-0 left-0 p-4 rounded-xl z-20 bg-white transition-all ${prof? `mt-0`: `-mt-96`}   `}>
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeProf(false)}> x </span>
-    <div className="grid justify-center">
-    <img src={react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
-    </div>
+<div className="grid justify-center">
+<img src={react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
+</div>
 
-    <div className="flex gap-x-2 items-center">
-    <FaUser size={'1.5rem'} />
-    <a className="block text-lg p-2">Your Profile</a>
-    </div>
+<div className="flex gap-x-2 items-center">
+<FaUser size={'1.5rem'} />
+<a className="block text-lg p-2">Your Profile</a>
+</div>
 
-    <div className="flex gap-x-2 items-center">
-    <FaFile size={'1.5rem'} fill="blue"/>
-    <a className="block text-lg p-2">Your Courses</a>
-    </div>
-    
+<div className="flex gap-x-2 items-center">
+<FaFile size={'1.5rem'} fill="blue"/>
+<a className="block text-lg p-2">Your Courses</a>
+</div>
 
-    <div className="flex gap-x-2 items-center">
-    <FaCreditCard size={'1.5rem'} fill='green'/>
-    <a className="block text-lg p-2">Payment History</a>
-    </div>
-    <button className="outline-none border-none rounded-2xl my-4 p-2 font-bold block text-white bg-emerald-700" onClick={()=> {
-                    signOut();
-                    navigate('/');
-                    clearAll();}}> Sign Out</button>
+
+<div className="flex gap-x-2 items-center">
+<FaCreditCard size={'1.5rem'} fill='green'/>
+<a className="block text-lg p-2">Payment History</a>
+</div>
+<button className="outline-none border-none rounded-2xl my-4 p-2 font-bold block text-white bg-emerald-700" onClick={()=> {
+                signOut();
+                navigate('/');
+                clearAll();}}> Sign Out</button>
 </div>
 
 
 <div className="grid items-center" onClick={()=> changeMenu(true)}>
-                    <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
-                    <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
-                    <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
+                <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
+                <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
+                <span className="h-1 w-8 block my-1 rounded-lg bg-emerald-800"></span>
 </div>
 
 {/* Dashboard Navigation Here*/}
 <div className={`absolute z-10 top-0 right-0 bg-white ${menuState ? `mt-0` : `-mt-96`} opacity-75 transition-all p-4 w-9/12 h-full`} >
-    <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeMenu(false)}> x </span>
-    <a className="text-xl font-bold block hover:italic my-4">Home</a>
-    <a className="text-xl font-bold block hover:italic my-4">Your Courses</a>
-    <a className="text-xl font-bold block hover:italic my-4">Search</a>
+<span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeMenu(false)}> x </span>
+<a className="text-xl font-bold block hover:italic my-4">Home</a>
+<a className="text-xl font-bold block hover:italic my-4">Your Courses</a>
+<a className="text-xl font-bold block hover:italic my-4">Search</a>
 </div>
-        </div>
-        </div>
+    </div>
+    </div>
+        </>
+    )
+}
+
+
+export function Dashboard(){
+    let firstName = useAppSelector(first_name)
+    useEffect(()=> {
+        if(new_arr){
+            let {user_first_name, user_last_name, email} = new_arr[0]
+            dispatch(setFirstName(user_first_name));
+            dispatch(setLastName(user_last_name));
+            dispatch(setEmailAddress(email))  ;
+        }
+    })
+
+    
+    let dispatch = useDispatch()    
+    let id_value = useAppSelector(ID)
+    console.log(id_value)
+    let {data, isSuccess}= useGetUsersQuery()
+    const new_arr = data?.filter((item) => item.id == id_value)
+    console.log(typeof new_arr)
+
+    return(
+        <>
+        <div className="w-11/12 p-4 my-4 mx-auto">
+        <MainNav/>
 
         <div className="grid grid-cols-4 items-center my-4">
             <div className="grid col-span-1 justify-items-center">
