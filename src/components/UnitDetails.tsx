@@ -1,7 +1,6 @@
 import { useParams } from "react-router";
 import { MainNav } from "./UserDash";
 import react from '../assets/expert_2.jpg'
-import { dummyCourseData } from "./UserDash";
 import { dummyCourseProgression } from "./UserCourseDetails";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -10,11 +9,11 @@ import { setCourses } from "../redux/userSlice";
 export function UnitDetails(){
     let value = useParams()
     let dispatch = useDispatch()
-    console.log(value)
-    let useArr = dummyCourseProgression.course_unit_details.filter((item) => item.unit_number == Number(value.unit_number) )
-    let [info_object]= useArr
-    console.log(info_object)
+    let [info_object]= dummyCourseProgression.course_unit_details.filter((item) => item.unit_number == Number(value.unit_number)) 
+    let baseArray = dummyCourseProgression
+    let course_details = dummyCourseProgression.course_unit_details.filter((item) => item.unit_number !== Number(value.unit_number))
     let [unit_is_complete, completeUnit] = useState(info_object.unit_status)
+    console.log(unit_count)
     return(
         <>
         <div className="mx-auto w-11/12 my-4 p-2"> 
@@ -25,12 +24,13 @@ export function UnitDetails(){
         <div>
         <p>Course Title: </p>
         <div className="flex gap-x-4 p-2 items-center">
-        <p className="font-bold">Unit {value.unit_number}: Introduction</p>
+        <p className="font-bold">Unit {value.unit_number}: {info_object.unit_title}</p>
         <button className="bg-emerald-700 rounded-2xl p-2 text-white font-bold" onClick={()=> {
             completeUnit(!unit_is_complete)
-            console.log(unit_is_complete)
             let new_obj = {...info_object, unit_status : !unit_is_complete}
-            dispatch(setCourses(new_obj))
+            let updated_course_details = [...course_details, new_obj]
+            let newCoursesArray = {...baseArray, course_unit_details: updated_course_details}
+            dispatch(setCourses(newCoursesArray))
         }}>
             {unit_is_complete? 'Completed' : 'Mark as Complete'}
         </button>
