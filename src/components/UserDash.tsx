@@ -115,7 +115,7 @@ export function MainNav(){
 
     return(
         <>
-         <div className="hidden md:grid md:grid-cols-6"> 
+         <div className="hidden md:grid md:grid-cols-6 my-4"> 
     <p className="text-emerald-700 text-3xl col-span-5 font-bold">Dashboard</p>
     <div className="col-span-1 grid grid-cols-2 justify-items-center relative">
         <i>
@@ -131,7 +131,7 @@ export function MainNav(){
 
 <div className="flex gap-x-2 items-center">
 <FaUser size={'1.5rem'} />
-<a className="block text-lg p-2">Your Profile</a>
+<a className="block text-lg p-2" href="/user">Your Profile</a>
 </div>
 
 <div className="flex gap-x-2 items-center">
@@ -185,7 +185,7 @@ export function Dashboard(){
     
     let dispatch = useDispatch()    
     let id_value = useAppSelector(ID)
-    let {data, isSuccess}= useGetUsersQuery()
+    let {data, isFetching}= useGetUsersQuery()
     const new_arr = data?.filter((item) => item.id == id_value)
 
     return(
@@ -193,12 +193,12 @@ export function Dashboard(){
         <div className="w-11/12 p-4 my-4 mx-auto">
         <MainNav/>
 
-        <div className="grid grid-cols-4 items-center my-4">
+        <div className="grid grid-cols-4 items-center">
             <div className="grid col-span-1 justify-items-center">
             <img src={react} alt="User Profile Photograph" className="rounded-full w-6/12 p-4" />
             </div>
             <div className="grid col-span-3 p-4">
-                {!isSuccess?
+                {isFetching?
                 <>
                 <p className='text-xl font-bold'>Loading....</p>
                 </> :

@@ -8,6 +8,7 @@ import { Dashboard } from './components/UserDash'
 import { PersistGate } from 'redux-persist/integration/react'
 import { UserCourseDetails } from './components/UserCourseDetails'
 import { AllCourses } from './components/AllCourses'
+import { UnitDetails } from './components/UnitDetails'
 
 const routes = createBrowserRouter([
   {
@@ -28,12 +29,16 @@ const routes = createBrowserRouter([
   },
   {
     path: '/user/courses/:courseID',
-    element: <UserCourseDetails />
+    element: <UserCourseDetails />,
   },
   {
     path: '/courses',
     element: <AllCourses/>
   },
+  {
+    path: '/user/courses/:courseID/:unit_number',
+    element: <UnitDetails/>
+  }
 ])
 
 createRoot(document.getElementById('root')!).render(

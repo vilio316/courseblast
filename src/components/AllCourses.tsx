@@ -26,7 +26,7 @@ export function AllCourses(){
             <div className="rounded-2xl group p-4 hover:bg-gray-200">
                 <p className="text-xl font-bold my-2">{course_title}</p>
                 <p className="my-2 font-bold">{course_instructor}</p>
-                <p>{course_blurb}</p>
+                <p className="my-4">{course_blurb}</p>
                 <button className="add_course hidden group-hover:block outline-none border-none p-2 rounded-xl text-white bg-emerald-700">
                     Add Course
                 </button>
