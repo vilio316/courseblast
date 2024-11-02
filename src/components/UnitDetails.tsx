@@ -13,7 +13,6 @@ export function UnitDetails(){
     let baseArray = dummyCourseProgression
     let course_details = dummyCourseProgression.course_unit_details.filter((item) => item.unit_number !== Number(value.unit_number))
     let [unit_is_complete, completeUnit] = useState(info_object.unit_status)
-    console.log(unit_count)
     return(
         <>
         <div className="mx-auto w-11/12 my-4 p-2"> 
@@ -29,6 +28,8 @@ export function UnitDetails(){
             completeUnit(!unit_is_complete)
             let new_obj = {...info_object, unit_status : !unit_is_complete}
             let updated_course_details = [...course_details, new_obj]
+            updated_course_details.sort((a,b) => a.unit_number - b.unit_number)
+            console.log(updated_course_details)
             let newCoursesArray = {...baseArray, course_unit_details: updated_course_details}
             dispatch(setCourses(newCoursesArray))
         }}>

@@ -1,15 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import { UCD } from "../components/UserCourseDetails";
+
+type State = {
+    first_name: string,
+    last_name: string,
+    email: string, 
+    id: string,
+    course_details: UCD,
+}
+
+let initialState : State = {
+    first_name: '',
+    last_name: '',
+    email: '',
+    id: '',
+    course_details: {
+        course_blurb: '',
+        course_duration: '',
+        course_instructor: '',
+        course_progress_percentage: 0,
+        course_title: '',
+        course_unit_details: [],
+        course_units_completed: 0,
+        course_units_count: 0,
+        courseID: ''
+    }
+}
 
 const userSlice = createSlice({
     name:"user",
-    initialState: {
-        first_name: '',
-        last_name: '',
-        email: "", 
-        id: "",
-        course_details: [],
-    },
+    initialState
+    ,
     reducers:{
         setFirstName : (state, action) => {
             return {...state, first_name : action.payload}
