@@ -38,7 +38,7 @@ export const dummyCourseProgression : UCD=
                 unit_title: "Introduction",
                 unit_blurb: "Introducton to the course matter, key concepts and recommended technologies",
                 unit_number: 1,
-                unit_status: true
+                unit_status: false
             }, 
             {
                 unit_title: "Definition of Terms",
@@ -47,7 +47,8 @@ export const dummyCourseProgression : UCD=
                 unit_status: true
             }, 
         ],
-        courseID: "",
+        courseID: 
+        '43red-45k67',
         course_duration: '9',
     }
 

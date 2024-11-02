@@ -8,7 +8,7 @@ const userSlice = createSlice({
         last_name: '',
         email: "", 
         id: "",
-        courses: [],
+        course_details: [],
     },
     reducers:{
         setFirstName : (state, action) => {
@@ -26,13 +26,13 @@ const userSlice = createSlice({
             return {...state, id : action.payload}
         },
         setCourses : (state, action) => {
-            return {...state, courses: action.payload}
+            return {...state, course_details: action.payload}
         }
     }
 })
 export const first_name = (state: RootState)=> state.user_information.first_name
 export const last_name = (state: RootState)=> state.user_information.last_name
 export const ID = (state: RootState) => state.user_information.id
-export const courses = (state: RootState) => state.user_information.courses
+export const courses = (state: RootState) => state.user_information.course_details
 export const {setFirstName, setLastName, setEmailAddress, setID, setCourses} = userSlice.actions
 export default userSlice.reducer
