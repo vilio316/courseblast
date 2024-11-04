@@ -97,7 +97,7 @@ function ShowCourse(props : propType){
 }
 
 
-export function MainNav(){
+export function MainNav(props: {text?: string}){
     let [menuState, changeMenu] = useState(false)
     let [prof, changeProf] = useState(false)
     let navigate = useNavigate()
@@ -116,7 +116,7 @@ export function MainNav(){
     return(
         <>
          <div className="hidden md:grid md:grid-cols-6 my-4"> 
-    <p className="text-emerald-700 text-3xl col-span-5 font-bold">Dashboard</p>
+    <p className="text-emerald-700 text-3xl col-span-5 font-bold">{props.text ? `${props.text}` : `Dashboard`}</p>
     <div className="col-span-1 grid grid-cols-2 justify-items-center relative">
         <i>
             <FaUser size={'2rem'} fill="blue" onClick={()=> changeProf(true)}/>
@@ -136,7 +136,7 @@ export function MainNav(){
 
 <div className="flex gap-x-2 items-center">
 <FaFile size={'1.5rem'} fill="blue"/>
-<a className="block text-lg p-2">Your Courses</a>
+<a className="block text-lg p-2" href='/user/#courses'>Your Courses</a>
 </div>
 
 
@@ -162,7 +162,7 @@ export function MainNav(){
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeMenu(false)}> x </span>
 <a className="text-xl font-bold block hover:italic my-4">Home</a>
 <a className="text-xl font-bold block hover:italic my-4" href='/courses'>All Courses</a>
-<a className="text-xl font-bold block hover:italic my-4">Search</a>
+{/*<a className="text-xl font-bold block hover:italic my-4">Search</a>*/}
 </div>
     </div>
     </div>
@@ -211,7 +211,7 @@ export function Dashboard(){
         </div>
         <p className="text-4xl font-bold my-4">Your Courses ({dummyCourseData.length})</p>
 
-        <div className="user-courses-my-4 grid grid-cols-3 gap-4">
+        <div className="user-courses-my-4 grid grid-cols-3 gap-4" id='courses'>
             {
                 dummyCourseData.map((course) => (
                     <ShowCourse object = {course} key={course.courseID}  />

@@ -9,35 +9,49 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { UserCourseDetails } from './components/UserCourseDetails'
 import { AllCourses } from './components/AllCourses'
 import { UnitDetails } from './components/UnitDetails'
+import { CourseDetails } from './components/CourseDetails'
+import Error from './components/Error'
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Landing/>
+    element: <Landing/>,
+    errorElement: <Error/>
   },
   {
     path:'/sign-up',
-    element: <SignUp/>
+    element: <SignUp/>,
+    errorElement: <Error/>
   },
   {
     path: "/sign-in",
-    element: <SignIn/>
+    element: <SignIn/>,
+    errorElement: <Error/>
   },
   {
     path: '/user',
-    element: <Dashboard/>
+    element: <Dashboard/>,
+    errorElement: <Error/>
   },
   {
     path: '/user/courses/:courseID',
     element: <UserCourseDetails />,
+    errorElement: <Error/>
   },
   {
     path: '/courses',
-    element: <AllCourses/>
+    element: <AllCourses/>,
+    errorElement: <Error/>
   },
   {
     path: '/user/courses/:courseID/:unit_number',
-    element: <UnitDetails/>
+    element: <UnitDetails/>,
+    errorElement: <Error/>
+  },
+  {
+    path: '/courses/:courseID',
+    element: <CourseDetails/>,
+    errorElement: <Error/>
   }
 ])
 

@@ -20,7 +20,6 @@ export function SignUp(){
             email: email,
             password: pwd
         })
-        console.log(data, error)
         return data
     }
 
