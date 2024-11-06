@@ -1,13 +1,13 @@
-import { FaCreditCard, FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaCartPlus, FaCreditCard, FaHome, FaShoppingCart, FaUser, FaWrench } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
 import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
-import { useGetUsersQuery } from "../redux/apiSlice";
+import { useGetUserQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { FaFile } from "react-icons/fa6";
+import { FaCirclePlus, FaFile } from "react-icons/fa6";
 
 export type UserCourseData = {
     course_title: string,
@@ -68,13 +68,13 @@ function ShowCourse(props : propType){
         return `w-${reddy}/12`
         }
         else{
-            return `w-2`
+            return `w-2/12`
         }
     }
     return(
         <>
-            <div className="rounded-2xl p-4 hover:bg-gray-200 group">
-            <p className="font-bold text-xl w-10/12 overflow-hidden text-ellipsis whitespace-nowrap">{course_title}</p>
+            <div className="rounded-2xl p-2 md:p-4 hover:bg-gray-200 group w-5/12 md:w-full bg-gray-200 md:bg-inherit my-2">
+            <p className="font-bold text-lg md:text-xl w-10/12 overflow-hidden text-ellipsis whitespace-nowrap">{course_title}</p>
             <div className="grid-cols-3 gap-4">
                 <div className="grid col-span-2 progress-bar">
                     <div className="bg-gray-300 rounded-md">
@@ -86,9 +86,9 @@ function ShowCourse(props : propType){
                 </div>
             </div>
             <p className="font-bold">{course_instructor}</p>
-            <p className="my-4 h-32 overflow-y-auto">{course_blurb}</p>
+            <p className="my-4 h-20 md:h-32 overflow-y-auto text-xs md:text-sm">{course_blurb}</p>
 
-            <button onClick={()=> navigate(`/user/courses/${courseID}`)}className="hidden group-hover:block p-2 rounded-2xl bg-emerald-700 text-white">
+            <button onClick={()=> navigate(`/user/courses/${courseID}`)} className="hidden text-sm group-hover:block p-2 rounded-2xl bg-emerald-700 text-white">
                 Continue
             </button>
         </div>
@@ -142,7 +142,7 @@ export function MainNav(props: {text?: string}){
 
 <div className="flex gap-x-2 items-center">
 <FaShoppingCart size={'1.5rem'} fill='green' />
-<a className="block text-lg p-2" href="">Your BlastCart</a>
+<a className="block text-lg p-2" href="/user/cart">Your BlastCart</a>
 </div>
 
 <div className="flex gap-x-2 items-center">
@@ -190,39 +190,96 @@ export function Dashboard(){
     
     let dispatch = useDispatch()    
     let id_value = useAppSelector(ID)
-    let {data, isFetching}= useGetUsersQuery()
+    let {data, isFetching}= useGetUserQuery()
     const new_arr = data?.filter((item) => item.id == id_value)
 
     return(
         <>
-        <div className="w-11/12 p-4 my-4 mx-auto">
+        <div className="w-11/12 p-2 md:p-4 my-4 mx-auto relative">
         <MainNav/>
 
         <div className="grid grid-cols-4 items-center">
             <div className="grid col-span-1 justify-items-center">
-            <img src={react} alt="User Profile Photograph" className="rounded-full w-6/12 p-4" />
+            <img src={react} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
             </div>
             <div className="grid col-span-3 p-4">
                 {isFetching?
                 <>
-                <p className='text-xl font-bold'>Loading....</p>
+                <p className='text-lg md:text-xl font-bold'>Loading....</p>
                 </> :
                 <>
-                <p className="font-bold text-2xl">Hi, {firstName}!</p>
+                <p className="font-bold text-lg md:text-2xl">Hi, {firstName}!</p>
                 <p>Pick up from where you left off!</p>
                 </>
 }
             </div>
         </div>
-        <p className="text-4xl font-bold my-4">Your Courses ({dummyCourseData.length})</p>
+        <p className="text-2xl md:text-4xl font-bold md:my-4 my-2">Your Courses ({dummyCourseData.length})</p>
 
-        <div className="user-courses-my-4 grid md:grid-cols-3 gap-4" id='courses'>
+        <div className="user-courses md:my-4 my-2 grid md:grid-cols-3 gap-x-4 overflow-y-scroll" id='courses'>
             {
                 dummyCourseData.map((course) => (
                     <ShowCourse object = {course} key={course.courseID}  />
                 ))
             }
         </div>
+        <MobileNav/>
+        </div>
+        </>
+    )
+}
+
+export function MobileNav(){
+    let navigate = useNavigate()
+
+    return(
+        <>
+        <div className="sticky z-20 bottom-0 grid md:hidden grid-cols-5 bg-white items-end p-2">
+            <div className="grid justify-items-center" onClick={()=> navigate('/user/cart')}>
+                <div>
+                    <FaShoppingCart fill='blue' size='1.25rem'/>
+                </div>
+                <a className="block text-sm text-center">
+                    Cart
+                </a>
+            </div>
+
+            <div className="grid justify-items-center" onClick={()=> navigate('/courses')}>
+                <div>
+                    <FaCirclePlus fill='blue' size='1.25rem'/>
+                </div>
+                <a className="block text-sm text-center">
+                    Add
+                </a>
+            </div>
+
+            <div className="grid justify-items-center" onClick={()=> navigate('/user')}>
+                <div>
+                    <FaHome fill='blue' size='2rem'/>
+                </div>
+                <a className="block text-center font-bold">
+                    Home
+                </a>
+            </div>
+
+            <div className="grid justify-items-center" onClick={()=> navigate('/user')}>
+                <div>
+                    <FaUser fill='blue' size='1.5rem'/>
+                </div>
+                <a className="block text-sm text-center">
+                    Profile
+                </a>
+            </div>
+
+            <div className="grid justify-items-center" onClick={()=> navigate('/users/settings')}>
+                <div>
+                    <FaWrench fill='gray' size='1.25rem'/>
+                </div>
+                <a className="block text-sm text-center">
+                    Settings
+                </a>
+            </div>
+
         </div>
         </>
     )

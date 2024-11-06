@@ -52,11 +52,11 @@ type User = {
     reducerPath: 'supabaseApi',
     baseQuery: supabaseUserQuery,
     endpoints: (builder) => ({
-      getUsers: builder.query<User[], void>({
+      getUser: builder.query<User[], void>({
         query: () => ('')
       })
     })
   });
 
-  export const { useGetUsersQuery } = supabaseApi;
+  export const { useGetUserQuery } = supabaseApi;
 

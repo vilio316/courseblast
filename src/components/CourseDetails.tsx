@@ -43,21 +43,23 @@ export function CourseDetails(){
         ))}
         </ol>
         </div>
-        <div className={`w-full bg-gray-300 opacity-75 z-10 absolute top-0 h-full ${course_modal? 'grid': 'hidden'}`}>
+        <div className={`w-full bg-gray-300 opacity-85 z-10 absolute top-0 h-full ${course_modal? 'grid': 'hidden'}`}>
             <div className={`w-6/12 bg-white h-9/12 mx-auto p-4 opacity-100`}>
-            <span className="w-full text-right block hover:text-red-500 text-2xl font-bolds" onClick={()=> showMod(false) }>x</span>
+            <span className="w-full text-right block hover:text-red-500 text-4xl font-bolds" onClick={()=> showMod(false) }>x</span>
                 <p className="font-bold text-3xl">{course_title}</p>
-                <p className="text-emerald-700 font-bold my-2">$2000</p>
+                <p className="text-emerald-700 text-xl font-bold my-2">$2000</p>
                 <p>{course_instructor}</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur et sit autem repellat iure placeat, dolorum dolor laudantium quidem incidunt obcaecati ipsam consequuntur quis perferendis minima corrupti. Delectus, vitae cum.</p>
 
-                <button className="outline-none border-4 bg-white border-blue-800 p-4 rounded-md text-emerald-700">
-                    <div className="flex items-center">
+                <div className="grid my-4">
+                <button className="outline-none border-4 bg-white border-blue-800 p-4 rounded-xl text-emerald-700 justify-self-center w-9/12 hover:bg-blue-300 transition-colors">
+                    <div className="flex items-center justify-center gap-x-4">
                         <FaShoppingBasket size='1.5rem' fill="blue"/>
-                        <p className="text-blue">{'Add to Blastcart'.toUpperCase()}</p>
+                        <p className="text-blue font-bold">{'Add to Blastcart'.toUpperCase()}</p>
                     </div>
 
                 </button>
+                </div>
             </div>
         </div>
         </>

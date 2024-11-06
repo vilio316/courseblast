@@ -11,6 +11,7 @@ import { AllCourses } from './components/AllCourses'
 import { UnitDetails } from './components/UnitDetails'
 import { CourseDetails } from './components/CourseDetails'
 import Error from './components/Error'
+import BlastCart from './components/BlastCart'
 
 const routes = createBrowserRouter([
   {
@@ -51,6 +52,11 @@ const routes = createBrowserRouter([
   {
     path: '/courses/:courseID',
     element: <CourseDetails/>,
+    errorElement: <Error/>
+  }, 
+  {
+    path: '/user/cart',
+    element: <BlastCart/>,
     errorElement: <Error/>
   }
 ])
