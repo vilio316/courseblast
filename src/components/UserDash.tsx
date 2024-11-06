@@ -1,4 +1,4 @@
-import { FaCreditCard, FaUser } from "react-icons/fa";
+import { FaCreditCard, FaShoppingCart, FaUser } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
 import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
@@ -123,7 +123,7 @@ export function MainNav(props: {text?: string}){
         </i>
 
         {/* User Profile Modal Here */}
-<div className={`user_nav absolute top-0 left-0 p-4 rounded-xl z-20 bg-white transition-all ${prof? `mt-0`: `-mt-96`}   `}>
+<div className={`user_nav absolute top-0 left-0 p-4 rounded-xl z-20 bg-white transition-all ${prof? `ml-0`: `ml-96`} `}>
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeProf(false)}> x </span>
 <div className="grid justify-center">
 <img src={react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
@@ -139,6 +139,11 @@ export function MainNav(props: {text?: string}){
 <a className="block text-lg p-2" href='/user/#courses'>Your Courses</a>
 </div>
 
+
+<div className="flex gap-x-2 items-center">
+<FaShoppingCart size={'1.5rem'} fill='green' />
+<a className="block text-lg p-2" href="">Your BlastCart</a>
+</div>
 
 <div className="flex gap-x-2 items-center">
 <FaCreditCard size={'1.5rem'} fill='green'/>
@@ -211,7 +216,7 @@ export function Dashboard(){
         </div>
         <p className="text-4xl font-bold my-4">Your Courses ({dummyCourseData.length})</p>
 
-        <div className="user-courses-my-4 grid grid-cols-3 gap-4" id='courses'>
+        <div className="user-courses-my-4 grid md:grid-cols-3 gap-4" id='courses'>
             {
                 dummyCourseData.map((course) => (
                     <ShowCourse object = {course} key={course.courseID}  />
