@@ -22,7 +22,7 @@ type propType = {
 }
 
 export let dummyCourseData : UserCourseData[] = [{
-    course_blurb: "Go from Zero To OOP Hero in thirty days with this new and improved Python course. In this course, you will come to understand various concepts in the field of object-oriented programming, including polymorphism, encapsulation and abstraction. You will also learn various Python techniques, best practices and libraries to improve your understanding of Python programming concepts. ",
+    course_blurb: "Go from Zero To OOP Hero in thirty days with this new and improved Python course. In this course, you will come to understand various concepts in the field of object-oriented programming, including polymorphism, encapsulation and abstraction. You will also learn various Python techniques, best practices and libraries to improve your understanding of Python programming concepts. begin",
     course_instructor: "Amir Khan",
     course_title: "OOP Fundamentals",
     course_progress_percentage: 0,
@@ -30,7 +30,7 @@ export let dummyCourseData : UserCourseData[] = [{
     
 }, 
 {
-course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguiei. Steel Ball Run!",
+course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguiei. Steel Ball Run! begin inter",
 course_instructor: "J.R.R. Tolkien",
 course_title: "Nothing but .NET: 30 Days of ASP.NET with your favourite Basketball Stars",
 course_progress_percentage: 35,
@@ -38,7 +38,7 @@ courseID: "43red-45k67"
 }, 
 
 {
-    course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguiii. Steel Ball Run!",
+    course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguiii. Steel Ball Run! pro pro",
     course_instructor: "Araki, Hirohiko",
     course_title: "Stando Power! : The Musical History of JoJo's Bizarre Adventure",
     course_progress_percentage: 46,
@@ -46,7 +46,7 @@ courseID: "43red-45k67"
     }, 
 
     {
-        course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguierowii. Steel Ball Run!",
+        course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguierowii. Steel Ball Run! inter",
         course_instructor: "J.R.R. Tolkien",
         course_title: "Nothing but .NET: 30 Days of ASP.NET with your favourite Basketball Stars",
         course_progress_percentage: 21,

@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from './userSlice'
+import filtersReducer from './filterSlice'
 
 import { persistStore, persistReducer,  FLUSH,
     REHYDRATE,
@@ -20,6 +21,7 @@ const persistedUserReducer = persistReducer(persistConf, userReducer)
 export const user_store = configureStore({
     reducer:{
         user_information: persistedUserReducer,
+        selected_filters:  filtersReducer,
         [supabaseApi.reducerPath]: supabaseApi.reducer
     },
     middleware:  (getDefaultMiddleware) =>  getDefaultMiddleware({
