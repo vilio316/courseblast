@@ -8,6 +8,8 @@ type State = {
     email: string, 
     id: string,
     course_details: UCD,
+    cart_state: {title: string, price:number}[
+    ]
 }
 
 let initialState : State = {
@@ -25,7 +27,8 @@ let initialState : State = {
         course_units_completed: 0,
         course_units_count: 0,
         courseID: ''
-    }
+    },
+    cart_state: []
 }
 
 const userSlice = createSlice({
@@ -40,15 +43,16 @@ const userSlice = createSlice({
             return {...state, last_name : action.payload}
         },
         setEmailAddress : (state, action) => {
-            return {
-                ...state, email: action.payload
-            }
+            return {...state, email: action.payload}
         },
         setID : (state, action) => {
             return {...state, id : action.payload}
         },
         setCourses : (state, action) => {
             return {...state, course_details: action.payload}
+        },
+        setCartState : (state, action) => {
+            return {...state, cart_state: action.payload}
         }
     }
 })
@@ -56,5 +60,6 @@ export const first_name = (state: RootState)=> state.user_information.first_name
 export const last_name = (state: RootState)=> state.user_information.last_name
 export const ID = (state: RootState) => state.user_information.id
 export const courses = (state: RootState) => state.user_information.course_details
-export const {setFirstName, setLastName, setEmailAddress, setID, setCourses} = userSlice.actions
+export const {setFirstName, setLastName, setEmailAddress, setID, setCourses, setCartState} = userSlice.actions
+export const cart = (state: RootState) => state.user_information.cart_state
 export default userSlice.reducer

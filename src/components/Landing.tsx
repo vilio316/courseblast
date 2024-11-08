@@ -33,6 +33,7 @@ export function Landing(){
                 <a className='block p-2'>Courses</a>
                 <a className='block p-2'>Instructors</a>
                 <a className='block p-2'>Blog</a>
+                <a href="/sign-in">Register!</a>
             </div>
 
 

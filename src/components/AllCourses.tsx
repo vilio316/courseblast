@@ -13,7 +13,6 @@ export function AllCourses(){
     let filter_values= useAppSelector(filterValues)
     let gradeValue = useAppSelector(gradeFilter)
     let [is_filter_chosen, chooseFilter] = useState(false)
-    console.log(is_filter_chosen)
     let [searchVal, updateSearchVal] = useState('')
     let search_results = dummyCourseData.filter((item) => item.course_title.toLowerCase().includes(searchVal.toLowerCase()))
 
@@ -46,8 +45,8 @@ export function AllCourses(){
     function CourseCard(props: {obj : UserCourseData}){
         let {course_title, course_blurb, course_instructor, courseID} = props.obj
         return(
-            <div className="rounded-2xl group p-4 hover:bg-gray-200">
-                <p className="text-xl font-bold my-2">{course_title}</p>
+            <div className="rounded-2xl group md:p-4 p-2  hover:bg-gray-200">
+                <p className=" text-lg md:text-xl font-bold my-2">{course_title}</p>
                 <p className="my-2 font-bold">{course_instructor}</p>
                 <p className="my-2 text-sm">{course_blurb}</p>
                 <button className="add_course hidden group-hover:block outline-none border-none p-2 rounded-xl text-white bg-emerald-700" onClick={()=> navigate(`/courses/${courseID}`)}>
@@ -67,8 +66,8 @@ export function AllCourses(){
         <MainNav text="All Courses"/>
         <div className="md:flex gap-x-4 items-center">
         <input type="text" id='search_bar' placeholder="Search for courses..." className="outline-none border-2 border-emerald-500 p-4 md:w-8/12 w-10/12 mx-2 rounded-lg" value={searchVal} onChange={(e)=> updateSearchVal(e.target.value)}/>
-        <div className="grid grid-cols-3 filters">
-            <div className="bg-inherit flex gap-x-4 rounded-xl hover:bg-gray-50 text-sm col-span-1">
+        <div className="grid grid-cols-3 gap-x-4 filters">
+            <div className="bg-inherit flex rounded-xl hover:bg-gray-50 text-sm col-span-1">
                 <select onChange={(e)=>{
                     chooseFilter(true)
                     dispatch(setFiltersName(e.target.value))
@@ -95,7 +94,7 @@ export function AllCourses(){
 
         </div>
         </div>
-        <p className="indent-4 my-2 text-lg md:text-xl">{determineFilterOutput().length} results</p>
+        <p className="indent-4 text-md md:text-xl">{determineFilterOutput().length} results</p>
         {is_filter_chosen? <>
         Now Using Filters
         </>
