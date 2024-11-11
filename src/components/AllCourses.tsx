@@ -5,9 +5,11 @@ import { UserCourseData } from "./UserDash"
 import { useNavigate } from "react-router"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { filterValues, gradeFilter, setFiltersGrade, setFiltersName } from "../redux/filterSlice"
+import { useGetAllCoursesQuery } from "../redux/apiSlice"
 
 
 export function AllCourses(){
+    let {data} = useGetAllCoursesQuery()
     let navigate = useNavigate()
     let dispatch = useAppDispatch()
     let filter_values= useAppSelector(filterValues)
@@ -101,7 +103,7 @@ export function AllCourses(){
         </div>
         </div>
         <p className="indent-4 text-md md:text-xl">{determineFilterOutput().length} results</p>
-        
+
         {null_search? <>
         <div className="grid justify-center my-4 p-4">
         <p className="text-2xl font-bold ">
@@ -117,8 +119,8 @@ export function AllCourses(){
         {
             determineFilterOutput().map((course) => (<CourseCard obj={course} key={course.courseID} />))
         }
-        </>:    search_results.map((item) => (
-            <CourseCard obj={item } key={item.courseID} />
+        </>:    data?.map((item) => (
+            <p>{item.course_title}</p>
         )) } 
         </div>
         </>}

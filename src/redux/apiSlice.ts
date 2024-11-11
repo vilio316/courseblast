@@ -13,6 +13,33 @@ type User = {
     user_points_balance: number | null;
   };
 
+interface Course{
+          course_blurb: string | null
+          course_difficulty: string | null
+          course_duration: number | null
+          course_id: string
+          course_instructor: string | null
+          course_price: number | null
+          course_title: string
+}
+
+
+let supabaseCoursesQuery : BaseQueryFn<void,
+ Course[] | null, 
+ PostgrestError | null > = async ()=> {
+    const {data, error} = await supabase.from('courses').select('*')
+
+    if(data){
+      return {data}
+    }
+
+    if(error){
+      return {error}
+    }
+
+    return {data: []}
+}
+
   // Define a custom base query function
   let supabaseUserQuery : BaseQueryFn< void,
   User[] | null, 
@@ -32,22 +59,6 @@ type User = {
     return {data : []}
   }
 
-  //Defining another custom base query. God abeg
-  /*let userDataQuery : BaseQueryFn< void , User[] | null, PostgrestError | null> = async() =>{
-    const state = user_store.getState() as RootState
-    let ID = state.user_information.id
-
-    const {data, error} = await supabase.from('users').select().eq('id', ID )
-    if(data){
-        return data
-    }
-    if(error){
-        return error
-    }
-
-    return {data: []}
-  }*/
-
   export const supabaseApi = createApi({
     reducerPath: 'supabaseApi',
     baseQuery: supabaseUserQuery,
@@ -58,5 +69,16 @@ type User = {
     })
   });
 
-  export const { useGetUserQuery } = supabaseApi;
+  export const coursesAPISlice = createApi({
+    reducerPath: 'supabaseCourses',
+    baseQuery: supabaseCoursesQuery,
+    endpoints: (builder) => ({
+      getAllCourses: builder.query<Course[], void>({
+        query: () => ('')
+      })
+    })
+  });
 
+
+  export const { useGetUserQuery } = supabaseApi;
+  export const { useGetAllCoursesQuery } = coursesAPISlice
