@@ -6,12 +6,9 @@ import { dummyCourseProgression } from "./UserCourseDetails";
 import { useState } from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { useNavigate } from "react-router";
-
 
 export function CourseDetails(){
     let params = useParams()
-    let navigate = useNavigate()
     let dispatch = useAppDispatch()
     let [course_modal, showMod] = useState(false)
     let blast_cart = useAppSelector(cart)

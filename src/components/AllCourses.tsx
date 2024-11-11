@@ -28,6 +28,12 @@ export function AllCourses(){
         return nameFilterResults
     }
 }
+    useEffect(()=> {
+        if(filter_values.length <= 1 && gradeValue.length <= 1){
+            chooseFilter(false)
+        }
+    }, [filter_values, is_filter_chosen, gradeValue.length])
+
     let [null_search, setNullSearch ] = useState(false)
     
     useEffect(()=> {
@@ -95,11 +101,7 @@ export function AllCourses(){
         </div>
         </div>
         <p className="indent-4 text-md md:text-xl">{determineFilterOutput().length} results</p>
-        {is_filter_chosen? <>
-        Now Using Filters
-        </>
-    : <>
-        </>}
+        
         {null_search? <>
         <div className="grid justify-center my-4 p-4">
         <p className="text-2xl font-bold ">
