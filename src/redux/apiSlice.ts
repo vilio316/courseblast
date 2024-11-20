@@ -13,21 +13,21 @@ type User = {
     user_points_balance: number | null;
   };
 
-interface Course{
+export interface Course{
           course_blurb: string | null
           course_difficulty: string | null
           course_duration: number | null
           course_id: string
           course_instructor: string | null
-          course_price: number | null
+          course_price: number 
           course_title: string
 }
 
 
-let supabaseCoursesQuery : BaseQueryFn<void,
+let supabaseCoursesQuery : BaseQueryFn<string,
  Course[] | null, 
  PostgrestError | null > = async ()=> {
-    const {data, error} = await supabase.from('courses').select('*')
+    const {data, error} = await supabase.from('courses').select()
 
     if(data){
       return {data}
@@ -74,7 +74,7 @@ let supabaseCoursesQuery : BaseQueryFn<void,
     baseQuery: supabaseCoursesQuery,
     endpoints: (builder) => ({
       getAllCourses: builder.query<Course[], void>({
-        query: () => ('')
+        query: () => (``)
       })
     })
   });

@@ -16,7 +16,7 @@ export function SignUp(){
    let navigate = useNavigate()
 
     async function signUp(email:string, pwd:string){
-        const {data, error} = await supabase.auth.signUp({
+        const {data} = await supabase.auth.signUp({
             email: email,
             password: pwd
         })

@@ -41,7 +41,7 @@ export type Database = {
           course_duration: number | null
           course_id: string
           course_instructor: string | null
-          course_price: number | null
+          course_price: number
           course_title: string
         }
         Insert: {
@@ -50,7 +50,7 @@ export type Database = {
           course_duration?: number | null
           course_id?: string
           course_instructor?: string | null
-          course_price?: number | null
+          course_price?: number
           course_title: string
         }
         Update: {
@@ -59,7 +59,7 @@ export type Database = {
           course_duration?: number | null
           course_id?: string
           course_instructor?: string | null
-          course_price?: number | null
+          course_price?: number
           course_title?: string
         }
         Relationships: []
