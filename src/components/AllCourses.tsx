@@ -119,8 +119,8 @@ export function AllCourses(){
         {
             determineFilterOutput().map((course) => (<CourseCard obj={course} key={course.courseID} />))
         }
-        </>:    data?.map((item) => (
-            <p>{item.course_title}</p>
+        </>:    search_results.map((item) => (
+            <CourseCard obj={item } key={item.courseID} />
         )) } 
         </div>
         </>}
