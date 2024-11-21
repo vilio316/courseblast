@@ -1,3 +1,4 @@
+import { FaTrashCan } from "react-icons/fa6"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { cart, setCartState } from "../redux/userSlice"
 import { MainNav, MobileNav } from "./UserDash"
@@ -23,6 +24,11 @@ export default function BlastCart(){
             <div key={cart_item.id} className=" grid grid-cols-12 font-bold text-lg md:text-2xl">
             <p className="col-span-9">{cart_item.title}</p>
             <p className="col-span-2">{cart_item.price}</p>
+            <div className="flex items-center">
+                <button>
+                    <FaTrashCan fill="red" size={'1.5rem'} />
+                </button>
+            </div>
             </div>
             </li>
         ))}

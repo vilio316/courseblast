@@ -77,7 +77,8 @@ export function AllCourses(){
 
     return(
         <>
-         {isSuccess ? <><div className="w-11/12 p-2 md:p-4 my-2 md:my-4 mx-auto grid relative">
+         {isSuccess ? <>
+         <div className="w-11/12 p-2 md:p-4 my-2 md:my-4 mx-auto grid relative">
         <MainNav text="All Courses"/>
         <div className="md:flex gap-x-4 items-center">
         <input type="text" id='search_bar' placeholder="Search for courses..." className="outline-none border-2 border-emerald-500 p-4 md:w-8/12 w-10/12 mx-2 rounded-lg" value={searchVal} onChange={(e)=> updateSearchVal(e.target.value)}/>
