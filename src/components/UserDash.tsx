@@ -265,7 +265,7 @@ export function MobileNav(){
                 <div>
                     <FaUser fill='blue' size='1.5rem'/>
                 </div>
-                <a className="block text-sm text-center">
+                <a className="block text-sm text-center" href="/user/profile">
                     Profile
                 </a>
             </div>
