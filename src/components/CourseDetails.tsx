@@ -1,10 +1,9 @@
 import { useParams } from "react-router";
 import { MainNav, MobileNav } from "./UserDash";
-
 import {cart, setCartState } from '../redux/userSlice'
 import { dummyCourseProgression } from "./UserCourseDetails";
 import { useState } from "react";
-import { FaShoppingBasket } from "react-icons/fa";
+import { FaShoppingBasket, FaUserClock } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useGetAllCoursesQuery } from "../redux/apiSlice";
 import { Course } from "../redux/apiSlice";
@@ -25,14 +24,14 @@ export function CourseDetails(){
     if(courseFetchResult){
     course = courseFetchResult[0]
     }
-    let {course_blurb, course_difficulty, course_duration, course_title,course_price, course_instructor} = course
+    let {course_blurb, course_difficulty, course_duration, course_title,course_price, course_instructor, course_id} = course
     let dispatch = useAppDispatch()
     let [course_modal, showMod] = useState(false)
     let blast_cart = useAppSelector(cart)
     let {course_unit_details} = dummyCourseProgression
 
-    function setCourseInCart(title:string ,price: number ){
-        let newBCart= [...blast_cart, {title: title, price: price}]
+    function setCourseInCart(title:string ,price: number, id: string ){
+        let newBCart= [...blast_cart, {title: title, price: price, id: id}]
         dispatch(setCartState(newBCart))
     }
     return(
@@ -51,7 +50,10 @@ export function CourseDetails(){
         <p className='text-emerald-700 font-bold text-xl'>
                 ${course_price}
         </p>
-        <p>{course_duration}</p>
+        <div className="flex items-center gap-x-2 md:gap-x-4">
+        <FaUserClock size={'1.5rem'} fill='green' />
+        <p>{course_duration} hours</p>
+        </div>
         <p>{course_instructor}</p>
         <p>{course_difficulty}</p>
         <p className="text-justify indent-8">{course_blurb}</p>
@@ -78,7 +80,7 @@ export function CourseDetails(){
 
                 <div className="grid my-4 h-3/6">
                 <button onClick={()=> {
-                    setCourseInCart(course_title, course_price );
+                    setCourseInCart(course_title, course_price, course_id);
                     showMod(false);
                     alert("Item successfully Added to Cart!")
                 }} className="outline-none border-4 bg-white border-blue-800 p-4 rounded-xl text-emerald-700 justify-self-center w-9/12 hover:bg-blue-300 transition-colors self-end"  >

@@ -8,7 +8,7 @@ type State = {
     email: string, 
     id: string,
     course_details: UCD,
-    cart_state: {title: string, price:number}[
+    cart_state: {title: string, price:number, id:string}[
     ]
 }
 

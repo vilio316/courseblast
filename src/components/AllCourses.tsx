@@ -69,7 +69,7 @@ export function AllCourses(){
                 </div>
                 <p className="my-2 text-sm md:text-lg">{course_blurb}</p>
                 <button className="add_course hidden group-hover:block outline-none border-none p-2 rounded-xl text-white bg-emerald-700" onClick={()=> navigate(`/courses/${course_id}`)}>
-                    Add Course
+                    View Course
                 </button>
             </div>
         )
