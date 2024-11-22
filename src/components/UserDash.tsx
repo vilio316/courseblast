@@ -130,7 +130,7 @@ export function MainNav(props: {text?: string}){
 
 <div className="flex gap-x-2 items-center">
 <FaUser size={'1.5rem'} />
-<a className="block text-lg p-2" href="/user">Your Profile</a>
+<a className="block text-lg p-2" href="/user/profile">Your Profile</a>
 </div>
 
 <div className="flex gap-x-2 items-center">

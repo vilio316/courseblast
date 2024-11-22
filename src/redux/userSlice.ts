@@ -59,6 +59,7 @@ const userSlice = createSlice({
 export const first_name = (state: RootState)=> state.user_information.first_name
 export const last_name = (state: RootState)=> state.user_information.last_name
 export const ID = (state: RootState) => state.user_information.id
+export const emailAddress = (state: RootState) => state.user_information.email
 export const courses = (state: RootState) => state.user_information.course_details
 export const {setFirstName, setLastName, setEmailAddress, setID, setCourses, setCartState} = userSlice.actions
 export const cart = (state: RootState) => state.user_information.cart_state
