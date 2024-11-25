@@ -8,6 +8,7 @@ import supabase from "../supabase/clientSetup";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaCirclePlus, FaFile } from "react-icons/fa6";
+import { MdDashboard } from "react-icons/md";
 
 export type UserCourseData = {
     course_title: string,
@@ -57,7 +58,7 @@ courseID: "43red-45k67"
 
 ]
 
-function ShowCourse(props : propType){
+export function ShowCourse(props : propType){
     let navigate = useNavigate()
     let {course_blurb, course_instructor, course_progress_percentage, course_title, courseID} = props.object
     let initial = course_progress_percentage
@@ -126,6 +127,11 @@ export function MainNav(props: {text?: string}){
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeProf(false)}> x </span>
 <div className="grid justify-center">
 <img src={react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
+</div>
+
+<div className="flex gap-x-2 items-center">
+<MdDashboard size={'1.5rem'} fill="green" />
+<a className="block text-lg p-2" href="/user">Your Dashboard</a>
 </div>
 
 <div className="flex gap-x-2 items-center">
@@ -261,7 +267,7 @@ export function MobileNav(){
                 </a>
             </div>
 
-            <div className="grid justify-items-center" onClick={()=> navigate('/user')}>
+            <div className="grid justify-items-center" onClick={()=> navigate('/user/profile')}>
                 <div>
                     <FaUser fill='blue' size='1.5rem'/>
                 </div>
@@ -270,7 +276,7 @@ export function MobileNav(){
                 </a>
             </div>
 
-            <div className="grid justify-items-center" onClick={()=> navigate('/users/settings')}>
+            <div className="grid justify-items-center" onClick={()=> navigate('/user/settings')}>
                 <div>
                     <FaWrench fill='gray' size='1.25rem'/>
                 </div>

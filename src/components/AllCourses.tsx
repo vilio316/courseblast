@@ -104,7 +104,7 @@ export function AllCourses(){
             No courses on that yet. 
         </p>
         <p className="text-lg">Your search term '<b>{`${searchVal}`}</b>' yielded no results.</p>
-        <p>Please try a different term or check the quality of your connection.</p>
+        <p>Please try a different term or check the quality of your internet connection.</p>
         </div>
         </>: 
         <>

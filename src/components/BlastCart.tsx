@@ -20,7 +20,7 @@ export default function BlastCart(){
         <p className="font-bold text-lg md:text-xl">Your BlastCart ({blastCart.length} Items)</p>
         <ul className="list-disc w-11/12 my-2 md:my-4">
         {blastCart.map((cart_item) => (
-            <li>
+            <li key={cart_item.id}>
             <div key={cart_item.id} className=" grid grid-cols-12 font-bold text-lg md:text-2xl">
             <p className="col-span-9">{cart_item.title}</p>
             <p className="col-span-2">{cart_item.price}</p>
