@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { MainNav, MobileNav } from "./UserDash";
-import {cart, ID, setCartState } from '../redux/userSlice'
+import {cart, enrolledCourses, ID, setCartState, updateEnrolledCourses } from '../redux/userSlice'
 import { dummyCourseProgression } from "./UserCourseDetails";
 import { useState } from "react";
 import { FaShoppingBasket, FaUserClock, FaPen } from "react-icons/fa";
@@ -12,17 +12,24 @@ import { FaScaleUnbalanced } from "react-icons/fa6";
 
 export function CourseDetails(){
     let user_id = useAppSelector(ID)
-    
+    let your_course_data = useAppSelector(enrolledCourses)
+    let value= [...your_course_data]
     const goToSupa = async(param: any[]) => {
         const {data, error} = await supabase.from('users').update({
-            user_blastCart: param
+            user_blastCart: param,
         }).eq('id', user_id)
         console.log(data, error)
     }
-
+    const updateUserCourses = async (param: any[])=> {
+        await supabase.from('users').update({
+            user_courses : param,
+        }).eq('id', user_id)
+    }
     let params = useParams()
+    let dispatch = useAppDispatch()
     let { data, isLoading }= useGetAllCoursesQuery()
     let courseFetchResult = data?.filter((item) => item.course_id == params.courseID)
+
     let course: Course = {
         course_blurb: '',   
         course_difficulty: '',
@@ -34,9 +41,10 @@ export function CourseDetails(){
     }
     if(courseFetchResult){
     course = courseFetchResult[0]
+    value.push(course)
     }
     let {course_blurb, course_difficulty, course_duration, course_title,course_price, course_instructor, course_id} = course
-    let dispatch = useAppDispatch()
+    
     let [course_modal, showMod] = useState(false)
     let blast_cart = useAppSelector(cart)
     let {course_unit_details} = dummyCourseProgression
@@ -45,6 +53,8 @@ export function CourseDetails(){
         let newBCart= [...blast_cart, {title: title, price: price, id: id}]
         dispatch(setCartState(newBCart))
         goToSupa(newBCart)
+        dispatch(updateEnrolledCourses(value))
+        updateUserCourses(value)
     }
     return(
         <>

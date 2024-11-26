@@ -1,6 +1,6 @@
-import { FaCartPlus, FaCreditCard, FaHome, FaShoppingCart, FaUser, FaWrench } from "react-icons/fa";
+import { FaCreditCard, FaHome, FaShoppingCart, FaUser, FaWrench } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
-import { first_name, ID, setCartState, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
+import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
 import { Course, useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaCirclePlus, FaFile } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
-import { Json } from "../supabase";
 
 export type UserCourseData = {
     course_title: string,

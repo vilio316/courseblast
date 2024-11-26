@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { UCD } from "../components/UserCourseDetails";
+import { Course } from "./apiSlice";
 
 type State = {
     first_name: string,
@@ -8,6 +9,7 @@ type State = {
     email: string, 
     id: string,
     course_details: UCD,
+    enrolled_courses: Course[],
     cart_state: {title: string, price:number, id:string}[
     ]
 }
@@ -17,6 +19,7 @@ let initialState : State = {
     last_name: '',
     email: '',
     id: '',
+    enrolled_courses: [],
     course_details: {
         course_blurb: '',
         course_duration: '',
@@ -53,6 +56,9 @@ const userSlice = createSlice({
         },
         setCartState : (state, action) => {
             return {...state, cart_state: action.payload}
+        }, 
+        updateEnrolledCourses: (state, action) => {
+            return {...state, enrolled_courses: action.payload}
         }
     }
 })
@@ -61,6 +67,7 @@ export const last_name = (state: RootState)=> state.user_information.last_name
 export const ID = (state: RootState) => state.user_information.id
 export const emailAddress = (state: RootState) => state.user_information.email
 export const courses = (state: RootState) => state.user_information.course_details
-export const {setFirstName, setLastName, setEmailAddress, setID, setCourses, setCartState} = userSlice.actions
+export const enrolledCourses = (state: RootState) => state.user_information.enrolled_courses
+export const {setFirstName, setLastName, setEmailAddress, setID, setCourses, setCartState, updateEnrolledCourses} = userSlice.actions
 export const cart = (state: RootState) => state.user_information.cart_state
 export default userSlice.reducer
