@@ -1,13 +1,11 @@
-import { MainNav, MobileNav, ShowCourse } from "./UserDash"
+import { MainNav, MobileNav } from "./UserDash"
 import photograph from '../assets/react.svg'
 import { useAppSelector, useAppDispatch} from "../redux/hooks"
 import { emailAddress, first_name, last_name } from "../redux/userSlice"
 import supabase from "../supabase/clientSetup"
 import {setID, setEmailAddress, setFirstName} from '../redux/userSlice'
 import { useNavigate } from "react-router"
-import { dummyCourseData } from "./UserDash"
 import { useGetUserCoursesQuery } from "../redux/apiSlice"
-import { useState } from "react"
 
 export default function UserProfile(){
     let {data} = useGetUserCoursesQuery()
@@ -46,19 +44,21 @@ export default function UserProfile(){
         </div>
 
         <div className="grid justify-items-center md:justify-items-start md:flex md:gap-x-8">
+        
         <div className="pfp grid justify-center" >
         <img src={photograph} alt="User PFP" className="rounded-full h-12 md:h-24 sm:h-18"  />
         </div>
+        
         </div>
+
         <p className="font-bold text-lg text-center md:text-left p-1">{firstName} {lastName}</p>
         <p className="email italic text-sm text-center md:text-left p-1">{email_address}</p>
-
         <p>Your Courses</p>
         <div className="grid w-9/12">
         {data? <>
-            {data[0].user_courses.map((item : any) => (<p key={item.id}>
+            {data[0].user_courses.map((item : any) => (<a key={item.id} href={`/courses/${item.id}`} className="underline" >
                 {item.title}
-            </p>)
+            </a>)
         )}
         </> : <p>
             Nooo!

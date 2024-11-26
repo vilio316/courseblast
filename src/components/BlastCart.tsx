@@ -2,17 +2,29 @@ import { FaTrashCan } from "react-icons/fa6"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { cart, setCartState } from "../redux/userSlice"
 import { MainNav, MobileNav } from "./UserDash"
+import supabase from "../supabase/clientSetup"
+import {ID } from '../redux/userSlice'
+
 export default function BlastCart(){
     const blastCart = useAppSelector(cart)
     const dispatch = useAppDispatch()
+    let user_id = useAppSelector(ID)
 
+    const goToSupa = async(param: any[]) => {
+        const {data, error} = await supabase.from('users').update({
+            user_blastCart: param
+        }).eq('id', user_id)
+        console.log(data, error)
+    }
+    
     return(
         <>
         <div className="w-11/12 mx-auto p-2 md:p-4">
         <MainNav text="Your BlastCart"/>
         <div className="grid">
         <button className="text-md text-white bg-emerald-700 rounded-2xl p-2 justify-self-end" onClick={()=> {
-            dispatch(setCartState([]))
+            dispatch(setCartState([]));
+            goToSupa([])
         }}>
             Clear Cart
         </button>

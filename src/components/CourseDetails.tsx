@@ -3,28 +3,28 @@ import { MainNav, MobileNav } from "./UserDash";
 import {cart, ID, setCartState } from '../redux/userSlice'
 import { dummyCourseProgression } from "./UserCourseDetails";
 import { useState } from "react";
-import { FaShoppingBasket, FaUserClock } from "react-icons/fa";
+import { FaShoppingBasket, FaUserClock, FaPen } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useGetAllCoursesQuery } from "../redux/apiSlice";
 import { Course } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
+import { FaScaleUnbalanced } from "react-icons/fa6";
 
 export function CourseDetails(){
     let user_id = useAppSelector(ID)
+    
     const goToSupa = async(param: any[]) => {
         const {data, error} = await supabase.from('users').update({
-            user_courses: param
+            user_blastCart: param
         }).eq('id', user_id)
         console.log(data, error)
     }
-    
 
     let params = useParams()
-    
     let { data, isLoading }= useGetAllCoursesQuery()
     let courseFetchResult = data?.filter((item) => item.course_id == params.courseID)
     let course: Course = {
-        course_blurb: '',
+        course_blurb: '',   
         course_difficulty: '',
         course_duration: 0,
         course_id: "",
@@ -62,12 +62,24 @@ export function CourseDetails(){
         <p className='text-emerald-700 font-bold text-xl'>
                 ${course_price}
         </p>
+
+        <div className="my-2 md:my-4">
         <div className="flex items-center gap-x-2 md:gap-x-4">
         <FaUserClock size={'1.5rem'} fill='green' />
         <p>{course_duration} hours</p>
         </div>
+
+        <div className="flex items-center gap-x-2 md:gap-x-4">
+        <FaPen size={'1.25rem'} fill='black'/>
         <p>{course_instructor}</p>
+        </div>
+
+        <div className="flex items-center gap-x-2 md:gap-x-2">
+        <FaScaleUnbalanced size={'1.5rem'} fill='blue' />
         <p>{course_difficulty}</p>
+        </div>
+        </div>
+
         <p className="text-justify indent-8">{course_blurb}</p>
         <p className="my-4 font-bold text-xl md:text-2xl">
             Units

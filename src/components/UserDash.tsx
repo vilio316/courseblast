@@ -3,12 +3,13 @@ import { useAppSelector } from "../redux/hooks";
 import { first_name, ID, setCartState, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
-import { useGetUserQuery } from "../redux/apiSlice";
+import { Course, useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaCirclePlus, FaFile } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
+import { Json } from "../supabase";
 
 export type UserCourseData = {
     course_title: string,
@@ -180,6 +181,19 @@ export function MainNav(props: {text?: string}){
     )
 }
 
+function DashBody(){
+    let {data, isSuccess} = useGetUserCoursesQuery()
+
+    return(
+        <>
+        {data? <>
+        {
+            data[0].user_courses.map((course : any) => <ShowCourse object={course} key={course.course_id}/>)
+        }
+        </> : <></>}
+        </>
+    )
+}
 
 export function Dashboard(){
     let firstName = useAppSelector(first_name)
@@ -219,14 +233,8 @@ export function Dashboard(){
 }
             </div>
         </div>
-        <p className="text-2xl md:text-4xl font-bold md:my-4 my-2">Your Courses ({dummyCourseData.length})</p>
-
-        <div className="user-courses md:my-4 my-2 grid md:grid-cols-3 gap-x-4 overflow-y-scroll" id='courses'>
-            {
-                dummyCourseData.map((course) => (
-                    <ShowCourse object = {course} key={course.courseID}  />
-                ))
-            }
+        <div id="courses">
+        <DashBody/>
         </div>
         <MobileNav/>
         </div>
