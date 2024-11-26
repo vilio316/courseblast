@@ -89,6 +89,7 @@ export type Database = {
         Row: {
           email: string | null
           id: string
+          user_blastCart: Json[] | null
           user_courses: Json[] | null
           user_first_name: string | null
           user_last_name: string | null
@@ -97,6 +98,7 @@ export type Database = {
         Insert: {
           email?: string | null
           id?: string
+          user_blastCart?: Json[] | null
           user_courses?: Json[] | null
           user_first_name?: string | null
           user_last_name?: string | null
@@ -105,6 +107,7 @@ export type Database = {
         Update: {
           email?: string | null
           id?: string
+          user_blastCart?: Json[] | null
           user_courses?: Json[] | null
           user_first_name?: string | null
           user_last_name?: string | null

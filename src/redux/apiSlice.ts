@@ -23,12 +23,27 @@ export interface Course{
           course_title: string
 }
 
+let userCoursesQuery : BaseQueryFn<
+void, 
+any[] |null, 
+PostgrestError | null > = async()=>{
+  let state = user_store.getState() as RootState
+  let ID = state.user_information.id
+  const {data, error} = await supabase.from('users').select('user_courses').eq('id', ID)
+  if(data){
+    return {data}
+  }
+  if(error){
+    return {error}
+  }
+  return {data: []}
+}
 
-let supabaseCoursesQuery : BaseQueryFn<string,
+
+let supabaseCoursesQuery : BaseQueryFn<void,
  Course[] | null, 
  PostgrestError | null > = async ()=> {
     const {data, error} = await supabase.from('courses').select()
-
     if(data){
       return {data}
     }
@@ -69,6 +84,16 @@ let supabaseCoursesQuery : BaseQueryFn<string,
     })
   });
 
+  export const userCourses = createApi({
+    reducerPath: 'supabaseUserCourses',
+    baseQuery: userCoursesQuery,
+    endpoints: (builder) => ({
+      getUserCourses : builder.query<any[], void>({
+        query: () => ('')
+      })
+    })
+  })
+
   export const coursesAPISlice = createApi({
     reducerPath: 'supabaseCourses',
     baseQuery: supabaseCoursesQuery,
@@ -82,3 +107,4 @@ let supabaseCoursesQuery : BaseQueryFn<string,
 
   export const { useGetUserQuery } = supabaseApi;
   export const { useGetAllCoursesQuery } = coursesAPISlice
+  export const { useGetUserCoursesQuery } = userCourses

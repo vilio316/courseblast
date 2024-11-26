@@ -9,7 +9,7 @@ import { persistStore, persistReducer,  FLUSH,
     PURGE,
     REGISTER} from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { supabaseApi, coursesAPISlice } from "./apiSlice";
+import { supabaseApi, coursesAPISlice, userCourses } from "./apiSlice";
 
 let persistConf = {
     key: 'courseblast',
@@ -23,13 +23,14 @@ export const user_store = configureStore({
         user_information: persistedUserReducer,
         selected_filters:  filtersReducer,
         [supabaseApi.reducerPath]: supabaseApi.reducer,
-        [coursesAPISlice.reducerPath]: coursesAPISlice.reducer
+        [coursesAPISlice.reducerPath]: coursesAPISlice.reducer,
+        [userCourses.reducerPath] : userCourses.reducer
     },
     middleware:  (getDefaultMiddleware) =>  getDefaultMiddleware({
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }).concat(supabaseApi.middleware).concat(coursesAPISlice.middleware),
+      }).concat(supabaseApi.middleware).concat(coursesAPISlice.middleware).concat(userCourses.middleware),
 })
 
 export const persisted_store = persistStore(user_store)

@@ -1,15 +1,26 @@
 import { useParams } from "react-router";
 import { MainNav, MobileNav } from "./UserDash";
-import {cart, setCartState } from '../redux/userSlice'
+import {cart, ID, setCartState } from '../redux/userSlice'
 import { dummyCourseProgression } from "./UserCourseDetails";
 import { useState } from "react";
 import { FaShoppingBasket, FaUserClock } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useGetAllCoursesQuery } from "../redux/apiSlice";
 import { Course } from "../redux/apiSlice";
+import supabase from "../supabase/clientSetup";
 
 export function CourseDetails(){
+    let user_id = useAppSelector(ID)
+    const goToSupa = async(param: any[]) => {
+        const {data, error} = await supabase.from('users').update({
+            user_courses: param
+        }).eq('id', user_id)
+        console.log(data, error)
+    }
+    
+
     let params = useParams()
+    
     let { data, isLoading }= useGetAllCoursesQuery()
     let courseFetchResult = data?.filter((item) => item.course_id == params.courseID)
     let course: Course = {
@@ -33,6 +44,7 @@ export function CourseDetails(){
     function setCourseInCart(title:string ,price: number, id: string ){
         let newBCart= [...blast_cart, {title: title, price: price, id: id}]
         dispatch(setCartState(newBCart))
+        goToSupa(newBCart)
     }
     return(
         <>

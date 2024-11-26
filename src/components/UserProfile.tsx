@@ -6,9 +6,11 @@ import supabase from "../supabase/clientSetup"
 import {setID, setEmailAddress, setFirstName} from '../redux/userSlice'
 import { useNavigate } from "react-router"
 import { dummyCourseData } from "./UserDash"
-import { CourseDetails } from "./CourseDetails"
+import { useGetUserCoursesQuery } from "../redux/apiSlice"
+import { useState } from "react"
 
 export default function UserProfile(){
+    let {data} = useGetUserCoursesQuery()
     let firstName = useAppSelector(first_name)
     let navigate = useNavigate()
     let lastName = useAppSelector(last_name)
@@ -52,10 +54,15 @@ export default function UserProfile(){
         <p className="email italic text-sm text-center md:text-left p-1">{email_address}</p>
 
         <p>Your Courses</p>
-        <div className="grid grid-cols-3 w-9/12 overflow-x-scroll whitespace-nowrap">
-            {dummyCourseData.map((item) =>(
-                <ShowCourse object={item} />
-                ))}
+        <div className="grid w-9/12">
+        {data? <>
+            {data[0].user_courses.map((item : any) => (<p key={item.id}>
+                {item.title}
+            </p>)
+        )}
+        </> : <p>
+            Nooo!
+            </p>}
         </div>
         <MobileNav/>
         </div>
