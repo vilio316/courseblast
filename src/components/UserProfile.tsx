@@ -56,9 +56,13 @@ export default function UserProfile(){
         <p>Your Courses</p>
         <div className="grid w-9/12">
         {data? <>
-            {data[0].user_courses.map((item : any) => (<a key={item.id} href={`/courses/${item.id}`} className="underline" >
-                {item.title}
-            </a>)
+            {data[0].user_courses.map((item : any) => (
+                <div key={item.course_id} className="hover:bg-gray-200">
+                <a href={`/courses/${item.course_id}`} >
+                {item.course_title}
+                </a>
+                </div>
+            )
         )}
         </> : <p>
             Nooo!

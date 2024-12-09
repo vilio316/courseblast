@@ -1,6 +1,6 @@
 import { FaCreditCard, FaHome, FaShoppingCart, FaUser, FaWrench } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
-import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
+import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName, updateEnrolledCourses } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
 import { Course, useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaCirclePlus, FaFile } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
+import { updateUserCourses } from "./CourseDetails";
 
 export type UserCourseData = {
     course_title: string,
@@ -74,7 +75,7 @@ export function ShowCourse(props : propType){
     }
     return(
         <>
-            <div className="rounded-2xl p-2 md:p-4 hover:bg-gray-200 group w-5/12 md:w-full bg-gray-200 md:bg-inherit my-2">
+            <div className="rounded-2xl p-2 md:p-4 hover:bg-gray-200 group w-full bg-gray-200 md:bg-inherit my-2">
             <p className="font-bold text-lg md:text-xl w-10/12 overflow-hidden text-ellipsis whitespace-nowrap">{course_title}</p>
             <div className="grid-cols-3 gap-4">
                 <div className="grid col-span-2 progress-bar">
@@ -181,7 +182,7 @@ export function MainNav(props: {text?: string}){
 }
 
 function DashBody(){
-    let {data, isSuccess} = useGetUserCoursesQuery()
+    let {data} = useGetUserCoursesQuery()
 
     return(
         <>
@@ -195,7 +196,12 @@ function DashBody(){
 }
 
 export function Dashboard(){
-    let firstName = useAppSelector(first_name)
+    let firstName = useAppSelector(first_name)  
+    let dispatch = useDispatch()    
+    let navigate = useNavigate()
+    let id_value = useAppSelector(ID)
+    let {data, isFetching}= useGetUserQuery()
+    const new_arr = data?.filter((item) => item.id == id_value)
     useEffect(()=> {
         if(new_arr){
             let {user_first_name, user_last_name, email} = new_arr[0]
@@ -205,17 +211,16 @@ export function Dashboard(){
         }
     })
 
-    
-    let dispatch = useDispatch()    
-    let id_value = useAppSelector(ID)
-    let {data, isFetching}= useGetUserQuery()
-    const new_arr = data?.filter((item) => item.id == id_value)
-
     return(
         <>
         <div className="w-11/12 p-2 md:p-4 my-4 mx-auto relative">
         <MainNav/>
 
+        <button className="p-4 bg-emerald-600 rounded-2xl text-white"  onClick={()=> {
+            dispatch(updateEnrolledCourses([]));
+            updateUserCourses([], id_value);
+            navigate('/user')
+            }}>Clear Courses!</button>
         <div className="grid grid-cols-4 items-center">
             <div className="grid col-span-1 justify-items-center">
             <img src={react} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
@@ -232,7 +237,7 @@ export function Dashboard(){
 }
             </div>
         </div>
-        <div id="courses">
+        <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
         <DashBody/>
         </div>
         <MobileNav/>

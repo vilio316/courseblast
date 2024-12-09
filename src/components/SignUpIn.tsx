@@ -44,12 +44,12 @@ export function SignUp(){
                 <p className="text-sm md:text-lg">Sign Up for CourseBlast!</p>
                     
                     <div className="grid h-5/6 md:grid-cols-12">
-                        <form className="my-2 grid col-span-8">
+                    <form className="my-2 grid col-span-8">
                     <label htmlFor="name" className="block font-bold text-lg">First Name</label>
                     <input id="name" type='name' autoFocus value={full_name} onChange={(e)=> setName(e.target.value)} required placeholder="Full Name" className="outline-none p-2 md:w-8/12 rounded-md border-2 border-emerald-700 indent-2 my-2"/>
 
                     <label htmlFor="lname" className="block font-bold text-lg">Last Name</label>
-                    <input type="text" name="lname" id="lname" onChange={(e)=> setLName(e.target.value)}autoFocus required placeholder="Last Name" className="outline-none p-2 md:w-8/12 rounded-md border-2 border-emerald-700 indent-2 my-2"/>
+                    <input type="text" name="lname" id="lname" onChange={(e)=> setLName(e.target.value)} required placeholder="Last Name" className="outline-none p-2 md:w-8/12 rounded-md border-2 border-emerald-700 indent-2 my-2"/>
 
                     <label htmlFor="password" className="block font-bold text-lg">Password</label>
                     <div className="grid grid-cols-12 items-center">

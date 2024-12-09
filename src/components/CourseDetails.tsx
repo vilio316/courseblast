@@ -10,24 +10,27 @@ import { Course } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { FaScaleUnbalanced } from "react-icons/fa6";
 
+export const updateUserCourses = async (param: any[], id:string)=> {
+    await supabase.from('users').update({
+        user_courses : param,
+    }).eq('id', id)
+}
+
 export function CourseDetails(){
     let user_id = useAppSelector(ID)
     let your_course_data = useAppSelector(enrolledCourses)
     let value= [...your_course_data]
+
     const goToSupa = async(param: any[]) => {
         const {data, error} = await supabase.from('users').update({
             user_blastCart: param,
         }).eq('id', user_id)
         console.log(data, error)
     }
-    const updateUserCourses = async (param: any[])=> {
-        await supabase.from('users').update({
-            user_courses : param,
-        }).eq('id', user_id)
-    }
+   
     let params = useParams()
     let dispatch = useAppDispatch()
-    let { data, isLoading }= useGetAllCoursesQuery()
+    let { data }= useGetAllCoursesQuery()
     let courseFetchResult = data?.filter((item) => item.course_id == params.courseID)
 
     let course: Course = {
@@ -39,6 +42,7 @@ export function CourseDetails(){
         course_price: 0,
         course_title:''
     }
+
     if(courseFetchResult){
     course = courseFetchResult[0]
     value.push(course)
@@ -54,7 +58,7 @@ export function CourseDetails(){
         dispatch(setCartState(newBCart))
         goToSupa(newBCart)
         dispatch(updateEnrolledCourses(value))
-        updateUserCourses(value)
+        updateUserCourses(value, user_id)
     }
     return(
         <>
@@ -104,20 +108,21 @@ export function CourseDetails(){
         </div>
         <MobileNav/>
 
+        {/* Course Details Modal*/}
         <div className={`w-full bg-gray-300 opacity-85 z-10 absolute top-0 h-full ${course_modal? 'grid': 'hidden'}`}>
             <div className={`md:w-6/12 w-full bg-white md:h-9/12 mx-auto p-4 opacity-100`}>
             <span className="w-full text-right block hover:text-red-500 text-4xl font-bolds" onClick={()=> showMod(false) }>x</span>
-                <p className="font-bold text-3xl">{course_title}</p>
-                <p className="text-emerald-700 text-xl font-bold my-2">${course_price}</p>
-                <p>{course_instructor}</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur et sit autem repellat iure placeat, dolorum dolor laudantium quidem incidunt obcaecati ipsam consequuntur quis perferendis minima corrupti. Delectus, vitae cum.</p>
+                <p className="font-bold md:text-3xl text-lg ">{course_title}</p>
+                <p className="text-emerald-700 md:text-xl text-sm font-bold my-2">${course_price}</p>
+                <p className="font-bold">{course_instructor}</p>
+                <p className="text-sm italic indent-2 md:indent-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur et sit autem repellat iure placeat, dolorum dolor laudantium quidem incidunt obcaecati ipsam consequuntur quis perferendis minima corrupti. Delectus, vitae cum.</p>
 
-                <div className="grid my-4 h-3/6">
+                <div className="grid my-4 absolute md:bottom-0">
                 <button onClick={()=> {
                     setCourseInCart(course_title, course_price, course_id);
                     showMod(false);
                     alert("Item successfully Added to Cart!")
-                }} className="outline-none border-4 bg-white border-blue-800 p-4 rounded-xl text-emerald-700 justify-self-center w-9/12 hover:bg-blue-300 transition-colors self-end"  >
+                }} className="outline-none border-4 bg-white border-blue-800 p-2 md:p-4 rounded-xl text-emerald-700 justify-self-center w-9/12 hover:bg-blue-300 transition-colors self-end"  >
                      <div className="flex items-center justify-center gap-x-4">
                         <FaShoppingBasket size='1.5rem' fill="blue"/>
                         <p className="text-blue font-bold">{'Add to Blastcart'.toUpperCase()}</p>
