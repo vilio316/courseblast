@@ -198,7 +198,6 @@ function DashBody(){
 export function Dashboard(){
     let firstName = useAppSelector(first_name)  
     let dispatch = useDispatch()    
-    let navigate = useNavigate()
     let id_value = useAppSelector(ID)
     let {data, isFetching}= useGetUserQuery()
     const new_arr = data?.filter((item) => item.id == id_value)
@@ -219,7 +218,6 @@ export function Dashboard(){
         <button className="p-4 bg-emerald-600 rounded-2xl text-white"  onClick={()=> {
             dispatch(updateEnrolledCourses([]));
             updateUserCourses([], id_value);
-            navigate('/user')
             }}>Clear Courses!</button>
         <div className="grid grid-cols-4 items-center">
             <div className="grid col-span-1 justify-items-center">

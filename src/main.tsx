@@ -13,6 +13,7 @@ import { CourseDetails } from './components/CourseDetails'
 import Error from './components/Error'
 import BlastCart from './components/BlastCart'
 import UserProfile from './components/UserProfile'
+import PaystackComp from './components/PaystackTestComp'
 
 const routes = createBrowserRouter([
   {
@@ -63,6 +64,11 @@ const routes = createBrowserRouter([
   {
     path: '/user/profile',
     element: <UserProfile/>,
+    errorElement: <Error/>
+  },
+  {
+    path: '/paystack_test',
+    element: <PaystackComp/>,
     errorElement: <Error/>
   }
 ])
