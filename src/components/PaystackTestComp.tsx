@@ -5,7 +5,7 @@ import { PaystackButton } from "react-paystack"
 
 export default function PaystackComp(){
     let publicKey = 'pk_test_01a7b1f00ce37286a6a3e7d6f9d3ebd29bed7d2b'
-    const amount = 1000000 // Remember, set in kobo!
+    const amount = 4500000
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
@@ -13,6 +13,7 @@ export default function PaystackComp(){
   const componentProps = {
     email,
     amount,
+    currency: 'NGN',
     metadata: {
       name,
       phone,
@@ -27,8 +28,6 @@ export default function PaystackComp(){
     },
     publicKey,
     text: "Pay Now",
-    onSuccess: () =>
-      alert("Thanks for doing business with us! Come back soon!!"),
   }
 
     return(

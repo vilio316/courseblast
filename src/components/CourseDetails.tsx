@@ -74,7 +74,7 @@ export function CourseDetails(){
         </button>
         </div>      
         <p className='text-emerald-700 font-bold text-xl'>
-                ${course_price}
+                NGN {course_price}
         </p>
 
         <div className="my-2 md:my-4">
@@ -113,7 +113,7 @@ export function CourseDetails(){
             <div className={`md:w-6/12 w-full bg-white md:h-9/12 mx-auto p-4 opacity-100`}>
             <span className="w-full text-right block hover:text-red-500 text-4xl font-bolds" onClick={()=> showMod(false) }>x</span>
                 <p className="font-bold md:text-3xl text-lg ">{course_title}</p>
-                <p className="text-emerald-700 md:text-xl text-sm font-bold my-2">${course_price}</p>
+                <p className="text-emerald-700 md:text-xl text-sm font-bold my-2">NGN {course_price}</p>
                 <p className="font-bold">{course_instructor}</p>
                 <p className="text-sm italic indent-2 md:indent-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur et sit autem repellat iure placeat, dolorum dolor laudantium quidem incidunt obcaecati ipsam consequuntur quis perferendis minima corrupti. Delectus, vitae cum.</p>
 
