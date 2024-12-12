@@ -1,6 +1,6 @@
 import { FaCreditCard, FaHome, FaShoppingCart, FaUser, FaWrench } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
-import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName, updateEnrolledCourses } from "../redux/userSlice";
+import { enrolledCourses, first_name, ID, setEmailAddress, setFirstName, setID, setLastName, updateEnrolledCourses } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
 import { Course, useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
@@ -183,12 +183,14 @@ export function MainNav(props: {text?: string}){
 
 function DashBody(){
     let {data} = useGetUserCoursesQuery()
+    if(data) updateEnrolledCourses(data[0].user_courses)
+    let user_courses_from_supa = useAppSelector(enrolledCourses) 
 
     return(
         <>
         {data? <>
         {
-            data[0].user_courses.map((course : any) => <ShowCourse object={course} key={course.course_id}/>)
+            user_courses_from_supa.map((course : any) => <ShowCourse object={course} key={course.course_id}/>)
         }
         </> : <></>}
         </>

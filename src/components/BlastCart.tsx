@@ -5,6 +5,7 @@ import { MainNav, MobileNav } from "./UserDash"
 import supabase from "../supabase/clientSetup"
 import {ID } from '../redux/userSlice'
 import { PaystackButton } from "react-paystack"
+import { CartFiller, EmptyCart } from "./EmptyCart"
 
 function loopr (array: any[]){
     let holding_value = [...array];
@@ -72,27 +73,51 @@ export default function BlastCart(){
         </button>
         </div>
         <p className="font-bold text-lg md:text-xl">Your BlastCart ({blastCart.length} Items)</p>
-        <ul className="list-disc w-11/12 my-2 md:my-4">
+        {blastCart.length < 1 ?
+        <>
+        <EmptyCart/>
+        </>
+        :
+        <div className="block min-h-48 w-full">
+        <table className="w-full md:w-9/12 my-2 md:my-4 table-auto border-collapse border-2 border-emerald-300">
+            <thead>
+            <tr className="bg-emerald-200">
+                <th className="text-center border border-emerald-300">Course Title</th>
+                <th className="text-center border border-emerald-300">Course Price (NGN)</th>
+                <th className="text-transparent border border-emerald-300">icon</th>
+            </tr>
+            </thead>
+            <tbody>
         {blastCart.map((cart_item) => (
-            <li key={cart_item.id}>
-            <div key={cart_item.id} className=" grid grid-cols-12 font-bold text-lg md:text-2xl items-center">
-            <p className="col-span-9">{cart_item.title}</p>
-            <p className="col-span-2">{cart_item.price}</p>
-            <div className="flex items-center">
-                <button onClick={() => deleteHandler(cart_item, blastCart)}>
-                    <FaTrashCan fill="red" size={'1.5rem'} />
+            <tr key={cart_item.id} className="items-center">
+            <td className="text-center font-bold p-2 md:p-4 border border-emerald-300">
+                <a href={`/courses/${cart_item.id}`}>{cart_item.title}</a>
+                </td>
+            <td className="text-center p-2 md:p-4 border border-emerald-300">{cart_item.price}</td>
+            <td className="grid p-2 md:p-4">
+                <button className="grid items-center" onClick={() => deleteHandler(cart_item, blastCart)}>
+                    <FaTrashCan fill="red" size={'2rem'} />
                 </button>
-            </div>
-            </div>
-            </li>
+            </td>
+            </tr>
         ))}
-        </ul>
+        </tbody>
+        </table>
+        {
+            blastCart.length < 3 ?<>
+            <CartFiller/>
+            </>: <>
+            </>
+        }
         { loopr(blastCart) > 0 ?
         <p>Total to Pay: NGN {loopr(blastCart)}</p>: <p>
             Nothing Ordered Yet!
         </p>
         }
-        <PaystackButton {...payProps} className='bg-emerald-700 font-bold text-white my-2 md:my-4 md:w-20 rounded-2xl p-2 md:p-4' />
+        <PaystackButton {...payProps} className='bg-emerald-700 font-bold text-white my-2 md:my-4 grid justify-self-center rounded-2xl p-2 md:p-4' />
+        </div>
+}
+        
         <MobileNav/>
         </div>
         </>

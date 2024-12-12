@@ -117,7 +117,7 @@ export function CourseDetails(){
                 <p className="font-bold">{course_instructor}</p>
                 <p className="text-sm italic indent-2 md:indent-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur et sit autem repellat iure placeat, dolorum dolor laudantium quidem incidunt obcaecati ipsam consequuntur quis perferendis minima corrupti. Delectus, vitae cum.</p>
 
-                <div className="grid my-4 absolute md:bottom-0">
+                <div className="grid my-4 absolute md:bottom-0 md:w-6/12 mx-auto w-full">
                 <button onClick={()=> {
                     setCourseInCart(course_title, course_price, course_id);
                     showMod(false);
