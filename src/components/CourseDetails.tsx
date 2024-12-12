@@ -47,6 +47,7 @@ export function CourseDetails(){
     course = courseFetchResult[0]
     value.push(course)
     }
+
     let {course_blurb, course_difficulty, course_duration, course_title,course_price, course_instructor, course_id} = course
     
     let [course_modal, showMod] = useState(false)
@@ -119,9 +120,20 @@ export function CourseDetails(){
 
                 <div className="grid my-4 absolute md:bottom-0 md:w-6/12 mx-auto w-full">
                 <button onClick={()=> {
+                    let ids_arr = [];
+                    console.log(your_course_data)
+                    for(let i = 0; i < your_course_data.length; i++){
+                        ids_arr.push(your_course_data[i].course_id)
+                    }
+                    console.log(ids_arr)
+                    if(params.courseID && ids_arr.indexOf(params.courseID) !== -1){
+                        alert("Item is already in Cart")
+                    }
+                    else{
                     setCourseInCart(course_title, course_price, course_id);
                     showMod(false);
                     alert("Item successfully Added to Cart!")
+                }
                 }} className="outline-none border-4 bg-white border-blue-800 p-2 md:p-4 rounded-xl text-emerald-700 justify-self-center w-9/12 hover:bg-blue-300 transition-colors self-end"  >
                      <div className="flex items-center justify-center gap-x-4">
                         <FaShoppingBasket size='1.5rem' fill="blue"/>

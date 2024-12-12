@@ -3,7 +3,7 @@ import { MainNav, MobileNav} from "./UserDash"
 import  { Course } from '../redux/apiSlice'
 import { useNavigate } from "react-router"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { filterValues, gradeFilter, setFiltersGrade, setFiltersName } from "../redux/filterSlice"
+import { filterValues, gradeFilter, setFiltersGrade } from "../redux/filterSlice"
 import { useGetAllCoursesQuery } from "../redux/apiSlice"
 import { FaScaleUnbalanced } from "react-icons/fa6"
 

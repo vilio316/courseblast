@@ -1,6 +1,6 @@
 import { FaCreditCard, FaHome, FaShoppingCart, FaUser, FaWrench } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
-import { enrolledCourses, first_name, ID, setEmailAddress, setFirstName, setID, setLastName, updateEnrolledCourses } from "../redux/userSlice";
+import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
 import { Course, useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaCirclePlus, FaFile } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
-import { updateUserCourses } from "./CourseDetails";
+
 
 export type UserCourseData = {
     course_title: string,
@@ -109,7 +109,6 @@ export function MainNav(props: {text?: string}){
         dispatch(setEmailAddress(''));
         dispatch(setFirstName(''));
     }
-
     let signOut = async() =>{
         await supabase.auth.signOut()
     } 
@@ -124,7 +123,7 @@ export function MainNav(props: {text?: string}){
         </i>
 
         {/* User Profile Modal Here */}
-<div className={`user_nav absolute top-0 left-0 p-4 rounded-xl z-20 bg-white transition-all ${prof? `ml-0`: `ml-96`} `}>
+<div className={`user_nav absolute top-0 left-0 p-4 rounded-xl z-20 bg-white border-2 border-emerald-300 transition-all ${prof? `ml-0`: `ml-96`} `}>
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeProf(false)}> x </span>
 <div className="grid justify-center">
 <img src={react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
@@ -169,11 +168,10 @@ export function MainNav(props: {text?: string}){
 </div>
 
 {/* Dashboard Navigation Here*/}
-<div className={`absolute z-10 top-0 right-0 bg-white ${menuState ? `mt-0` : `-mt-96`} opacity-75 transition-all p-4 w-9/12 h-full`} >
+<div className={`absolute z-10 top-0 right-0  ${menuState ? `mt-0` : `-mt-96`} transition-all p-4 w-9/12 h-full`} >
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeMenu(false)}> x </span>
 <a className="text-xl font-bold block hover:italic my-4">Home</a>
 <a className="text-xl font-bold block hover:italic my-4" href='/courses'>All Courses</a>
-{/*<a className="text-xl font-bold block hover:italic my-4">Search</a>*/}
 </div>
     </div>
     </div>
@@ -183,14 +181,13 @@ export function MainNav(props: {text?: string}){
 
 function DashBody(){
     let {data} = useGetUserCoursesQuery()
-    if(data) updateEnrolledCourses(data[0].user_courses)
-    let user_courses_from_supa = useAppSelector(enrolledCourses) 
+   
 
     return(
         <>
         {data? <>
         {
-            user_courses_from_supa.map((course : any) => <ShowCourse object={course} key={course.course_id}/>)
+            data[0].user_courses.map((course : any) => <ShowCourse object={course} key={course.course_id}/>)
         }
         </> : <></>}
         </>
@@ -216,11 +213,6 @@ export function Dashboard(){
         <>
         <div className="w-11/12 p-2 md:p-4 my-4 mx-auto relative">
         <MainNav/>
-
-        <button className="p-4 bg-emerald-600 rounded-2xl text-white"  onClick={()=> {
-            dispatch(updateEnrolledCourses([]));
-            updateUserCourses([], id_value);
-            }}>Clear Courses!</button>
         <div className="grid grid-cols-4 items-center">
             <div className="grid col-span-1 justify-items-center">
             <img src={react} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
