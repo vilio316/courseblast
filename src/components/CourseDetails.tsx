@@ -59,7 +59,6 @@ export function CourseDetails(){
         dispatch(setCartState(newBCart))
         goToSupa(newBCart)
         dispatch(updateEnrolledCourses(value))
-        updateUserCourses(value, user_id)
     }
     return(
         <>
@@ -110,13 +109,13 @@ export function CourseDetails(){
         <MobileNav/>
 
         {/* Course Details Modal*/}
-        <div className={`w-full bg-gray-300 opacity-85 z-10 absolute top-0 h-full ${course_modal? 'grid': 'hidden'}`}>
+        <div className={`w-full bg-gray-300 opacity-90 z-10 absolute top-0 h-full ${course_modal? 'grid': 'hidden'}`}>
             <div className={`md:w-6/12 w-full bg-white md:h-9/12 mx-auto p-4 opacity-100`}>
             <span className="w-full text-right block hover:text-red-500 text-4xl font-bolds" onClick={()=> showMod(false) }>x</span>
                 <p className="font-bold md:text-3xl text-lg ">{course_title}</p>
                 <p className="text-emerald-700 md:text-xl text-sm font-bold my-2">NGN {course_price}</p>
                 <p className="font-bold">{course_instructor}</p>
-                <p className="text-sm italic indent-2 md:indent-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur et sit autem repellat iure placeat, dolorum dolor laudantium quidem incidunt obcaecati ipsam consequuntur quis perferendis minima corrupti. Delectus, vitae cum.</p>
+                <p className="text-sm md:text-lg italic indent-2 md:indent-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur et sit autem repellat iure placeat, dolorum dolor laudantium quidem incidunt obcaecati ipsam consequuntur quis perferendis minima corrupti. Delectus, vitae cum.</p>
 
                 <div className="grid my-4 absolute md:bottom-0 md:w-6/12 mx-auto w-full">
                 <button onClick={()=> {

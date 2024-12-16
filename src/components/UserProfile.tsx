@@ -1,7 +1,7 @@
 import { MainNav, MobileNav } from "./UserDash"
 import photograph from '../assets/react.svg'
 import { useAppSelector, useAppDispatch} from "../redux/hooks"
-import { emailAddress, first_name, last_name } from "../redux/userSlice"
+import { emailAddress, first_name, last_name, updateEnrolledCourses } from "../redux/userSlice"
 import supabase from "../supabase/clientSetup"
 import {setID, setEmailAddress, setFirstName} from '../redux/userSlice'
 import { useNavigate } from "react-router"
@@ -18,6 +18,7 @@ export default function UserProfile(){
         dispatch(setID(''));
         dispatch(setEmailAddress(''));
         dispatch(setFirstName(''));
+        dispatch(updateEnrolledCourses([]))
     }
 
     let signOut = async() =>{

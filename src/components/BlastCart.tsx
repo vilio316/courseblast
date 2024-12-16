@@ -6,6 +6,9 @@ import supabase from "../supabase/clientSetup"
 import {ID } from '../redux/userSlice'
 import { PaystackButton } from "react-paystack"
 import { CartFiller, EmptyCart } from "./EmptyCart"
+import { PaystackButtonProps } from "react-paystack/dist/paystack-button"
+import { updateUserCourses } from "./CourseDetails"
+import { useNavigate } from "react-router"
 
 function loopr (array: any[]){
     let holding_value = [...array];
@@ -21,6 +24,7 @@ export default function BlastCart(){
     const user_mail = useAppSelector(emailAddress)
     const dispatch = useAppDispatch()
     let user_id = useAppSelector(ID)
+    let navigate = useNavigate()
 
     const goToSupa = async(param: any[]) => {
         const {data, error} = await supabase.from('users').update({
@@ -36,8 +40,15 @@ export default function BlastCart(){
         goToSupa(updated_arr)
     }
     
-    let payProps = 
-        {publicKey: 'pk_test_01a7b1f00ce37286a6a3e7d6f9d3ebd29bed7d2b', email: user_mail, amount: loopr(blastCart) * 100, text: `Make Payment Now`}
+    let payProps: PaystackButtonProps = 
+        {publicKey: 'pk_test_01a7b1f00ce37286a6a3e7d6f9d3ebd29bed7d2b', email: user_mail, amount: loopr(blastCart) * 100, text: `Make Payment Now`, onSuccess: () => {
+            window.alert("Successful Payment!");
+            updateUserCourses(blastCart, user_id);
+            goToSupa([]);
+            dispatch(setCartState([]))
+            navigate('/user')
+
+        }}
 
     return(
         <>

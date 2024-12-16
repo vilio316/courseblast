@@ -190,7 +190,7 @@ function DashBody(){
         {
             data[0].user_courses.map((course : any) => <ShowCourse object={course} key={course.course_id}/>)
         }
-        </> : <></>}
+        </> : <><p>OOPS!</p></>}
         </>
     )
 }
@@ -211,10 +211,11 @@ export function Dashboard(){
     })
 
     async function clearCourses(){
+        dispatch(updateEnrolledCourses([]))
         const {data} = await supabase.from('users').update({
             user_courses: []
         }).eq('id', id_value)
-        updateEnrolledCourses([])
+        
     }
 
 

@@ -59,7 +59,6 @@ export const dummyCourseProgression : UCD=
 export function UserCourseDetails(){
     let {courseID} = useParams()
     let courseObj = useAppSelector(courses)
-    console.log(courseID)
     let {course_title , course_units_count, course_duration, course_progress_percentage} = courseObj
     let navigate = useNavigate()
     function CourseUnit(props : compProps){
