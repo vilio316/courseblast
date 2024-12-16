@@ -36,27 +36,6 @@ export default function BlastCart(){
         goToSupa(updated_arr)
     }
     
-   {/* const componentProps = {
-        email,
-        amount,
-        currency: 'NGN',
-        metadata: {
-          name,
-          phone,
-          custom_fields: [
-            {
-                display_name: 'description',
-                variable_name: 'description',
-                value: 'Funding Wallet'
-            }
-            // To pass extra metadata, add an object with the same fields as above
-        ]
-        },
-        publicKey,
-        text: "Pay Now",
-      }
-    */}
-
     let payProps = 
         {publicKey: 'pk_test_01a7b1f00ce37286a6a3e7d6f9d3ebd29bed7d2b', email: user_mail, amount: loopr(blastCart) * 100, text: `Make Payment Now`}
 

@@ -3,8 +3,10 @@ import hero from '../assets/hero_illust.jpeg'
 import selfpaced from '../assets/self-paced.jpg'
 import security_illustration from '../assets/security_illustration.jpg'
 import expert_1 from '../assets/expert_1.jpg'
+import expert_2 from '../assets/expert_2.jpg'
 import { useState } from 'react'
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 
 
 export function Landing(){
@@ -44,7 +46,7 @@ export function Landing(){
                     <a className="p-2 text-center hover:underline">Courses</a>
                     <a className="p-2 text-center hover:underline">Instructors</a>
                     <a className="p-2 text-center hover:underline">Blog</a>
-                    <a className="p-2 text-center hover:underline bg-emerald-800  hover:bg-emerald-600 transition-colors rounded-2xl text-white" href='/sign-up'>Register</a>
+                    <a className="p-2 text-center hover:underline bg-emerald-800  hover:bg-emerald-600 transition-colors rounded-2xl text-white" href='/sign-in'>Register</a>
                 </div>
 
             </div>
@@ -204,8 +206,8 @@ export function Landing(){
             <h2 className='p-2 text-xl md:text-2xl font-bold'>Why You Should Choose CourseBlast</h2>
             <div className='grid md:grid-cols-2 my-2'>
                 <div>
-                    <p className='p-2 text-xl font-bold'>Tailored Learning</p>
-                    <p>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
+                    <p className='p-2 text-xl font-bold md:text-2xl'>Tailored Learning</p>
+                    <p className='p-2 text-lg indent-2 md:indent-4'>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
                 </div>
 
                 <div>
@@ -214,14 +216,14 @@ export function Landing(){
 
             </div>
 
-            <div className='grid md:grid-cols-2 my-2'>
+            <div className='grid md:grid-cols-2 my-2 items-center'>
             <div>
-                    {/* Insert Image/Illustration Here */}
+                   <img src={expert_2} alt="Flexibility Illustration" className='w-9/12 mx-auto rounded-lg'/> 
                 </div>
                
                 <div>
                     <p className='p-2 text-xl font-bold md:text-2xl'>Flexibility</p>
-                    <p>All of our courses at CourseBlast are very user-friendly and can support any and all learning structure. Whether you prefer to binge-learn or study consistently, we're here for you. Our goal-based learning system also helps to ensure high completion and retention rates across the board.  </p>
+                    <p className='p-2 indent-2 md:indent-4 text-lg'>All of our courses at CourseBlast are very user-friendly and can support any and all learning structure. Whether you prefer to binge-learn or study consistently, we're here for you. Our goal-based learning system also helps to ensure high completion and retention rates across the board.  </p>
                 </div>
 
                
@@ -407,8 +409,13 @@ export function Landing(){
             </div>
 
             <div className='grid-cols-4 grid gap-x-4'>
+
                 <FaFacebook size={"2.5rem"} className='block' fill='blue'/>
-                <FaTwitter size={'2.5rem'} className="block" fill='blue'/>
+
+                <a href="https://x.com/vilio316">
+                <FaXTwitter size={'2.5rem'} className="block" fill='blue'/>
+                </a>
+                
                 <FaInstagram size={'2.5rem'} className='block' fill='pink'/>
                 <FaLinkedin size={"2.5rem"} className='block' fill="blue"/>
                 </div>

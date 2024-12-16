@@ -3,12 +3,13 @@ import { useAppSelector } from "../redux/hooks";
 import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
-import { Course, useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
+import { useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaCirclePlus, FaFile } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
+import { enrolledCourses, updateEnrolledCourses } from "../redux/userSlice";
 
 
 export type UserCourseData = {
@@ -209,6 +210,14 @@ export function Dashboard(){
         }
     })
 
+    async function clearCourses(){
+        const {data} = await supabase.from('users').update({
+            user_courses: []
+        }).eq('id', id_value)
+        updateEnrolledCourses([])
+    }
+
+
     return(
         <>
         <div className="w-11/12 p-2 md:p-4 my-4 mx-auto relative">
@@ -229,7 +238,12 @@ export function Dashboard(){
 }
             </div>
         </div>
-        <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
+        <button
+        onClick={()=> {
+            clearCourses()
+        }}
+        > Clear Cart!</button>
+        <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 min-h-72">
         <DashBody/>
         </div>
         <MobileNav/>
