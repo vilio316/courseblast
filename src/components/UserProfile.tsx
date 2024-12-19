@@ -1,7 +1,7 @@
 import { MainNav, MobileNav } from "./UserDash"
 import photograph from '../assets/react.svg'
 import { useAppSelector, useAppDispatch} from "../redux/hooks"
-import { emailAddress, first_name, last_name, updateEnrolledCourses } from "../redux/userSlice"
+import { emailAddress, first_name, last_name, setLastName, updateEnrolledCourses } from "../redux/userSlice"
 import supabase from "../supabase/clientSetup"
 import {setID, setEmailAddress, setFirstName} from '../redux/userSlice'
 import { useNavigate } from "react-router"
@@ -18,6 +18,7 @@ export default function UserProfile(){
         dispatch(setID(''));
         dispatch(setEmailAddress(''));
         dispatch(setFirstName(''));
+        dispatch(setLastName(''))
         dispatch(updateEnrolledCourses([]))
     }
 
@@ -32,18 +33,19 @@ export default function UserProfile(){
         <>
         <div className="w-11/12 p-2 md:p-4 mx-auto">
         <MainNav text="Your Profile"/>
-        <div className="grid">
-        </div>
+        
         <p className="md:hidden font-bold text-xl ">Your Profile</p>
         
         <div className="grid p-2 md:p-1">
-        <button className="text-xs justify-self-end" onClick={()=> {
+        <button className={`text-xs justify-self-end ${email_address.length > 1 ? 'block': 'hidden'} text-white p-1 md:p-2 bg-emerald-700 rounded-2xl`} onClick={()=> {
             signOut();
             clearAll();
             navigate('/')
-        }}> Log Out </button>
+        }} 
+        > Log Out </button>
         </div>
-
+        { emailAddress.length > 1 ?
+        <>
         <div className="grid justify-items-center md:justify-items-start md:flex md:gap-x-8">
         
         <div className="pfp grid justify-center" >
@@ -69,9 +71,25 @@ export default function UserProfile(){
             Nooo!
             </p>}
         </div>
+        </> : <>
+        <NotSignedInError/>
+        </>
+        }
         <MobileNav/>
         </div>
         </>
     )
 
+}
+
+export function NotSignedInError(){
+
+    return (
+        <>
+         <div className="w-6/12 mx-auto">
+        <p className="text-center text-2xl">Oops!</p>
+        <p>Looks like you're not logged in yet. Click <a href='/sign-in' className="underline">here</a> to sign in if you already have an account and <a href="/sign-up" className="underline">here</a> to sign up for CourseBlast.</p>
+        </div>
+        </>
+    )
 }

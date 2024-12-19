@@ -1,8 +1,8 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { MainNav, MobileNav } from "./UserDash";
-import {cart, enrolledCourses, ID, setCartState, updateEnrolledCourses } from '../redux/userSlice'
+import {cart, emailAddress, enrolledCourses, ID, setCartState, updateEnrolledCourses } from '../redux/userSlice'
 import { dummyCourseProgression } from "./UserCourseDetails";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaShoppingBasket, FaUserClock, FaPen } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useGetAllCoursesQuery } from "../redux/apiSlice";
@@ -16,10 +16,28 @@ export const updateUserCourses = async (param: any[], id:string)=> {
     }).eq('id', id)
 }
 
+
+
 export function CourseDetails(){
     let user_id = useAppSelector(ID)
+    
+    useEffect(()=>{
+        async function find_my_courses(){
+            const {data} = await supabase.from('users').select('user_blastCart').eq('id', user_id)
+            if(data){
+                dispatch(setCartState(data[0].user_blastCart))
+            }
+        };
+        find_my_courses()
+    }, [])
+
+
+    let user_mail = useAppSelector(emailAddress)
     let your_course_data = useAppSelector(enrolledCourses)
+    let your_cart_data = useAppSelector(cart)
     let value= [...your_course_data]
+    let navigate = useNavigate()
+   
 
     const goToSupa = async(param: any[]) => {
         const {data, error} = await supabase.from('users').update({
@@ -120,20 +138,25 @@ export function CourseDetails(){
                 <div className="grid my-4 absolute md:bottom-0 md:w-6/12 mx-auto w-full">
                 <button onClick={()=> {
                     let ids_arr = [];
-                    console.log(your_course_data)
-                    for(let i = 0; i < your_course_data.length; i++){
-                        ids_arr.push(your_course_data[i].course_id)
+                    if(user_mail.length > 1){
+                    for(let i = 0; i < your_cart_data.length; i++){
+                        ids_arr.push(your_cart_data[i].id)
                     }
-                    console.log(ids_arr)
                     if(params.courseID && ids_arr.indexOf(params.courseID) !== -1){
-                        alert("Item is already in Cart")
+                        alert("Course is already in Cart")
                     }
                     else{
                     setCourseInCart(course_title, course_price, course_id);
                     showMod(false);
-                    alert("Item successfully Added to Cart!")
+                    alert("Course successfully Added to Cart!")
+                    }
+                
                 }
-                }} className="outline-none border-4 bg-white border-blue-800 p-2 md:p-4 rounded-xl text-emerald-700 justify-self-center w-9/12 hover:bg-blue-300 transition-colors self-end"  >
+                else{
+                    navigate('/sign-in')    
+                }
+                }
+                } className="outline-none border-4 bg-white border-blue-800 p-2 md:p-4 rounded-xl text-emerald-700 justify-self-center w-9/12 hover:bg-blue-300 transition-colors self-end"  >
                      <div className="flex items-center justify-center gap-x-4">
                         <FaShoppingBasket size='1.5rem' fill="blue"/>
                         <p className="text-blue font-bold">{'Add to Blastcart'.toUpperCase()}</p>

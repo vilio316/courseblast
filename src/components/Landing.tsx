@@ -43,7 +43,7 @@ export function Landing(){
 
            <div className="nav_links md:grid md:grid-cols-5 md:col-span-8 hidden text-xl">
                     <a className="p-2 text-center hover:underline">About</a>
-                    <a className="p-2 text-center hover:underline">Courses</a>
+                    <a className="p-2 text-center hover:underline" href="/courses">Courses</a>
                     <a className="p-2 text-center hover:underline">Instructors</a>
                     <a className="p-2 text-center hover:underline">Blog</a>
                     <a className="p-2 text-center hover:underline bg-emerald-800  hover:bg-emerald-600 transition-colors rounded-2xl text-white" href='/sign-in'>Register</a>

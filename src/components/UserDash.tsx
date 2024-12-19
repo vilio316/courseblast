@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaCirclePlus, FaFile } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
-import { enrolledCourses, updateEnrolledCourses } from "../redux/userSlice";
+import { updateEnrolledCourses } from "../redux/userSlice";
 
 
 export type UserCourseData = {
@@ -215,9 +215,8 @@ export function Dashboard(){
         const {data} = await supabase.from('users').update({
             user_courses: []
         }).eq('id', id_value)
-        
+        console.log(data)
     }
-
 
     return(
         <>
@@ -243,7 +242,7 @@ export function Dashboard(){
         onClick={()=> {
             clearCourses()
         }}
-        > Clear Cart!</button>
+        > Clear Your Courses!</button>
         <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 min-h-72">
         <DashBody/>
         </div>
