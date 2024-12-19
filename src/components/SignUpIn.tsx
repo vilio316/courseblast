@@ -7,6 +7,13 @@ import supabase from "../supabase/clientSetup";
 import { useNavigate } from "react-router";
 
 
+async function signInWithGoog(){
+    const {data, error} = await supabase.auth.signInWithOAuth({
+        provider: 'google'
+    })
+    console.log(data, error)
+}
+
 export function SignUp(){
    let [password_show, changeState] = useState(false)
    let [full_name, setName] = useState('')
@@ -34,6 +41,8 @@ export function SignUp(){
         })
         console.log(data, error)
     }
+
+    
 
 
     return(
@@ -78,7 +87,7 @@ export function SignUp(){
                     <div className="provider_bay grid justify-items-center md:grid-cols-3 gap-2 md:gap-4 p-2">
                     <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 
                     border-2 w-full hover:bg-emerald-700 hover:text-white">
-                        <div className="grid grid-cols-12 items-center">
+                        <div className="grid grid-cols-12 items-center" onClick={signInWithGoog}>
                             <FaGoogle fill="red" size={"2rem"} className="col-span-2 justify-self-center"/>
                             <p className="col-span-6 text-center text-sm md:text-lg">Sign in with Google</p>
                         </div>
@@ -165,7 +174,7 @@ export function SignIn(){
                 <div className="provider_bay grid justify-items-center md:grid-cols-3 gap-1 md:gap-4 p-2">
                     <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 
                     border-2 w-full hover:bg-emerald-700 hover:text-white">
-                        <div className="grid grid-cols-12 items-center">
+                        <div className="grid grid-cols-12 items-center" onClick={signInWithGoog}>
                             <FaGoogle fill="red" size={"1.5rem"} className="col-span-2 justify-self-center"/>
                             <p className="col-span-6 text-center text-sm md:text-lg">Sign in with Google</p>
                         </div>
