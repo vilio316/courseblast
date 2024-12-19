@@ -52,7 +52,7 @@ export default function BlastCart(){
 
     return(
         <>
-        <div className="w-11/12 mx-auto p-2 md:p-4">
+        <div className="w-11/12 mx-auto p-2 md:p-4 h-dvh md:h-auto">
         <MainNav text="Your BlastCart"/>
         <div className="grid">
         <button className="text-md text-white bg-emerald-700 rounded-2xl p-2 justify-self-end" onClick={()=> {
@@ -68,7 +68,7 @@ export default function BlastCart(){
         <EmptyCart/>
         </>
         :
-        <div className="block min-h-48 w-full">
+        <div className="block h-svh w-full">
         <table className="w-full md:w-9/12 my-2 md:my-4 table-auto border-collapse border-2 border-emerald-300">
             <thead>
             <tr className="bg-emerald-200">
@@ -100,7 +100,7 @@ export default function BlastCart(){
             </>
         }
         { loopr(blastCart) > 0 ?
-        <p>Total to Pay: NGN {loopr(blastCart)}</p>: <p>
+        <p>Total to Pay: <span className="bold">NGN {loopr(blastCart)}</span></p>: <p>
             Nothing Ordered Yet!
         </p>
         }

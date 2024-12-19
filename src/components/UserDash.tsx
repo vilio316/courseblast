@@ -243,7 +243,7 @@ export function Dashboard(){
             clearCourses()
         }}
         > Clear Your Courses!</button>
-        <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 min-h-72">
+        <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 h-svh">
         <DashBody/>
         </div>
         <MobileNav/>

@@ -80,7 +80,7 @@ export function CourseDetails(){
     }
     return(
         <>
-        <div className="w-11/12 mx-auto p-4 relative">
+        <div className="w-11/12 block h-dvh md:h-auto mx-auto p-4 relative">
         <MainNav text="Courses"/>  
         <div className="flex gap-x-2 p-2 items-center">
         <p className="font-bold text-xl ">

@@ -44,7 +44,7 @@ export default function UserProfile(){
         }} 
         > Log Out </button>
         </div>
-        { emailAddress.length > 1 ?
+        { email_address.length > 1 ?
         <>
         <div className="grid justify-items-center md:justify-items-start md:flex md:gap-x-8">
         
@@ -53,7 +53,7 @@ export default function UserProfile(){
         </div>
         
         </div>
-
+            <div className="h-svh md:h-auto">
         <p className="font-bold text-lg text-center md:text-left p-1">{firstName} {lastName}</p>
         <p className="email italic text-sm text-center md:text-left p-1">{email_address}</p>
         <p>Your Courses</p>
@@ -70,6 +70,7 @@ export default function UserProfile(){
         </> : <p>
             Nooo!
             </p>}
+        </div>
         </div>
         </> : <>
         <NotSignedInError/>
