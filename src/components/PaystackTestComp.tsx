@@ -7,7 +7,7 @@ export default function PaystackComp(){
     let publicKey = 'pk_test_01a7b1f00ce37286a6a3e7d6f9d3ebd29bed7d2b'
     const amount = 4500000
   const [email, setEmail] = useState("")
-  const [name, setName] = useState("")
+  const [name] = useState("")
   const [phone, setPhone] = useState("")
 
   const componentProps = {

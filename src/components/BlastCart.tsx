@@ -6,9 +6,21 @@ import supabase from "../supabase/clientSetup"
 import {ID } from '../redux/userSlice'
 import { PaystackButton } from "react-paystack"
 import { CartFiller, EmptyCart } from "./EmptyCart"
-import { PaystackButtonProps } from "react-paystack/dist/paystack-button"
+import { ReactNode } from "react"
+import { PaystackProps, callback } from "react-paystack/dist/types"
 import { updateUserCourses } from "./CourseDetails"
 import { useNavigate } from "react-router"
+
+
+interface PaystackButtonProps extends PaystackProps {
+    text?: string;
+    className?: string;
+    disabled?: boolean;
+    children?: ReactNode;
+    onSuccess?: callback;
+    onClose?: callback;
+}
+
 
 function loopr (array: any[]){
     let holding_value = [...array];
