@@ -12,6 +12,7 @@ import supabase from '../supabase/clientSetup'
 import { useNavigate } from 'react-router'
 import { useAppDispatch } from '../redux/hooks'
 import { setEmailAddress, setFirstName, setID, updatePFP } from '../redux/userSlice'
+import { insertGoogUser } from './SignUpIn'
 
 export function Landing(){
     let [nav_state, showNav]  = useState(false)
@@ -32,7 +33,9 @@ export function Landing(){
               dispatch(setEmailAddress(email))
               dispatch(setFirstName(name))
               dispatch(updatePFP(picture))
+              insertGoogUser(user.id, name, '', email)
               navigate('/user')
+
             }
         }
             else{

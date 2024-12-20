@@ -200,7 +200,7 @@ export function Dashboard(){
     let dispatch = useDispatch()    
     let id_value = useAppSelector(ID)
     let profilePicture = useAppSelector(pfp)
-    {/*let {data, isFetching}= useGetUserQuery()
+    let {data, isFetching}= useGetUserQuery()
     const new_arr = data?.filter((item) => item.id == id_value)
     useEffect(()=> {
         if(new_arr){
@@ -210,7 +210,7 @@ export function Dashboard(){
             dispatch(setEmailAddress(email))  ;
         }
     })
-    */}
+
     async function clearCourses(){
         dispatch(updateEnrolledCourses([]))
         const {data} = await supabase.from('users').update({
@@ -227,10 +227,10 @@ export function Dashboard(){
             <div className="grid col-span-1 justify-items-center">
             <img src={profilePicture} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
             </div>
-            <div className="grid col-span-3 p-4">
             <p className="font-bold text-lg md:text-2xl">Hi, {firstName}!</p>
             <p>Pick up from where you left off!</p>
-                {/* isFetching?
+            <div className="grid col-span-3 p-4">
+                {isFetching?
                 <>
                 <p className='text-lg md:text-xl font-bold'>Loading....</p>
                 </> :
@@ -238,9 +238,10 @@ export function Dashboard(){
                 <p className="font-bold text-lg md:text-2xl">Hi, {firstName}!</p>
                 <p>Pick up from where you left off!</p>
                 </>
-*/}
-            </div>
+}
+            </div> 
         </div>
+         <DashBody/>
         <button
         onClick={()=> {
             clearCourses()

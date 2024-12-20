@@ -1,7 +1,6 @@
 import { MainNav, MobileNav } from "./UserDash"
-import photograph from '../assets/react.svg'
 import { useAppSelector, useAppDispatch} from "../redux/hooks"
-import { emailAddress, first_name, last_name, setLastName, updateEnrolledCourses } from "../redux/userSlice"
+import { emailAddress, first_name, last_name, pfp, setLastName, updateEnrolledCourses, updatePFP } from "../redux/userSlice"
 import supabase from "../supabase/clientSetup"
 import {setID, setEmailAddress, setFirstName} from '../redux/userSlice'
 import { useNavigate } from "react-router"
@@ -11,6 +10,7 @@ export default function UserProfile(){
     let {data} = useGetUserCoursesQuery()
     let firstName = useAppSelector(first_name)
     let navigate = useNavigate()
+    let profpic = useAppSelector(pfp)
     let lastName = useAppSelector(last_name)
     let email_address = useAppSelector(emailAddress)
     let dispatch = useAppDispatch()    
@@ -20,6 +20,7 @@ export default function UserProfile(){
         dispatch(setFirstName(''));
         dispatch(setLastName(''))
         dispatch(updateEnrolledCourses([]))
+        dispatch(updatePFP(''))
     }
 
     let signOut = async() =>{
@@ -46,14 +47,16 @@ export default function UserProfile(){
         </div>
         { email_address.length > 1 ?
         <>
-        <div className="grid justify-items-center md:justify-items-start md:flex md:gap-x-8 h-svh md:h-auto">
+        <div className="grid justify-items-center md:justify-items-start md:flex md:gap-x-8 md:h-auto">
         
         <div className="pfp grid justify-center" >
-        <img src={photograph} alt="User PFP" className="rounded-full h-12 md:h-24 sm:h-18"  />
+        <img src={profpic} 
+        alt="User PFP" className="rounded-full h-12 md:h-24 sm:h-18"/>
         </div>
         
         </div>
-            <div className="h-svh md:h-auto">
+
+            <div>
         <p className="font-bold text-lg text-center md:text-left p-1">{firstName} {lastName}</p>
         <p className="email italic text-sm text-center md:text-left p-1">{email_address}</p>
         <p>Your Courses</p>
