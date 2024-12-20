@@ -9,10 +9,18 @@ import { useNavigate } from "react-router";
 
 async function signInWithGoog(){
     const {data, error} = await supabase.auth.signInWithOAuth({
-        provider: 'google'
+        provider: 'google', 
+        options: {
+            queryParams: {
+              access_type: 'offline',
+              prompt: 'consent',
+            },
+        }
     })
     console.log(data, error)
 }
+
+
 
 export function SignUp(){
    let [password_show, changeState] = useState(false)

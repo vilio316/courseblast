@@ -7,10 +7,42 @@ import expert_2 from '../assets/expert_2.jpg'
 import { useState } from 'react'
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
-
+import { useEffect } from 'react'
+import supabase from '../supabase/clientSetup'
+import { useNavigate } from 'react-router'
+import { useAppDispatch } from '../redux/hooks'
+import { setEmailAddress, setFirstName, setID, updatePFP } from '../redux/userSlice'
 
 export function Landing(){
     let [nav_state, showNav]  = useState(false)
+    let navigate = useNavigate()
+    let dispatch = useAppDispatch()
+    
+    //UseEffect Call for redirecting users who sign in with Google
+    useEffect(()=> {
+        async function checkForUser(){
+            const {data, error} = await supabase.auth.getSession()
+            if(data){
+              let {session} = data
+              if(session){
+              let { user } = session
+              let {user_metadata} = user
+              let {email, name, picture} = user_metadata
+              dispatch(setID(user.id))
+              dispatch(setEmailAddress(email))
+              dispatch(setFirstName(name))
+              dispatch(updatePFP(picture))
+              navigate('/user')
+            }
+        }
+            else{
+                console.log(error)
+            }
+        }
+        checkForUser()
+    }, [])
+    //Effect Call ends here
+
     return(
         <>
         <div className="landing p-4 m-auto box-border">
@@ -58,7 +90,7 @@ export function Landing(){
                 <p className="text-lg md:text-xl indent-6 text-justify my-4">
                     At CourseBlast, we provide dynamic and unique learning solutions that can be used to meet the diverse educational needs of students and instructors alike. With self-paced, easy-to-monitor courses and cutting-edge delivery technologies, we remain the number 1 provider of e-learning facilities.
                 </p>
-                <a className="text-white bg-emerald-700 text-xl rounded-2xl block w-4/12 hover:opacity-65 text-center p-4 my-4 hover:underline font-bold transition-opacity ">Read More</a>
+                <a className="text-white bg-emerald-700 text-xl rounded-2xl block w-8/12 md:w-4/12 hover:opacity-65 text-center p-4 my-4 hover:underline font-bold transition-opacity ">Read More</a>
             </div>
             <div>
         <img src={hero} alt="Online Learning Illustration" className='lg:w-6/12 w-10/12 sm:w-9/12 mx-auto' />

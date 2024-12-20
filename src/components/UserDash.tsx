@@ -1,6 +1,6 @@
 import { FaCreditCard, FaHome, FaShoppingCart, FaUser, FaWrench } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
-import { first_name, ID, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
+import { first_name, ID, pfp, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
 import { useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
@@ -186,7 +186,7 @@ function DashBody(){
 
     return(
         <>
-        {data? <>
+        {data && data[0]? <>
         {
             data[0].user_courses.map((course : any) => <ShowCourse object={course} key={course.course_id}/>)
         }
@@ -199,7 +199,8 @@ export function Dashboard(){
     let firstName = useAppSelector(first_name)  
     let dispatch = useDispatch()    
     let id_value = useAppSelector(ID)
-    let {data, isFetching}= useGetUserQuery()
+    let profilePicture = useAppSelector(pfp)
+    {/*let {data, isFetching}= useGetUserQuery()
     const new_arr = data?.filter((item) => item.id == id_value)
     useEffect(()=> {
         if(new_arr){
@@ -209,7 +210,7 @@ export function Dashboard(){
             dispatch(setEmailAddress(email))  ;
         }
     })
-
+    */}
     async function clearCourses(){
         dispatch(updateEnrolledCourses([]))
         const {data} = await supabase.from('users').update({
@@ -224,10 +225,12 @@ export function Dashboard(){
         <MainNav/>
         <div className="grid grid-cols-4 items-center">
             <div className="grid col-span-1 justify-items-center">
-            <img src={react} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
+            <img src={profilePicture} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
             </div>
             <div className="grid col-span-3 p-4">
-                {isFetching?
+            <p className="font-bold text-lg md:text-2xl">Hi, {firstName}!</p>
+            <p>Pick up from where you left off!</p>
+                {/* isFetching?
                 <>
                 <p className='text-lg md:text-xl font-bold'>Loading....</p>
                 </> :
@@ -235,7 +238,7 @@ export function Dashboard(){
                 <p className="font-bold text-lg md:text-2xl">Hi, {firstName}!</p>
                 <p>Pick up from where you left off!</p>
                 </>
-}
+*/}
             </div>
         </div>
         <button
@@ -244,7 +247,7 @@ export function Dashboard(){
         }}
         > Clear Your Courses!</button>
         <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 h-svh">
-        <DashBody/>
+        
         </div>
         <MobileNav/>
         </div>

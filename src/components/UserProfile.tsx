@@ -46,7 +46,7 @@ export default function UserProfile(){
         </div>
         { email_address.length > 1 ?
         <>
-        <div className="grid justify-items-center md:justify-items-start md:flex md:gap-x-8">
+        <div className="grid justify-items-center md:justify-items-start md:flex md:gap-x-8 h-svh md:h-auto">
         
         <div className="pfp grid justify-center" >
         <img src={photograph} alt="User PFP" className="rounded-full h-12 md:h-24 sm:h-18"  />
@@ -87,7 +87,7 @@ export function NotSignedInError(){
 
     return (
         <>
-         <div className="w-6/12 mx-auto">
+         <div className="w-6/12 mx-auto h-svh md:h-auto">
         <p className="text-center text-2xl">Oops!</p>
         <p>Looks like you're not logged in yet. Click <a href='/sign-in' className="underline">here</a> to sign in if you already have an account and <a href="/sign-up" className="underline">here</a> to sign up for CourseBlast.</p>
         </div>
