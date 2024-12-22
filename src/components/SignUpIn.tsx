@@ -189,6 +189,8 @@ export function SignIn(){
                 <input id="email_add" type='password' required placeholder="Password" className=" peer p-2 md:w-8/12 rounded-md border-2 border-emerald-700 outline-none indent-2 my-2" onChange={(e)=> setPass(e.target.value)}/>
                 </div>
                 <p className="text-red-400 text-lg font-bold">{err? "Incorrect Username or Password Provided" : ''}</p>
+
+                <p className="text-center font-bold md:text-xl my-2 md:my-4">OR</p>
                 <div className="provider_bay grid justify-items-center md:grid-cols-3 gap-1 md:gap-4 p-2">
                     <div className="sign_in_provider shadow-sm shadow-emerald-700 p-2 my-2 rounded-xl border-emerald-700 
                     border-2 w-full hover:bg-emerald-700 hover:text-white">

@@ -5,3 +5,6 @@
 tr:nth-child(even){
     background-color: #6ee7b7;
 }
+*{
+    box-sizing: border-box;
+}

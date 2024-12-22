@@ -27,9 +27,6 @@ export default function UserProfile(){
         await supabase.auth.signOut()
     } 
 
-
-
-
     return(
         <>
         <div className="w-11/12 p-2 md:p-4 mx-auto">
@@ -56,13 +53,15 @@ export default function UserProfile(){
         
         </div>
 
-            <div>
+        <div>
         <p className="font-bold text-lg text-center md:text-left p-1">{firstName} {lastName}</p>
         <p className="email italic text-sm text-center md:text-left p-1">{email_address}</p>
-        <p>Your Courses</p>
-        <div className="grid w-9/12">
+        <p className="underline">Your Courses</p>
+        <div className="grid w-11/12 mx-auto max-h-svh min-h-96">
         {data? <>
-            {data[0].user_courses.map((item : any) => (
+           {
+            data[0].user_courses.length > 0 ? <>
+             {data[0].user_courses.map((item : any) => (
                 <div key={item.course_id} className="hover:bg-gray-200">
                 <a href={`/courses/${item.course_id}`} >
                 {item.course_title}
@@ -70,8 +69,15 @@ export default function UserProfile(){
                 </div>
             )
         )}
+            </> : <>
+            <div>            
+            <p>No Courses Added Yet</p>
+            <p>Add Courses using the link <a className="underline" href='/courses'>here</a></p>
+            </div>
+            </>
+           }
         </> : <p>
-            Nooo!
+            Oops! We can't seem to find your profile details at this time. Click <a>here</a> to go back to the homepage to log in again. 
             </p>}
         </div>
         </div>

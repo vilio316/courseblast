@@ -31,14 +31,12 @@ export function CourseDetails(){
         find_my_courses()
     }, [])
 
-
     let user_mail = useAppSelector(emailAddress)
     let your_course_data = useAppSelector(enrolledCourses)
     let your_cart_data = useAppSelector(cart)
     let value= [...your_course_data]
     let navigate = useNavigate()
    
-
     const goToSupa = async(param: any[]) => {
         const {data, error} = await supabase.from('users').update({
             user_blastCart: param,
@@ -51,6 +49,7 @@ export function CourseDetails(){
     let { data }= useGetAllCoursesQuery()
     let courseFetchResult = data?.filter((item) => item.course_id == params.courseID)
 
+    //Possibly Redundant Code Block
     let course: Course = {
         course_blurb: '',   
         course_difficulty: '',
@@ -65,7 +64,8 @@ export function CourseDetails(){
     course = courseFetchResult[0]
     value.push(course)
     }
-
+    //Redundant Ends Here
+    
     let {course_blurb, course_difficulty, course_duration, course_title,course_price, course_instructor, course_id} = course
     
     let [course_modal, showMod] = useState(false)

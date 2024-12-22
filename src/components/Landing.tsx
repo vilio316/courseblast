@@ -35,7 +35,6 @@ export function Landing(){
               dispatch(updatePFP(picture))
               insertGoogUser(user.id, name, '', email)
               navigate('/user')
-
             }
         }
             else{
@@ -57,7 +56,6 @@ export function Landing(){
             </div>
 
             {/*Mobile Navigation Bar*/}
-
             <div className='menu peer md:hidden col-span-2' onClick={()=> showNav(true)}>
                     <span className="h-1 w-6/12 block my-1 rounded-lg bg-emerald-800"></span>
                     <span className="h-1 w-6/12 block my-1 rounded-lg bg-emerald-800"></span>
@@ -70,32 +68,29 @@ export function Landing(){
                 <a className='block p-2'>Courses</a>
                 <a className='block p-2'>Instructors</a>
                 <a className='block p-2'>Blog</a>
-                <a href="/sign-in">Register!</a>
+                <a href="/sign-in">Log In / Sign Up</a>
             </div>
-
-
             {/* Mobile Nav Bar ends here*/} 
 
-           <div className="nav_links md:grid md:grid-cols-5 md:col-span-8 hidden text-xl">
+           <div className="nav_links md:grid md:grid-cols-5 md:col-span-8 hidd2 en text-xl">
                     <a className="p-2 text-center hover:underline">About</a>
                     <a className="p-2 text-center hover:underline" href="/courses">Courses</a>
                     <a className="p-2 text-center hover:underline">Instructors</a>
                     <a className="p-2 text-center hover:underline">Blog</a>
-                    <a className="p-2 text-center hover:underline bg-emerald-800  hover:bg-emerald-600 transition-colors rounded-2xl text-white" href='/sign-in'>Register</a>
+                    <a className="p-2 text-center hover:underline bg-emerald-800  hover:bg-emerald-600 transition-colors rounded-2xl text-white" href='/sign-in'>Log In / Sign Up</a>
                 </div>
-
             </div>
         
         <section className="my-4 hero">
-        <div className=" grid md:grid-cols-2 items-center justify-items-center">
+        <div className="grid md:grid-cols-2 items-center justify-items-center">
             <div className='md:p-4 p-2'>
                 <p className="font-bold text-4xl my-2">Online Learning Solutions for Students and Instructors</p>
                 <p className="text-lg md:text-xl indent-6 text-justify my-4">
                     At CourseBlast, we provide dynamic and unique learning solutions that can be used to meet the diverse educational needs of students and instructors alike. With self-paced, easy-to-monitor courses and cutting-edge delivery technologies, we remain the number 1 provider of e-learning facilities.
                 </p>
-                <a className="text-white bg-emerald-700 text-xl rounded-2xl block w-8/12 md:w-4/12 hover:opacity-65 text-center p-4 my-4 hover:underline font-bold transition-opacity ">Read More</a>
-            </div>
-            <div>
+                <a className="text-white bg-emerald-700 text-xl rounded-2xl block w-8/12 md:w-4/12 hover:opacity-65 text-center p-4 my-4 hover:underline font-bold transition-opacity">Read More</a>
+            </div> 
+        <div>
         <img src={hero} alt="Online Learning Illustration" className='lg:w-6/12 w-10/12 sm:w-9/12 mx-auto' />
         </div>
         </div>
@@ -239,14 +234,14 @@ export function Landing(){
 
         <section className="my-4 reasons md:p-4 p-2">
             <h2 className='p-2 text-xl md:text-2xl font-bold'>Why You Should Choose CourseBlast</h2>
-            <div className='grid md:grid-cols-2 my-2'>
+            <div className='grid md:grid-cols-2 my-2 items-center'>
                 <div>
                     <p className='p-2 text-xl font-bold md:text-2xl'>Tailored Learning</p>
-                    <p className='p-2 text-lg indent-2 md:indent-4'>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
+                    <p className='p-2 text-lg indent-2 md:indent-4 text-justify'>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
                 </div>
 
                 <div>
-                    <img src={selfpaced} className='w-6/12 mx-auto'/>
+                    <img src={selfpaced} className='w-7/12 mx-auto rounded-2xl'/>
                 </div>
 
             </div>
@@ -258,7 +253,7 @@ export function Landing(){
                
                 <div>
                     <p className='p-2 text-xl font-bold md:text-2xl'>Flexibility</p>
-                    <p className='p-2 indent-2 md:indent-4 text-lg'>All of our courses at CourseBlast are very user-friendly and can support any and all learning structure. Whether you prefer to binge-learn or study consistently, we're here for you. Our goal-based learning system also helps to ensure high completion and retention rates across the board.  </p>
+                    <p className='p-2 indent-2 md:indent-4 text-lg text-justify'>All of our courses at CourseBlast are very user-friendly and can support any and all learning structure. Whether you prefer to binge-learn or study consistently, we're here for you. Our goal-based learning system also helps to ensure high completion and retention rates across the board.  </p>
                 </div>
 
                
@@ -277,14 +272,14 @@ export function Landing(){
 
             </div>
 
-            <div className='grid md:grid-cols-2 items-center'>
+            <div className='grid md:grid-cols-2 my-2 items-center'>
             <div>
                     <img src={expert_1} alt="Expert Instructors" className='w-9/12 mx-auto rounded-xl' />
                 </div>
                 
                 <div>
                     <p className='p-2 text-lg font-bold md:text-xl'>Expert Instructors and Staff</p>
-                    <p className='text-lg md:text-xl'>At CourseBlast, we believe in providing high-quality education to all of our users. In line with this, we've gone the extra mile by ensuring that all of our instructors are certified and regularly testing and updating course material as at when necessary. </p>
+                    <p className='text-lg md:text-xl text-justify'>At CourseBlast, we believe in providing high-quality education to all of our users. In line with this, we've gone the extra mile by ensuring that all of our instructors are certified and regularly testing and updating course material as at when necessary. </p>
                 </div>
 
             </div>
@@ -296,7 +291,7 @@ export function Landing(){
             </p>
             <p>Don't just take our word for it. Here's a few testimonials from some of our favourite customers</p>
 
-            <div className='grid md:grid-cols-3 p-2 my-2 gap-4'>
+            <div className='grid md:grid-cols-3 p-2 my-2 gap-2 md:gap-4'>
                 <div className='testimonial p-2 shadow-sm shadow-emerald-700 rounded-lg'>
                     <div className='grid grid-cols-12 items-center'>
                         <div className='col-span-2'>
@@ -414,10 +409,10 @@ export function Landing(){
 
             </div>
             <div>
-                <p className="my-4 text-2xl md:text-4xl text-bold">
+                <p className="my-4 text-2xl md:text-4xl text-bold text-center">
                     What are you waiting for?
                 </p>
-                <p className='text-2xl'>Ignite your learning journey today!</p>
+                <p className='text-2xl text-center'>Ignite your learning journey today!</p>
             </div>
             </div>
         </section>
@@ -430,8 +425,8 @@ export function Landing(){
             <div>
                 <p className='text-xl underline'>About Us</p>
                 <a className='block'>Company Bio</a>
-                <a  className='block'>Our Staff </a>
-                <a  className='block'>Privacy and Information Policy</a>
+                <a className='block'>Our Staff </a>
+                <a className='block'>Privacy and Information Policy</a>
                 <a className='block'>Terms and Conditions</a>
             </div>
 

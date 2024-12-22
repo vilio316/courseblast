@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaCirclePlus, FaFile } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
+import { updatePFP } from "../redux/userSlice"; 
 import { updateEnrolledCourses } from "../redux/userSlice";
 
 
@@ -109,6 +110,9 @@ export function MainNav(props: {text?: string}){
         dispatch(setID(''));
         dispatch(setEmailAddress(''));
         dispatch(setFirstName(''));
+        dispatch(setLastName(''))
+        dispatch(updateEnrolledCourses([]))
+        dispatch(updatePFP(''))
     }
     let signOut = async() =>{
         await supabase.auth.signOut()
@@ -183,14 +187,23 @@ export function MainNav(props: {text?: string}){
 function DashBody(){
     let {data} = useGetUserCoursesQuery()
    
-
     return(
         <>
-        {data && data[0]? <>
-        {
-            data[0].user_courses.map((course : any) => <ShowCourse object={course} key={course.course_id}/>)
+        {data ?
+        <>
+        {data[0].user_courses.length > 0 ? <>
+            {
+                data[0].user_courses.map((item: any) => <ShowCourse object={item} />)
+            }
+        </> : <>
+        <p>
+            No Courses Added Yet
+        </p>
+        </> }
+        </> : 
+        <>
+        </>
         }
-        </> : <><p>OOPS!</p></>}
         </>
     )
 }
@@ -227,8 +240,6 @@ export function Dashboard(){
             <div className="grid col-span-1 justify-items-center">
             <img src={profilePicture} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
             </div>
-            <p className="font-bold text-lg md:text-2xl">Hi, {firstName}!</p>
-            <p>Pick up from where you left off!</p>
             <div className="grid col-span-3 p-4">
                 {isFetching?
                 <>
@@ -241,14 +252,13 @@ export function Dashboard(){
 }
             </div> 
         </div>
-         <DashBody/>
         <button
         onClick={()=> {
             clearCourses()
         }}
         > Clear Your Courses!</button>
         <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 h-svh">
-        
+        <DashBody />
         </div>
         <MobileNav/>
         </div>
