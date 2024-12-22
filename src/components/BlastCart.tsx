@@ -56,7 +56,12 @@ export default function BlastCart(){
     async function loadInUploadFormat(){
         const {data} = await supabase.from('courses').select()
         let blastCartClone = [...blastCart]
-        
+        //let newArray = []
+        for (let i = 0; i < blastCartClone.length; i++){
+            let arr = data?.filter((item) => item.course_id == blastCartClone[i].id)
+            console.log(arr)
+        }
+
     }
 
     loadInUploadFormat()
