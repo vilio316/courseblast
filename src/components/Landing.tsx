@@ -237,16 +237,16 @@ export function Landing(){
             <div className='grid md:grid-cols-2 my-2 items-center'>
                 <div>
                     <p className='p-2 text-xl font-bold md:text-2xl'>Tailored Learning</p>
-                    <p className='p-2 text-lg indent-2 md:indent-4 text-justify'>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience</p>
+                    <p className='p-2 text-lg indent-2 md:indent-4 text-justify'>Intermediate, beginner or professional, CourseBlast has a course with you in mind! Our courses and their curricula are carefully tailored to meet the educational needs of all of our users, irrespective of factors like skill and prior experience.</p>
                 </div>
 
                 <div>
-                    <img src={selfpaced} className='w-7/12 mx-auto rounded-2xl'/>
+                    <img src={selfpaced} className='md:w-7/12 w-9/12 mx-auto rounded-2xl'/>
                 </div>
 
             </div>
 
-            <div className='grid md:grid-cols-2 my-2 items-center'>
+            <div className='flex flex-col-reverse md:grid-cols-2 my-2 items-center md:grid'>
             <div>
                    <img src={expert_2} alt="Flexibility Illustration" className='w-9/12 mx-auto rounded-lg'/> 
                 </div>
@@ -272,7 +272,7 @@ export function Landing(){
 
             </div>
 
-            <div className='grid md:grid-cols-2 my-2 items-center'>
+            <div className='flex flex-col-reverse md:grid-cols-2 my-2 items-center md:grid'>
             <div>
                     <img src={expert_1} alt="Expert Instructors" className='w-9/12 mx-auto rounded-xl' />
                 </div>
