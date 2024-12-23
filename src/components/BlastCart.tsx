@@ -1,6 +1,6 @@
 import { FaTrashCan } from "react-icons/fa6"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { cart, emailAddress, setCartState } from "../redux/userSlice"
+import { cart, emailAddress, setCartState, updateEnrolledCourses } from "../redux/userSlice"
 import { MainNav, MobileNav } from "./UserDash"
 import supabase from "../supabase/clientSetup"
 import {ID } from '../redux/userSlice'
@@ -11,7 +11,7 @@ import { PaystackProps, callback } from "react-paystack/dist/types"
 import { updateUserCourses } from "./CourseDetails"
 import { useNavigate } from "react-router"
 import { useEffect } from "react"
-import { useGetUserCoursesQuery } from "../redux/apiSlice"
+
 
 interface PaystackButtonProps extends PaystackProps {
     text?: string;
@@ -38,10 +38,7 @@ export default function BlastCart(){
     const dispatch = useAppDispatch()
     let user_id = useAppSelector(ID)
     let navigate = useNavigate()
-    let {data} = useGetUserCoursesQuery()
-    if(data){
-        let users_courses = [...data[0].user_courses]
-    }
+  
 
     useEffect(()=> {
         async function fetchBlastCart(){
@@ -51,20 +48,22 @@ export default function BlastCart(){
         }
     };
         fetchBlastCart()
-    }, [blastCart])
+    }, [])
 
     async function loadInUploadFormat(){
         const {data} = await supabase.from('courses').select()
         let blastCartClone = [...blastCart]
-        //let newArray = []
+        let newArray = []
         for (let i = 0; i < blastCartClone.length; i++){
-            let arr = data?.filter((item) => item.course_id == blastCartClone[i].id)
-            console.log(arr)
+            if(data){
+            let arr = data.filter((item) => item.course_id == blastCartClone[i].id)
+            let element = arr[0]
+            newArray.push(element)
         }
-
+        updateEnrolledCourses(newArray)
+        updateUserCourses(newArray, user_id)
     }
-
-    loadInUploadFormat()
+    }
 
     const goToSupa = async(param: any[]) => {
         const {data, error} = await supabase.from('users').update({
@@ -85,7 +84,7 @@ export default function BlastCart(){
     let payProps: PaystackButtonProps = 
         {publicKey: 'pk_test_01a7b1f00ce37286a6a3e7d6f9d3ebd29bed7d2b', email: user_mail, amount: loopr(blastCart) * 100, text: `Make Payment Now`, onSuccess: () => {
             window.alert("Successful Payment!");
-
+            loadInUploadFormat()
             goToSupa([]);
             dispatch(setCartState([]))
             navigate('/user')
@@ -103,7 +102,7 @@ export default function BlastCart(){
             Clear Cart
         </button>
         </div>
-        <p className="font-bold text-lg md:text-xl">Your BlastCart ({blastCart.length} Items)</p>
+        <p className="font-bold text-lg md:text-xl">{blastCart.length} Items in Cart</p>
         {blastCart.length < 1 ?
         <>
         <EmptyCart/>

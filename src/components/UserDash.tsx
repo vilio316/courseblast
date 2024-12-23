@@ -25,42 +25,6 @@ type propType = {
     object: UserCourseData
 }
 
-export let dummyCourseData : UserCourseData[] = [{
-    course_blurb: "Go from Zero To OOP Hero in thirty days with this new and improved Python course. In this course, you will come to understand various concepts in the field of object-oriented programming, including polymorphism, encapsulation and abstraction. You will also learn various Python techniques, best practices and libraries to improve your understanding of Python programming concepts. begin",
-    course_instructor: "Amir Khan",
-    course_title: "OOP Fundamentals",
-    course_progress_percentage: 0,
-    courseID: "33acb-56f93"
-    
-}, 
-{
-course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguiei. Steel Ball Run! begin inter",
-course_instructor: "J.R.R. Tolkien",
-course_title: "Nothing but .NET: 30 Days of ASP.NET with your favourite Basketball Stars",
-course_progress_percentage: 35,
-courseID: "43red-45k67"
-}, 
-
-{
-    course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguiii. Steel Ball Run! pro pro",
-    course_instructor: "Araki, Hirohiko",
-    course_title: "Stando Power! : The Musical History of JoJo's Bizarre Adventure",
-    course_progress_percentage: 46,
-    courseID: '24eef-ru3y4'
-    }, 
-
-    {
-        course_blurb: "Understanding Active Server Pages in 30 days, with the special help of LeBron James, Wilt Chamberlain and so much more! bla hehuierhuyruieyghvjerhguierowii. Steel Ball Run! inter",
-        course_instructor: "J.R.R. Tolkien",
-        course_title: "Nothing but .NET: 30 Days of ASP.NET with your favourite Basketball Stars",
-        course_progress_percentage: 21,
-        courseID: '67uyr-ghe32'
-        }, 
-        
-
-
-]
-
 export function ShowCourse(props : propType){
     let navigate = useNavigate()
     let {course_blurb, course_instructor, course_progress_percentage, course_title, courseID} = props.object
@@ -79,8 +43,8 @@ export function ShowCourse(props : propType){
         <>
             <div className="rounded-2xl p-2 md:p-4 hover:bg-gray-200 group w-full bg-gray-200 md:bg-inherit my-2">
             <p className="font-bold text-lg md:text-xl w-10/12 overflow-hidden text-ellipsis whitespace-nowrap">{course_title}</p>
-            <div className="grid-cols-3 gap-4">
-                <div className="grid col-span-2 progress-bar">
+            <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid col-span-2 progress-bar self-center">
                     <div className="bg-gray-300 rounded-md">
                     <div className={`${convert()} bg-emerald-700 h-2 p-px rounded-md`}></div>
                     </div>   
@@ -257,8 +221,10 @@ export function Dashboard(){
             clearCourses()
         }}
         > Clear Your Courses!</button>
-        <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 h-svh">
+        <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 min-h-svh md:h-auto">
+            <div>
         <DashBody />
+        </div>
         </div>
         <MobileNav/>
         </div>
@@ -308,7 +274,7 @@ export function MobileNav(){
                 </a>
             </div>
 
-            <div className="grid justify-items-center" onClick={()=> navigate('/user/settings')}>
+            <div className="grid justify-items-center">
                 <div>
                     <FaWrench fill='gray' size='1.25rem'/>
                 </div>

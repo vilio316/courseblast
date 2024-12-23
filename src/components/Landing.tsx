@@ -56,7 +56,7 @@ export function Landing(){
             </div>
 
             {/*Mobile Navigation Bar*/}
-            <div className='menu peer md:hidden col-span-2' onClick={()=> showNav(true)}>
+            <div className='menu md:hidden col-span-2' onClick={()=> showNav(true)}>
                     <span className="h-1 w-6/12 block my-1 rounded-lg bg-emerald-800"></span>
                     <span className="h-1 w-6/12 block my-1 rounded-lg bg-emerald-800"></span>
                     <span className="h-1 w-6/12 block my-1 rounded-lg bg-emerald-800"></span>
@@ -68,11 +68,11 @@ export function Landing(){
                 <a className='block p-2'>Courses</a>
                 <a className='block p-2'>Instructors</a>
                 <a className='block p-2'>Blog</a>
-                <a href="/sign-in">Log In / Sign Up</a>
+                <a href="/sign-in" className='rounded-2xl text-white bg-emerald-700 hover:bg-emerald-500 p-2 my-2'>Log In / Sign Up</a>
             </div>
             {/* Mobile Nav Bar ends here*/} 
 
-           <div className="nav_links md:grid md:grid-cols-5 md:col-span-8 hidd2 en text-xl">
+           <div className="nav_links md:grid md:grid-cols-5 md:col-span-8 hidden text-xl">
                     <a className="p-2 text-center hover:underline">About</a>
                     <a className="p-2 text-center hover:underline" href="/courses">Courses</a>
                     <a className="p-2 text-center hover:underline">Instructors</a>

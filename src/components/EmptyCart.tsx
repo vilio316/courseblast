@@ -1,8 +1,8 @@
 export function EmptyCart(){
     return(
         <>
-        <div className="grid place-items-center min-h-96">
-            <div>
+        <div className="grid items-center min-h-[80vh]">
+        <div>
         <p className="bold text-xl md:text-3xl text-center font-bold">Nothing's in your Cart yet</p>
         <p className="text-lg text-center md:text-xl">
         Click <a href="/courses" className="underline">here</a> to view all of our available courses.

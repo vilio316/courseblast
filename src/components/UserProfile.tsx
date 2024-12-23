@@ -35,7 +35,7 @@ export default function UserProfile(){
         <p className="md:hidden font-bold text-xl ">Your Profile</p>
         
         <div className="grid p-2 md:p-1">
-        <button className={`text-xs justify-self-end ${email_address.length > 1 ? 'block': 'hidden'} text-white p-1 md:p-2 bg-emerald-700 rounded-2xl`} onClick={()=> {
+        <button className={`text-lg p-2 md:p-4 font-bold justify-self-end ${email_address.length > 1 ? 'block': 'hidden'} text-white p-1 md:p-2 bg-emerald-700 rounded-2xl`} onClick={()=> {
             signOut();
             clearAll();
             navigate('/')
@@ -59,14 +59,15 @@ export default function UserProfile(){
         <p className="underline">Your Courses</p>
         <div className="grid w-11/12 mx-auto max-h-svh min-h-96">
         {data? <>
+        <ul className="list-disc">
            {
             data[0].user_courses.length > 0 ? <>
              {data[0].user_courses.map((item : any) => (
-                <div key={item.course_id} className="hover:bg-gray-200">
+                <li key={item.course_id} className="hover:bg-gray-200">
                 <a href={`/courses/${item.course_id}`} >
                 {item.course_title}
                 </a>
-                </div>
+                </li>
             )
         )}
             </> : <>
@@ -76,6 +77,7 @@ export default function UserProfile(){
             </div>
             </>
            }
+        </ul>
         </> : <p>
             Oops! We can't seem to find your profile details at this time. Click <a>here</a> to go back to the homepage to log in again. 
             </p>}

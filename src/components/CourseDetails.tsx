@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import { MainNav, MobileNav } from "./UserDash";
-import {cart, emailAddress, enrolledCourses, ID, setCartState, updateEnrolledCourses } from '../redux/userSlice'
+import {cart, emailAddress, enrolledCourses, ID, setCartState } from '../redux/userSlice'
 import { dummyCourseProgression } from "./UserCourseDetails";
 import { useEffect, useState } from "react";
 import { FaShoppingBasket, FaUserClock, FaPen } from "react-icons/fa";
@@ -76,7 +76,6 @@ export function CourseDetails(){
         let newBCart= [...blast_cart, {title: title, price: price, id: id}]
         dispatch(setCartState(newBCart))
         goToSupa(newBCart)
-        dispatch(updateEnrolledCourses(value))
     }
     return(
         <>
@@ -127,7 +126,7 @@ export function CourseDetails(){
         <MobileNav/>
 
         {/* Course Details Modal*/}
-        <div className={`w-full bg-gray-300 opacity-90 z-10 absolute top-0 h-full ${course_modal? 'grid': 'hidden'}`}>
+        <div className={`w-full bg-gray-300 opacity-90 z-10 absolute top-0 h-svh ${course_modal? 'grid': 'hidden'}`}>
             <div className={`md:w-6/12 w-full bg-white md:h-9/12 mx-auto p-4 opacity-100`}>
             <span className="w-full text-right block hover:text-red-500 text-4xl font-bolds" onClick={()=> showMod(false) }>x</span>
                 <p className="font-bold md:text-3xl text-lg ">{course_title}</p>

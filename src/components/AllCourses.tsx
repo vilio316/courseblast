@@ -108,7 +108,7 @@ export function AllCourses(){
         </div>
         </>: 
         <>
-         <div className="md:grid-cols-4 gap-x-2 grid my-2">
+         <div className="md:grid-cols-4 gap-x-2 grid my-2 min-h-svh">
         {is_filter_chosen?<>
         {
             determineFilterOutput()?.map((course) => (<CourseCard obj={course} key={course.course_id} />))
