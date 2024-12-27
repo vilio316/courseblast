@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { MainNav, MobileNav} from "./UserDash"
+import { MainNav, MobileNav} from "./NavComponents"
 import  { Course } from '../redux/apiSlice'
 import { useNavigate } from "react-router"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
@@ -60,7 +60,7 @@ export function AllCourses(){
     function CourseCard(props: {obj: Course}){
         let {course_title, course_blurb, course_instructor, course_id, course_difficulty} = props.obj
         return(
-            <div className="rounded-2xl group md:p-4 p-2  hover:bg-gray-200">
+            <div className="rounded-2xl group md:p-4 p-2 bg-gray-100 hover:bg-gray-200md:bg-white border-2 border-emerald-700 md:border-0">
                 <p className=" text-lg md:text-xl font-bold my-2">{course_title}</p>
                 <p className="my-2 font-bold">{course_instructor}</p>
                 <div className="flex items-center gap-x-2 md:gap-x-4">

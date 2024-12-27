@@ -41,6 +41,7 @@ export type Database = {
           course_duration: number | null
           course_id: string
           course_instructor: string | null
+          course_long_desc: string | null
           course_price: number
           course_title: string
         }
@@ -50,6 +51,7 @@ export type Database = {
           course_duration?: number | null
           course_id?: string
           course_instructor?: string | null
+          course_long_desc?: string | null
           course_price?: number
           course_title: string
         }
@@ -59,6 +61,7 @@ export type Database = {
           course_duration?: number | null
           course_id?: string
           course_instructor?: string | null
+          course_long_desc?: string | null
           course_price?: number
           course_title?: string
         }

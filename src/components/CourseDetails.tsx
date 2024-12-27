@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router";
-import { MainNav, MobileNav } from "./UserDash";
+import { MainNav, MobileNav } from "./NavComponents";
 import {cart, emailAddress, enrolledCourses, ID, setCartState } from '../redux/userSlice'
 import { dummyCourseProgression } from "./UserCourseDetails";
 import { useEffect, useState } from "react";
@@ -57,7 +57,8 @@ export function CourseDetails(){
         course_id: "",
         course_instructor: "",
         course_price: 0,
-        course_title:''
+        course_title:'', 
+        course_long_desc: ''
     }
 
     if(courseFetchResult){
@@ -66,7 +67,7 @@ export function CourseDetails(){
     }
     //Redundant Ends Here
     
-    let {course_blurb, course_difficulty, course_duration, course_title,course_price, course_instructor, course_id} = course
+    let {course_difficulty, course_duration, course_title,course_price, course_instructor, course_id, course_long_desc} = course
     
     let [course_modal, showMod] = useState(false)
     let blast_cart = useAppSelector(cart)
@@ -111,7 +112,7 @@ export function CourseDetails(){
         </div>
         </div>
 
-        <p className="text-justify indent-8">{course_blurb}</p>
+        <p className="text-justify indent-8 text-lg">{course_long_desc}</p>
         <p className="my-4 font-bold text-xl md:text-2xl">
             Units
         </p>
@@ -132,7 +133,7 @@ export function CourseDetails(){
                 <p className="font-bold md:text-3xl text-lg ">{course_title}</p>
                 <p className="text-emerald-700 md:text-xl text-sm font-bold my-2">NGN {course_price}</p>
                 <p className="font-bold">{course_instructor}</p>
-                <p className="text-sm md:text-lg italic indent-2 md:indent-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur et sit autem repellat iure placeat, dolorum dolor laudantium quidem incidunt obcaecati ipsam consequuntur quis perferendis minima corrupti. Delectus, vitae cum.</p>
+                <p className="text-sm md:text-lg italic indent-2 md:indent-4">{course_long_desc}</p>
 
                 <div className="grid my-4 absolute md:bottom-0 md:w-6/12 mx-auto w-full">
                 <button onClick={()=> {

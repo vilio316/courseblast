@@ -1,8 +1,6 @@
 import { useState } from "react"
 import { PaystackButton } from "react-paystack"
 
-
-
 export default function PaystackComp(){
     let publicKey = 'pk_test_01a7b1f00ce37286a6a3e7d6f9d3ebd29bed7d2b'
     const amount = 4500000

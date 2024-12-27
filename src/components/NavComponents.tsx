@@ -3,10 +3,10 @@ import { FaShoppingCart, FaHome, FaUser, FaWrench, FaFile, FaCreditCard } from "
 import { FaCirclePlus } from "react-icons/fa6"
 import { MdDashboard } from "react-icons/md"
 import react from '../assets/react.svg'
-import { useAppDispatch } from "../redux/hooks"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import supabase from "../supabase/clientSetup"
 import { useState,  } from "react"
-import {setID, setEmailAddress, setFirstName, setLastName, updateEnrolledCourses, updatePFP} from '../redux/userSlice'
+import {setID, setEmailAddress, setFirstName, setLastName, updateEnrolledCourses, updatePFP, pfp} from '../redux/userSlice'
 
 export function MobileNav(){
     let navigate = useNavigate()
@@ -69,6 +69,7 @@ export function MobileNav(){
 
 
 export function MainNav(props: {text?: string}){
+    let profilePhoto = useAppSelector(pfp)
     let [menuState, changeMenu] = useState(false)
     let [prof, changeProf] = useState(false)
     let navigate = useNavigate()
@@ -98,7 +99,7 @@ export function MainNav(props: {text?: string}){
 <div className={`user_nav absolute top-0 left-0 p-4 rounded-xl z-20 bg-white border-2 border-emerald-300 transition-all ${prof? `ml-0`: `ml-96`} `}>
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeProf(false)}> x </span>
 <div className="grid justify-center">
-<img src={react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
+<img src={pfp.length > 1? profilePhoto : react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
 </div>
 
 <div className="flex gap-x-2 items-center">
