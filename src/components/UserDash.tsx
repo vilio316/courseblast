@@ -1,5 +1,5 @@
 import { FaCreditCard, FaHome, FaShoppingCart, FaUser, FaWrench } from "react-icons/fa";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector, useAppDispatch} from "../redux/hooks";
 import { first_name, ID, pfp, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
 import react from '../assets/react.svg'
 import { useNavigate } from "react-router";
@@ -11,6 +11,8 @@ import { FaCirclePlus, FaFile } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
 import { updatePFP } from "../redux/userSlice"; 
 import { updateEnrolledCourses } from "../redux/userSlice";
+import { insertGoogUser } from './SignUpIn'
+
 
 
 export type UserCourseData = {
@@ -173,8 +175,33 @@ function DashBody(){
 }
 
 export function Dashboard(){
+    //UseEffect Call for users who sign in with Google
+    useEffect(()=> {
+        async function checkForUser(){
+            const {data, error} = await supabase.auth.getSession()
+            if(data){
+              let {session} = data
+              if(session){
+              let { user } = session
+              let {user_metadata} = user
+              let {email, name, picture} = user_metadata
+              dispatch(setID(user.id))
+              dispatch(setEmailAddress(email))
+              dispatch(setFirstName(name))
+              dispatch(updatePFP(picture))
+              insertGoogUser(user.id, name, '', email)
+            }
+        }
+            else{
+                console.log(error)
+            }
+        }
+        checkForUser()
+    }, [])
+    //Effect Call ends here
+
     let firstName = useAppSelector(first_name)  
-    let dispatch = useDispatch()    
+    let dispatch = useAppDispatch()    
     let id_value = useAppSelector(ID)
     let profilePicture = useAppSelector(pfp)
     let {data, isFetching}= useGetUserQuery()

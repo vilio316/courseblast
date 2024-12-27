@@ -12,7 +12,7 @@ import supabase from '../supabase/clientSetup'
 import { useNavigate } from 'react-router'
 import { useAppDispatch } from '../redux/hooks'
 import { setEmailAddress, setFirstName, setID, updatePFP } from '../redux/userSlice'
-import { insertGoogUser } from './SignUpIn'
+
 
 export function Landing(){
     let [nav_state, showNav]  = useState(false)
@@ -33,8 +33,7 @@ export function Landing(){
               dispatch(setEmailAddress(email))
               dispatch(setFirstName(name))
               dispatch(updatePFP(picture))
-              insertGoogUser(user.id, name, '', email)
-              navigate('/user')
+              
             }
         }
             else{
@@ -101,7 +100,7 @@ export function Landing(){
             <h2 className="text-xl md:text-3xl md:col-span-3 font-bold">
                 Our Courses
             </h2>
-            <input type="text" name="course_search" id="search" className="md:col-span-8 w-6/12 rounded-2xl text-xl border-emerald-700 border-2 p-2 outline-none focus:w-10/12 transition-all" maxLength={70} placeholder="Search Courses Here..." />
+            <input type="text" name="course_search" id="search" className="md:col-span-8 w-9/12 md:w-6/12 rounded-2xl text-xl border-emerald-700 border-2 p-2 outline-none focus:w-10/12 transition-all" maxLength={70} placeholder="Search Courses Here..." />
             </div>
             <p className="hidden md:block">Check through our extensive course library to start your learning journey, continue learning or even support your favourite instructors.</p>
             <p className="md:hidden">Find your next course here!</p>

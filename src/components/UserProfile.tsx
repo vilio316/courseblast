@@ -1,4 +1,4 @@
-import { MainNav, MobileNav } from "./UserDash"
+import { MainNav, MobileNav } from "./NavComponents"
 import { useAppSelector, useAppDispatch} from "../redux/hooks"
 import { emailAddress, first_name, last_name, pfp, setLastName, updateEnrolledCourses, updatePFP } from "../redux/userSlice"
 import supabase from "../supabase/clientSetup"
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router"
 import { useGetUserCoursesQuery } from "../redux/apiSlice"
 
 export default function UserProfile(){
-    let {data} = useGetUserCoursesQuery()
+    let {data, isSuccess, isFetching, error} = useGetUserCoursesQuery()
     let firstName = useAppSelector(first_name)
     let navigate = useNavigate()
     let profpic = useAppSelector(pfp)
@@ -58,7 +58,7 @@ export default function UserProfile(){
         <p className="email italic text-sm text-center md:text-left p-1">{email_address}</p>
         <p className="underline">Your Courses</p>
         <div className="grid w-11/12 mx-auto max-h-svh min-h-96">
-        {data? <>
+        { data && isSuccess? <>
         <ul className="list-disc">
            {
             data[0].user_courses.length > 0 ? <>
@@ -78,9 +78,16 @@ export default function UserProfile(){
             </>
            }
         </ul>
-        </> : <p>
-            Oops! We can't seem to find your profile details at this time. Click <a>here</a> to go back to the homepage to log in again. 
-            </p>}
+        </> : 
+        <>
+        {
+        isFetching ? <p>Loading... {isFetching}</p>: <>{error ? <>
+        <p>Oops! We've encountered an error and can't find your profile at the moment. Click here to log back into your CourseBlast account. </p>
+        </> : <>
+        <p></p>
+        </>}</>
+        }
+        </> }
         </div>
         </div>
         </> : <>

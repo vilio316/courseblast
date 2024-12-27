@@ -1,7 +1,7 @@
 import { FaTrashCan } from "react-icons/fa6"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { cart, emailAddress, setCartState, updateEnrolledCourses } from "../redux/userSlice"
-import { MainNav, MobileNav } from "./UserDash"
+import { MainNav, MobileNav } from "./NavComponents"
 import supabase from "../supabase/clientSetup"
 import {ID } from '../redux/userSlice'
 import { PaystackButton } from "react-paystack"
