@@ -1,4 +1,5 @@
-import { MainNav, UserCourseData } from "./UserDash";
+import { UserCourseData } from "./UserDash";
+import { MainNav } from "./NavComponents";
 import expert from '../assets/expert_2.jpg'
 import { useState } from "react";
 import { FaBookOpen, FaClock } from "react-icons/fa";

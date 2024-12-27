@@ -20,7 +20,8 @@ export interface Course{
           course_id: string
           course_instructor: string | null
           course_price: number 
-          course_title: string
+          course_title: string, 
+          course_long_desc: string | null, 
 }
 
 let userCoursesQuery : BaseQueryFn<

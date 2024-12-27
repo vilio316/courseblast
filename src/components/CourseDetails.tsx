@@ -58,7 +58,7 @@ export function CourseDetails(){
         course_instructor: "",
         course_price: 0,
         course_title:'', 
-        course_long_desc: ''
+        course_long_desc: '',
     }
 
     if(courseFetchResult){

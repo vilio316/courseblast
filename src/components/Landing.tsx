@@ -9,14 +9,12 @@ import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
 import { useEffect } from 'react'
 import supabase from '../supabase/clientSetup'
-import { useNavigate } from 'react-router'
 import { useAppDispatch } from '../redux/hooks'
 import { setEmailAddress, setFirstName, setID, updatePFP } from '../redux/userSlice'
 
 
 export function Landing(){
     let [nav_state, showNav]  = useState(false)
-    let navigate = useNavigate()
     let dispatch = useAppDispatch()
     
     //UseEffect Call for redirecting users who sign in with Google
