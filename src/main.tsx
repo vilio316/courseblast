@@ -14,6 +14,7 @@ import Error from './components/Error'
 import BlastCart from './components/BlastCart'
 import UserProfile from './components/UserProfile'
 import PaystackComp from './components/PaystackTestComp'
+import UploadProfilePicture from './components/PFP_Upload'
 
 const routes = createBrowserRouter([
   {
@@ -69,6 +70,11 @@ const routes = createBrowserRouter([
   {
     path: '/paystack_test',
     element: <PaystackComp/>,
+    errorElement: <Error/>
+  },
+  {
+    path: '/user/change_pfp',
+    element: <UploadProfilePicture/>,
     errorElement: <Error/>
   }
 ])

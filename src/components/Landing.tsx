@@ -11,11 +11,13 @@ import { useEffect } from 'react'
 import supabase from '../supabase/clientSetup'
 import { useAppDispatch } from '../redux/hooks'
 import { setEmailAddress, setFirstName, setID, updatePFP } from '../redux/userSlice'
+import { useNavigate } from 'react-router'
 
 
 export function Landing(){
     let [nav_state, showNav]  = useState(false)
     let dispatch = useAppDispatch()
+    let navigate = useNavigate()
     
     //UseEffect Call for redirecting users who sign in with Google
     useEffect(()=> {
@@ -31,7 +33,7 @@ export function Landing(){
               dispatch(setEmailAddress(email))
               dispatch(setFirstName(name))
               dispatch(updatePFP(picture))
-              
+              navigate('/user')
             }
         }
             else{
@@ -69,7 +71,7 @@ export function Landing(){
             </div>
             {/* Mobile Nav Bar ends here*/} 
 
-           <div className="nav_links md:grid md:grid-cols-5 md:col-span-8 hidden text-xl">
+           <div className="nav_links md:grid md:grid-cols-5 md:col-span-8 hidden text-xl md:items-center">
                     <a className="p-2 text-center hover:underline">About</a>
                     <a className="p-2 text-center hover:underline" href="/courses">Courses</a>
                     <a className="p-2 text-center hover:underline">Instructors</a>
@@ -85,7 +87,7 @@ export function Landing(){
                 <p className="text-lg md:text-xl indent-6 text-justify my-4">
                     At CourseBlast, we provide dynamic and unique learning solutions that can be used to meet the diverse educational needs of students and instructors alike. With self-paced, easy-to-monitor courses and cutting-edge delivery technologies, we remain the number 1 provider of e-learning facilities.
                 </p>
-                <a className="text-white bg-emerald-700 text-xl rounded-2xl block w-8/12 md:w-4/12 hover:opacity-65 text-center p-4 my-4 hover:underline font-bold transition-opacity">Read More</a>
+                <a className="text-white bg-emerald-700 text-xl rounded-2xl block w-8/12 sm:w-6/12 md:w-4/12 hover:opacity-65 text-center p-4 my-4 hover:underline font-bold transition-opacity">Read More</a>
             </div> 
         <div>
         <img src={hero} alt="Online Learning Illustration" className='lg:w-6/12 w-10/12 sm:w-9/12 mx-auto' />

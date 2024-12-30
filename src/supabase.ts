@@ -96,6 +96,7 @@ export type Database = {
           user_courses: Json[] | null
           user_first_name: string | null
           user_last_name: string | null
+          user_pfp: string | null
           user_points_balance: number | null
         }
         Insert: {
@@ -105,6 +106,7 @@ export type Database = {
           user_courses?: Json[] | null
           user_first_name?: string | null
           user_last_name?: string | null
+          user_pfp?: string | null
           user_points_balance?: number | null
         }
         Update: {
@@ -114,6 +116,7 @@ export type Database = {
           user_courses?: Json[] | null
           user_first_name?: string | null
           user_last_name?: string | null
+          user_pfp?: string | null
           user_points_balance?: number | null
         }
         Relationships: []

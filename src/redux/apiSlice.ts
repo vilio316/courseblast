@@ -5,12 +5,13 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { RootState, user_store } from "./store";
 
 type User = {
-    id: string;
-    email: string | null;
-    user_courses: Json[] | null;
-    user_first_name: string | null;
-    user_last_name: string | null;
-    user_points_balance: number | null;
+    id: string,
+    email: string | null,
+    user_courses: Json[] | null,
+    user_first_name: string | null,
+    user_last_name: string | null,
+    user_points_balance: number | null,
+    user_pfp :string | null
   };
 
 export interface Course{

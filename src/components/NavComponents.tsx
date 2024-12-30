@@ -2,7 +2,7 @@ import { useNavigate } from "react-router"
 import { FaShoppingCart, FaHome, FaUser, FaWrench, FaFile, FaCreditCard } from "react-icons/fa"
 import { FaCirclePlus } from "react-icons/fa6"
 import { MdDashboard } from "react-icons/md"
-//import react from '../assets/react.svg'
+import react from '../assets/react.svg'
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import supabase from "../supabase/clientSetup"
 import { useState,  } from "react"
@@ -64,10 +64,6 @@ export function MobileNav(){
     )
 }
 
-
-
-
-
 export function MainNav(props: {text?: string}){
     let profilePhoto = useAppSelector(pfp)
     let [menuState, changeMenu] = useState(false)
@@ -100,8 +96,14 @@ export function MainNav(props: {text?: string}){
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeProf(false)}> x </span>
 
 <div className="grid justify-center">
+{
+profilePhoto && profilePhoto.length > 1? 
+<>
 <img src={profilePhoto} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
-
+</>
+: 
+<img src={react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
+}
 </div>
 
 <div className="flex gap-x-2 items-center">
@@ -143,10 +145,10 @@ export function MainNav(props: {text?: string}){
 </div>
 
 {/* Dashboard Navigation Here*/}
-<div className={`absolute z-10 top-0 right-0 ${menuState ? `mt-0` : `-mt-96`} transition-all p-4 w-9/12 bg-blue-700`} >
+<div className={`absolute z-10 top-0 right-0 ${menuState ? `mt-0` : `-mt-96`} transition-all p-4 bg-blue-700`} >
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeMenu(false)}> x </span>
-<a className="text-xl font-bold block hover:italic my-4">Home</a>
-<a className="text-xl font-bold block hover:italic my-4" href='/courses'>All Courses</a>
+<a className="text-xl font-bold block hover:italic m text-white y-4">Home</a>
+<a className="text-xl font-bold block hover:italic my-4 text-white" href='/courses'>All Courses</a>
 </div>
     </div>
     </div>
