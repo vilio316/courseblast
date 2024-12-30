@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import { MainNav, MobileNav } from "./NavComponents";
 import {cart, emailAddress, enrolledCourses, ID, setCartState } from '../redux/userSlice'
-import { dummyCourseProgression } from "./UserCourseDetails";
 import { useEffect, useState } from "react";
 import { FaShoppingBasket, FaUserClock, FaPen } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -71,7 +70,6 @@ export function CourseDetails(){
     
     let [course_modal, showMod] = useState(false)
     let blast_cart = useAppSelector(cart)
-    let {course_unit_details} = dummyCourseProgression
 
     function setCourseInCart(title:string ,price: number, id: string ){
         let newBCart= [...blast_cart, {title: title, price: price, id: id}]
@@ -80,7 +78,7 @@ export function CourseDetails(){
     }
     return(
         <>
-        <div className="w-11/12 block h-dvh md:h-auto mx-auto p-4 relative">
+        <div className="w-11/12 block min-h-dvh md:h-auto mx-auto p-4 relative">
         <MainNav text="Courses"/>  
         <div className="flex gap-x-2 p-2 items-center">
         <p className="font-bold text-xl ">
@@ -116,13 +114,6 @@ export function CourseDetails(){
         <p className="my-4 font-bold text-xl md:text-2xl">
             Units
         </p>
-        <ol className="list-decimal m-2 p-2">
-        {course_unit_details.map((unit) => (
-            <>
-            <li key={unit.unit_number}>{unit.unit_title}</li>
-            </>
-        ))}
-        </ol>
         </div>
         <MobileNav/>
 

@@ -98,8 +98,10 @@ export function MainNav(props: {text?: string}){
         {/* User Profile Modal Here */}
 <div className={`user_nav absolute top-0 left-0 p-4 rounded-xl z-20 bg-white border-2 border-emerald-300 transition-all ${prof? `ml-0`: `ml-96`} `}>
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeProf(false)}> x </span>
+
 <div className="grid justify-center">
 <img src={pfp.length > 1? profilePhoto : react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
+
 </div>
 
 <div className="flex gap-x-2 items-center">
@@ -141,7 +143,7 @@ export function MainNav(props: {text?: string}){
 </div>
 
 {/* Dashboard Navigation Here*/}
-<div className={`absolute z-10 top-0 right-0 bg-blue ${menuState ? `mt-0` : `-mt-96`} transition-all p-4 w-9/12 h-full`} >
+<div className={`absolute z-10 top-0 right-0 bg-blue-500 ${menuState ? `mt-0` : `-mt-96`} transition-all p-4 w-9/12 h-full`} >
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeMenu(false)}> x </span>
 <a className="text-xl font-bold block hover:italic my-4">Home</a>
 <a className="text-xl font-bold block hover:italic my-4" href='/courses'>All Courses</a>
