@@ -8,8 +8,9 @@ export default function UploadProfilePicture(){
 
     async function upload_pfp(event: any){
     let file_item = event.target.files[0]
+    console.log(file_item)
     const {data} = await supabase.storage.from('courseblast_storage_bucket').upload(
-        `${user_id}/profile_photo`, file_item
+        `${user_id}/${file_item.name}`, file_item
     )
     console.log(data)
     }
