@@ -114,6 +114,7 @@ export function CourseDetails(){
         <p className="my-4 font-bold text-xl md:text-2xl">
             Units
         </p>
+
         </div>
         <MobileNav/>
 
@@ -130,9 +131,13 @@ export function CourseDetails(){
                 <button onClick={()=> {
                     let ids_arr = [];
                     if(user_mail.length > 1){
+                    for(let i =0; i < your_course_data.length; i++){
+                        ids_arr.push(your_course_data[i].course_id)
+                    }
                     for(let i = 0; i < your_cart_data.length; i++){
                         ids_arr.push(your_cart_data[i].id)
                     }
+                    
                     if(params.courseID && ids_arr.indexOf(params.courseID) !== -1){
                         alert("Course is already in Cart")
                     }

@@ -1,13 +1,11 @@
 import { useAppSelector, useAppDispatch} from "../redux/hooks";
-import { first_name, ID, pfp, setEmailAddress, setFirstName, setID, setLastName } from "../redux/userSlice";
+import { first_name, ID, pfp, setEmailAddress, setFirstName, setLastName } from "../redux/userSlice";
 import { useNavigate } from "react-router";
 import { MainNav, MobileNav } from "./NavComponents";
 import { useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { useEffect } from "react"
-import { updatePFP } from "../redux/userSlice"; 
 import { updateEnrolledCourses } from "../redux/userSlice";
-import { insertGoogUser } from './SignUpIn'
 
 export type UserCourseData = {
     course_title: string,
@@ -85,31 +83,6 @@ function DashBody(){
 }
 
 export function Dashboard(){
-    //UseEffect Call for users who sign in with Google
-    useEffect(()=> {
-        async function checkForUser(){
-            const {data, error} = await supabase.auth.getSession()
-            if(data){
-              let {session} = data
-              if(session){
-              let { user } = session
-              let {user_metadata} = user
-              let {email, name, picture} = user_metadata
-              dispatch(setID(user.id))
-              dispatch(setEmailAddress(email))
-              dispatch(setFirstName(name))
-              dispatch(updatePFP(picture))
-              insertGoogUser(user.id, name, '', email)
-            }
-        }
-            else{
-                console.log(error)
-            }
-        }
-        checkForUser()
-    }, [])
-    //Effect Call ends here
-
     let firstName = useAppSelector(first_name)  
     let dispatch = useAppDispatch()    
     let id_value = useAppSelector(ID)
@@ -118,10 +91,11 @@ export function Dashboard(){
     const new_arr = data?.filter((item) => item.id == id_value)
     useEffect(()=> {
         if(new_arr){
-            let {user_first_name, user_last_name, email } = new_arr[0]
+            let {user_first_name, user_last_name, email, user_courses } = new_arr[0]
             dispatch(setFirstName(user_first_name));
             dispatch(setLastName(user_last_name));
             dispatch(setEmailAddress(email));
+            dispatch(updateEnrolledCourses(user_courses))
         }
     })
 

@@ -1,7 +1,6 @@
 import { useParams } from "react-router";
 import { MainNav } from "./NavComponents";
 import react from '../assets/expert_2.jpg'
-
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { courses, setCourses } from "../redux/userSlice";
