@@ -118,11 +118,10 @@ export function Dashboard(){
     const new_arr = data?.filter((item) => item.id == id_value)
     useEffect(()=> {
         if(new_arr){
-            let {user_first_name, user_last_name, email, user_pfp } = new_arr[0]
+            let {user_first_name, user_last_name, email } = new_arr[0]
             dispatch(setFirstName(user_first_name));
             dispatch(setLastName(user_last_name));
             dispatch(setEmailAddress(email));
-            dispatch(updatePFP(user_pfp))
         }
     })
 
