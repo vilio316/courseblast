@@ -15,8 +15,6 @@ export const updateUserCourses = async (param: any[], id:string)=> {
     }).eq('id', id)
 }
 
-
-
 export function CourseDetails(){
     let user_id = useAppSelector(ID)
     
