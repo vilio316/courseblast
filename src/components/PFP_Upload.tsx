@@ -13,8 +13,21 @@ export default function UploadProfilePicture(){
         `${user_id}/${file_item.name}`, file_item
     )
     console.log(data)
+
+    async function fetchSupaPfpURL(){
+        const { data } = supabase
+  .storage
+  .from('courseblast_storage_bucket')
+  .getPublicUrl(`${user_id}/${file_item.name}`)
+  console.log(data)
     }
 
+    if(data){
+    fetchSupaPfpURL()
+    }
+    }
+
+    
     return(
         <>
         <p>Attach PFP here: </p>

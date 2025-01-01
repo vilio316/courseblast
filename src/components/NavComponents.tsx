@@ -145,7 +145,7 @@ profilePhoto && profilePhoto.length > 1?
 </div>
 
 {/* Dashboard Navigation Here*/}
-<div className={`absolute z-10 top-0 right-0 ${menuState ? `mt-0` : `-mt-96`} transition-all p-4 bg-blue-700`} >
+<div className={`absolute z-10 top-0 right-0 ${menuState ? `mt-0` : `-mt-96`} transition-all p-4 bg-blue-700 rounded-2xl`} >
 <span className="text-xl font-bold hover:text-red-500 w-full text-right block" onClick={()=> changeMenu(false)}> x </span>
 <a className="text-xl font-bold block hover:italic m text-white y-4">Home</a>
 <a className="text-xl font-bold block hover:italic my-4 text-white" href='/courses'>All Courses</a>

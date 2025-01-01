@@ -6,8 +6,7 @@ import { FaBookOpen, FaClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router";
-import { useAppSelector } from "../redux/hooks";
-import { courses } from "../redux/userSlice";
+
 
 
 export interface UCD extends UserCourseData{
@@ -59,7 +58,7 @@ export const dummyCourseProgression : UCD=
 
 export function UserCourseDetails(){
     let {courseID} = useParams()
-    let courseObj = useAppSelector(courses)
+    let courseObj = dummyCourseProgression
     let {course_title , course_units_count, course_duration, course_progress_percentage} = courseObj
     let navigate = useNavigate()
     function CourseUnit(props : compProps){

@@ -5,6 +5,7 @@ import { MainNav, MobileNav } from "./NavComponents";
 import { useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { useEffect } from "react"
+import react from '../assets/react.svg'
 import { updateEnrolledCourses } from "../redux/userSlice";
 
 export type UserCourseData = {
@@ -84,7 +85,7 @@ function DashBody(){
 
 export function Dashboard(){
     let firstName = useAppSelector(first_name)  
-    let dispatch = useAppDispatch()    
+    let dispatch = useAppDispatch()   
     let id_value = useAppSelector(ID)
     let profilePicture = useAppSelector(pfp)
     let {data, isFetching}= useGetUserQuery()
@@ -113,7 +114,13 @@ export function Dashboard(){
         <MainNav/>
         <div className="grid grid-cols-4 items-center">
             <div className="grid col-span-1 justify-items-center">
+            {profilePicture && profilePicture.length > 1 ?
+            <>
             <img src={profilePicture} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
+            </> : <>
+            <img src={react} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
+            </>
+            }
             </div>
             <div className="grid col-span-3 p-4">
                 {isFetching?
