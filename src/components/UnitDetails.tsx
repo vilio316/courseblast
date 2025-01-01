@@ -10,9 +10,9 @@ export function UnitDetails(){
     let value = useParams()
     let dispatch = useDispatch()
     let courses_data = useAppSelector(courses)
-    let [info_object]= courses_data.course_unit_details.filter((item) => item.unit_number == Number(value.unit_number)) 
+    let [info_object]= courses_data.course_unit_details.filter((item: any) => item.unit_number == Number(value.unit_number)) 
     let baseCourseObject = courses_data
-    let course_details = courses_data.course_unit_details.filter((item) => item.unit_number !== Number(value.unit_number))
+    let course_details = courses_data.course_unit_details.filter((item : any) => item.unit_number !== Number(value.unit_number))
     let [unit_is_complete, completeUnit] = useState(info_object.unit_status)
     return(
         <>

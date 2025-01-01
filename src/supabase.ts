@@ -44,6 +44,7 @@ export type Database = {
           course_long_desc: string | null
           course_price: number
           course_title: string
+          course_units: Json[] | null
         }
         Insert: {
           course_blurb?: string | null
@@ -54,6 +55,7 @@ export type Database = {
           course_long_desc?: string | null
           course_price?: number
           course_title: string
+          course_units?: Json[] | null
         }
         Update: {
           course_blurb?: string | null
@@ -64,6 +66,7 @@ export type Database = {
           course_long_desc?: string | null
           course_price?: number
           course_title?: string
+          course_units?: Json[] | null
         }
         Relationships: []
       }
@@ -93,6 +96,7 @@ export type Database = {
           email: string | null
           id: string
           user_blastCart: Json[] | null
+          user_course_progression: Json[] | null
           user_courses: Json[] | null
           user_first_name: string | null
           user_last_name: string | null
@@ -103,6 +107,7 @@ export type Database = {
           email?: string | null
           id?: string
           user_blastCart?: Json[] | null
+          user_course_progression?: Json[] | null
           user_courses?: Json[] | null
           user_first_name?: string | null
           user_last_name?: string | null
@@ -113,6 +118,7 @@ export type Database = {
           email?: string | null
           id?: string
           user_blastCart?: Json[] | null
+          user_course_progression?: Json[] | null
           user_courses?: Json[] | null
           user_first_name?: string | null
           user_last_name?: string | null

@@ -23,6 +23,8 @@ export interface Course{
           course_price: number 
           course_title: string, 
           course_long_desc: string | null, 
+          course_units: Json[] | null
+          
 }
 
 let userCoursesQuery : BaseQueryFn<

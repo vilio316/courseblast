@@ -74,8 +74,8 @@ export function UserCourseDetails(){
                     setBlurbState(!blurb_state)
                 }}> 
                     <p className="font-bold">{unit_number}.</p>
-                    <p className="p-2 col-span-9 text-lg my-2 font-bold ">{unit_title}</p>
-                    <button className=' col-span-2 p-2 w-10/12 outline-none border-none rounded-2xl text-lg text-white bg-emerald-700' onClick={()=> navigate(`/user/courses/${courseID}/${unit_number}`) }>{!unit_status ? "Continue": "Completed!"}</button>
+                    <p className="p-2 col-span-6 md:col-span-9 text-lg my-2 font-bold overflow-x-hidden text-ellipsis">{unit_title}</p>
+                    <button className=' col-span-2 md:col-span-4 p-2 w-10/12 outline-none border-none rounded-2xl text-lg text-white bg-emerald-700' onClick={()=> navigate(`/user/courses/${courseID}/${unit_number}`) }>{!unit_status ? "Continue": "Completed!"}</button>
                 </div>
                 <p className={`my-1 ${blurb_state ? 'block' : 'hidden'} whitespace-nowrap w-10/12 transition-all indent-4`} onClick={()=> navigate(`/user/courses/${courseID}/${unit_number}`)}>{unit_blurb}</p>
                 </div>

@@ -58,6 +58,7 @@ export function CourseDetails(){
         course_price: 0,
         course_title:'', 
         course_long_desc: '',
+        course_units:[],
     }
 
     if(courseFetchResult){
@@ -66,7 +67,7 @@ export function CourseDetails(){
     }
     //Redundant Ends Here
     
-    let {course_difficulty, course_duration, course_title,course_price, course_instructor, course_id, course_long_desc} = course
+    let {course_difficulty, course_duration, course_title,course_price, course_instructor, course_id, course_long_desc, course_units} = course
     
     let [course_modal, showMod] = useState(false)
     let blast_cart = useAppSelector(cart)
@@ -114,6 +115,22 @@ export function CourseDetails(){
         <p className="my-4 font-bold text-xl md:text-2xl">
             Units
         </p>
+        <>
+        {course_units ?
+        <>
+            {course_units.map((item) => (
+                <p>
+                    {item?.toString()}
+                </p>
+            ))}
+        </>: 
+        <>
+        </>
+        }
+        </>
+        <p>
+
+        </p>
 
         </div>
         <MobileNav/>
@@ -157,7 +174,6 @@ export function CourseDetails(){
                         <FaShoppingBasket size='1.5rem' fill="blue"/>
                         <p className="text-blue font-bold">{'Add to Blastcart'.toUpperCase()}</p>
                     </div>
-
                 </button>
                 </div>
             </div>
