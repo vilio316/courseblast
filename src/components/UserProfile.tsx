@@ -1,6 +1,6 @@
 import { MainNav, MobileNav } from "./NavComponents"
 import { useAppSelector, useAppDispatch} from "../redux/hooks"
-import { emailAddress, first_name, last_name, pfp, setLastName, updateEnrolledCourses, updatePFP } from "../redux/userSlice"
+import { emailAddress, first_name, last_name, pfp, setLastName, updateEnrolledCourses} from "../redux/userSlice"
 import supabase from "../supabase/clientSetup"
 import {setID, setEmailAddress, setFirstName} from '../redux/userSlice'
 import { useNavigate } from "react-router"
@@ -20,7 +20,6 @@ export default function UserProfile(){
         dispatch(setFirstName(''));
         dispatch(setLastName(''))
         dispatch(updateEnrolledCourses([]))
-        dispatch(updatePFP(''))
     }
 
     let signOut = async() =>{
@@ -47,8 +46,14 @@ export default function UserProfile(){
         <div className="grid justify-items-center md:justify-items-start md:flex md:gap-x-8 md:h-auto">
         
         <div className="pfp grid justify-center" >
-        <img src={profpic} 
+        <>
+        { profpic && profpic.length > 1 ? <>
+        <img src="" alt="User PFP" className="rounded-full h-12 md:h-24 sm:h-18" />
+        </> : 
+        <img src={profpic}
         alt="User PFP" className="rounded-full h-12 md:h-24 sm:h-18"/>
+}
+        </>
         </div>
         
         </div>

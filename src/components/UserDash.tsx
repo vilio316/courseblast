@@ -36,7 +36,7 @@ export function ShowCourse(props : propType){
     }
     return(
         <>
-            <div className="rounded-2xl p-2 md:p-4 hover:bg-gray-200 group w-full bg-gray-200 md:bg-inherit my-2">
+            <div className="rounded-2xl p-2 md:p-4 border-2 border-emerald-700 hover:bg-gray-200 group w-full bg-gray-200 md:border-0  md:bg-inherit my-2">
             <p className="font-bold text-lg md:text-xl w-10/12 overflow-hidden text-ellipsis whitespace-nowrap">{course_title}</p>
             <div className="grid md:grid-cols-3 gap-4">
                 <div className="grid col-span-2 progress-bar self-center">

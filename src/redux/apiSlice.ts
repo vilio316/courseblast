@@ -23,9 +23,13 @@ export interface Course{
           course_price: number 
           course_title: string, 
           course_long_desc: string | null, 
-          course_units: Json[] | null
-          
 }
+
+export type CourseUnits = {
+  course_units? : Json[] | null
+}
+
+export type FullCourse = Course & CourseUnits
 
 let userCoursesQuery : BaseQueryFn<
 void, 
@@ -102,7 +106,7 @@ let supabaseCoursesQuery : BaseQueryFn<void,
     reducerPath: 'supabaseCourses',
     baseQuery: supabaseCoursesQuery,
     endpoints: (builder) => ({
-      getAllCourses: builder.query<Course[], void>({
+      getAllCourses: builder.query<FullCourse[], void>({
         query: () => (``)
       })
     })

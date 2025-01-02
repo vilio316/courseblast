@@ -4,7 +4,7 @@ import {cart, emailAddress, enrolledCourses, ID, setCartState } from '../redux/u
 import { useEffect, useState } from "react";
 import { FaShoppingBasket, FaUserClock, FaPen } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { useGetAllCoursesQuery } from "../redux/apiSlice";
+import { CourseUnits, FullCourse, useGetAllCoursesQuery } from "../redux/apiSlice";
 import { Course } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { FaScaleUnbalanced } from "react-icons/fa6";
@@ -27,11 +27,9 @@ export function CourseDetails(){
         };
         find_my_courses()
     }, [])
-
     let user_mail = useAppSelector(emailAddress)
     let your_course_data = useAppSelector(enrolledCourses)
     let your_cart_data = useAppSelector(cart)
-    let value= [...your_course_data]
     let navigate = useNavigate()
    
     const goToSupa = async(param: any[]) => {
@@ -47,7 +45,7 @@ export function CourseDetails(){
     let courseFetchResult = data?.filter((item) => item.course_id == params.courseID)
 
     //Possibly Redundant Code Block
-    let course: Course = {
+    let course: FullCourse = {
         course_blurb: '',   
         course_difficulty: '',
         course_duration: 0,
@@ -56,15 +54,15 @@ export function CourseDetails(){
         course_price: 0,
         course_title:'', 
         course_long_desc: '',
+        course_units: []
     }
 
     if(courseFetchResult){
     course = courseFetchResult[0]
-    value.push(course)
     }
     //Redundant Ends Here
     
-    let {course_difficulty, course_duration, course_title,course_price, course_instructor, course_id, course_long_desc} = course
+    let {course_difficulty, course_duration, course_title,course_price, course_instructor, course_id, course_long_desc, course_units} = course
     
     let [course_modal, showMod] = useState(false)
     let blast_cart = useAppSelector(cart)
@@ -112,6 +110,13 @@ export function CourseDetails(){
         <p className="my-4 font-bold text-xl md:text-2xl">
             Units
         </p>
+        {
+            course_units?.map((item) => (
+                <p>
+                    {item?.toString()}
+                </p>
+            ))
+        }
         </div>
         <MobileNav/>
 

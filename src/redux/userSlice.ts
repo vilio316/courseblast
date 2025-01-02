@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { UCD } from "../components/UserCourseDetails";
 import { Course } from "./apiSlice";
 
 type State = {
@@ -8,11 +7,10 @@ type State = {
     last_name: string,
     email: string, 
     id: string,
-    pfp_url?: string,
-    course_details: UCD,
+    pfp_url?: string, 
     enrolled_courses: Course[],
     cart_state: {title: string, price:number, id:string}[
-    ]
+    ], 
 }
 
 let initialState : State = {
@@ -21,19 +19,9 @@ let initialState : State = {
     email: '',
     id: '',
     enrolled_courses: [],
-    course_details: {
-        course_blurb: '',
-        course_duration: '',
-        course_instructor: '',
-        course_progress_percentage: 0,
-        course_title: '',
-        course_unit_details: [],
-        course_units_completed: 0,
-        course_units_count: 0,
-        courseID: ''
-    },
     cart_state: [], 
-    pfp_url: ''
+    pfp_url: '',
+    
 }
 
 const userSlice = createSlice({
@@ -71,7 +59,6 @@ export const first_name = (state: RootState)=> state.user_information.first_name
 export const last_name = (state: RootState)=> state.user_information.last_name
 export const ID = (state: RootState) => state.user_information.id
 export const emailAddress = (state: RootState) => state.user_information.email
-export const courses = (state: RootState) => state.user_information.course_details
 export const enrolledCourses = (state: RootState) => state.user_information.enrolled_courses
 export const pfp = (state: RootState) => state.user_information.pfp_url
 export const {setFirstName, setLastName, setEmailAddress, setID, setCourses, setCartState, updateEnrolledCourses, updatePFP} = userSlice.actions
