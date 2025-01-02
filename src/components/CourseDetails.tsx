@@ -4,8 +4,7 @@ import {cart, emailAddress, enrolledCourses, ID, setCartState } from '../redux/u
 import { useEffect, useState } from "react";
 import { FaShoppingBasket, FaUserClock, FaPen } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { CourseUnits, FullCourse, useGetAllCoursesQuery } from "../redux/apiSlice";
-import { Course } from "../redux/apiSlice";
+import { FullCourse, useGetAllCoursesQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { FaScaleUnbalanced } from "react-icons/fa6";
 
