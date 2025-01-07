@@ -62,8 +62,9 @@ export default function BlastCart(){
             newArray.push(element)
         }
         console.log(newArray)
-        updateEnrolledCourses([...enrolled, ...newArray])
-        updateUserCourses([...enrolled, ...newArray], user_id)
+        let updated_courses_array = [...enrolled, ...newArray]
+        updateEnrolledCourses(updated_courses_array)
+        updateUserCourses(updated_courses_array, user_id)
 
     }
     }
