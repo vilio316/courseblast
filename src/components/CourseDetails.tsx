@@ -109,13 +109,15 @@ export function CourseDetails(){
         <p className="my-4 font-bold text-xl md:text-2xl">
             Units
         </p>
+        <ol className="list-decimal">
         {
             course_units?.map((item) => (
-                <p>
+                <li>
                     {item?.toString()}
-                </p>
+                </li>
             ))
         }
+        </ol>
         </div>
         <MobileNav/>
 

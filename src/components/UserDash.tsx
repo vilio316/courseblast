@@ -2,7 +2,7 @@ import { useAppSelector, useAppDispatch} from "../redux/hooks";
 import { first_name, ID, pfp, setEmailAddress, setFirstName, setLastName } from "../redux/userSlice";
 import { useNavigate } from "react-router";
 import { MainNav, MobileNav } from "./NavComponents";
-import { useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
+import { Course, useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { useEffect } from "react"
 import react from '../assets/react.svg'
@@ -17,23 +17,13 @@ export type UserCourseData = {
     courseID : string, 
 }
 type propType = {
-    object: UserCourseData
+    object: Course
 }
 
 export function ShowCourse(props : propType){
     let navigate = useNavigate()
-    let {course_blurb, course_instructor, course_progress_percentage, course_title, courseID} = props.object
-    let initial = course_progress_percentage
-    let convert = () =>{
-        let newVal = initial / 100 
-        let reddy= Math.round(newVal * 12)
-        if(reddy > 0){
-        return `w-${reddy}/12`
-        }
-        else{
-            return `w-2/12`
-        }
-    }
+    let {course_blurb, course_id, course_title} = props.object
+
     return(
         <>
             <div className="rounded-2xl p-2 md:p-4 border-2 border-emerald-700 hover:bg-gray-200 group w-full bg-gray-200 md:border-0  md:bg-inherit my-2">
@@ -41,17 +31,13 @@ export function ShowCourse(props : propType){
             <div className="grid md:grid-cols-3 gap-4">
                 <div className="grid col-span-2 progress-bar self-center">
                     <div className="bg-gray-300 rounded-md">
-                    <div className={`${convert()} bg-emerald-700 h-2 p-px rounded-md`}></div>
+                    
                     </div>   
                 </div> 
-                <div className="grid col-span-1">
-                    <p>{course_progress_percentage }% complete!</p>
-                </div>
             </div>
-            <p className="font-bold">{course_instructor}</p>
             <p className="my-4 h-20 md:h-32 overflow-y-auto text-xs md:text-sm">{course_blurb}</p>
 
-            <button onClick={()=> navigate(`/user/courses/${courseID}`)} className="hidden text-sm group-hover:block p-2 rounded-2xl bg-emerald-700 text-white">
+            <button onClick={()=> navigate(`/user/courses/${course_id}`)} className="hidden text-sm group-hover:block p-2 rounded-2xl bg-emerald-700 text-white">
                 Continue
             </button>
         </div>
@@ -116,9 +102,9 @@ export function Dashboard(){
             <div className="grid col-span-1 justify-items-center">
             {profilePicture && profilePicture.length > 1 ?
             <>
-            <img src={profilePicture} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
+            <img src={profilePicture} alt="User Profile Photograph" className="rounded-full md:w-[6rem] md:h-24 md:p-4 p-2" />
             </> : <>
-            <img src={react} alt="User Profile Photograph" className="rounded-full md:w-6/12 md:p-4 p-2" />
+            <img src={react} alt="User Profile Photograph" className="rounded-full md:w-[6rem] md:h-24 md:p-4 p-2"  />
             </>
             }
             </div>

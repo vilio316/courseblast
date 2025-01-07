@@ -1,13 +1,14 @@
 import { UserCourseData } from "./UserDash";
 import { MainNav } from "./NavComponents";
 import expert from '../assets/expert_2.jpg'
+{/*
 import { useState } from "react";
-import { FaBookOpen, FaClock } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
-import { useNavigate } from "react-router";
+*/}
+import { FaBookOpen, FaClock, FaUser } from "react-icons/fa";
 import { useParams } from "react-router";
-
-
+//import { useGetUserCoursesQuery } from "../redux/apiSlice";
+import { FullCourse, useGetAllCoursesQuery } from "../redux/apiSlice";
+import { Json } from "../supabase";
 
 export interface UCD extends UserCourseData{
     course_units_count : number,
@@ -21,10 +22,6 @@ type CourseUnit = {
     unit_number : number,
     unit_blurb : string,
     unit_status : boolean,
-}
-
-type compProps ={
-    object : UCD
 }
 
 export const dummyCourseProgression : UCD= 
@@ -58,43 +55,25 @@ export const dummyCourseProgression : UCD=
 
 export function UserCourseDetails(){
     let {courseID} = useParams()
-    let courseObj = dummyCourseProgression
-    let {course_title , course_units_count, course_duration, course_progress_percentage} = courseObj
-    let navigate = useNavigate()
-    function CourseUnit(props : compProps){
-        let {course_unit_details} = props.object
+    let {data } = useGetAllCoursesQuery()
+    let user_courses = data?.filter((item) => item.course_id === courseID)
+    let requested_user_course: FullCourse = {
+        course_blurb: '',
+        course_difficulty: '',
+        course_id: '',
+        course_duration: 0,
+        course_instructor: '',
+        course_long_desc: '',
+        course_price: 0,
+        course_title:'',
+        course_units: []
+    }
+    if(data && user_courses){
+        requested_user_course = user_courses[0]
+    }
+
+    let {course_duration, course_instructor, course_title, course_units} = requested_user_course
     
-        function Unit(props: {object : CourseUnit}){
-            let [blurb_state, setBlurbState] = useState(false)
-            let {unit_blurb, unit_number, unit_status, unit_title } = props.object
-            return(
-                <>
-                <div key={`unit_${unit_number}`} className="hover:bg-gray-200 hover:shadow-md hover:shadow-emerald-300 p-2 rounded-xl">
-                <div className="grid peer items-center w-full grid-cols-12 p-2 rounded-xl" onClick={()=> {
-                    setBlurbState(!blurb_state)
-                }}> 
-                    <p className="font-bold">{unit_number}.</p>
-                    <p className="p-2 col-span-6 md:col-span-9 text-lg my-2 font-bold overflow-x-hidden text-ellipsis">{unit_title}</p>
-                    <button className=' col-span-2 md:col-span-4 p-2 w-10/12 outline-none border-none rounded-2xl text-lg text-white bg-emerald-700' onClick={()=> navigate(`/user/courses/${courseID}/${unit_number}`) }>{!unit_status ? "Continue": "Completed!"}</button>
-                </div>
-                <p className={`my-1 ${blurb_state ? 'block' : 'hidden'} whitespace-nowrap w-10/12 transition-all indent-4`} onClick={()=> navigate(`/user/courses/${courseID}/${unit_number}`)}>{unit_blurb}</p>
-                </div>
-                </>
-            )
-    
-        }
-    
-        return(
-            <>
-            {course_unit_details.map((unit : CourseUnit) => (
-                <Unit object={unit} key={unit.unit_number} />
-            ))}
-            </>
-        )
-    
-    
-    
-    } 
 
     return(
         <>
@@ -104,29 +83,47 @@ export function UserCourseDetails(){
                 <img src = {expert} className="w-full md:h-48 object-cover" alt="Course Image"/>
             </div>
             <p className="text-2xl font-bold my-4">{course_title}</p>
+
+            <div className="flex gap-x-2 items-center">
+            <div className="p-2">
+                <FaUser size={'1.5rem'} fill='blue'/>
+            </div>
+            <span>{course_instructor}</span>
+            </div>
+
+
             <div className="flex gap-x-2 items-center">
             <div className="p-2">
                 <FaBookOpen size={'1.5rem'} fill='blue'/>
             </div>
-            <span>{course_units_count} units</span>
+            <span>{course_units?.length} units</span>
             </div>
-          
-            <div className="flex gap-x-2 items-center">
-            <div className="p-2">
-                <FaLocationDot size={'1.5rem'} fill='green'/>
-            </div>
-            <span>{course_progress_percentage}% complete</span>
-            </div>
-
+    
             <div className="flex gap-x-2 items-center">
             <div className="p-2">
                 <FaClock size={'1.5rem'} fill='green'/>
             </div>
             <span>{course_duration} hours</span>
             </div>
-            <CourseUnit object = {courseObj} />
+            {
+                course_units?.map((course_item) => <CourseUnit unit={course_item}/>)
+            }
         </div>
         </>
     )
 }
 
+function CourseUnit(props: {unit: Json}){
+    return(
+        <>
+        <li>
+            <div className="grid grid-cols-12">
+            <p className="col-span-8">{props.unit?.toString()}</p>
+            <div className="col-span-2 rounded-2xl text-white p-2 md:p-4">
+                Complete...
+            </div>
+            </div>
+        </li>
+        </>
+    )
+} 

@@ -5,6 +5,7 @@ import supabase from "../supabase/clientSetup"
 import {setID, setEmailAddress, setFirstName} from '../redux/userSlice'
 import { useNavigate } from "react-router"
 import { useGetUserCoursesQuery } from "../redux/apiSlice"
+import react_img from '../assets/react.svg'
 
 export default function UserProfile(){
     let {data, isSuccess, isFetching, error} = useGetUserCoursesQuery()
@@ -48,10 +49,12 @@ export default function UserProfile(){
         <div className="pfp grid justify-center" >
         <>
         { profpic && profpic.length > 1 ? <>
-        <img src="" alt="User PFP" className="rounded-full h-12 md:h-24 sm:h-18" />
+        <img src={profpic} alt="User PFP" className="rounded-full h-12 w-12 md:h-24 md:w-[6rem] sm:w-[6rem] sm:h-18 object-contain" />
         </> : 
-        <img src={profpic}
-        alt="User PFP" className="rounded-full h-12 md:h-24 sm:h-18"/>
+        <img src={react_img}
+        alt="User PFP"
+        className="rounded-full h-12 w-12 md:h-24 md:w-[6rem] sm:w-[6rem] sm:h-18 object-contain"
+        />
 }
         </>
         </div>

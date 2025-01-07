@@ -20,14 +20,18 @@ async function signInWithGoog(){
     console.log(data, error)
 }
 
-export async function insertGoogUser(user_id: string, full_name: string, last_name:string, email:string){
+export async function insertGoogUser(user_id: string, full_name: string, last_name:string, email:string, pfp: string){
     const {data, error} = await supabase.from("users").insert({
         id: user_id,
         user_first_name: full_name,
         user_last_name: last_name,
         email: email, 
         user_blastCart: [],
-        user_courses: []
+        user_courses: [],
+        user_course_progression: [],
+        user_pfp: pfp,
+        user_points_balance: 0,
+
     })
     console.log(data, error)
 }

@@ -1,6 +1,6 @@
 import { FaTrashCan } from "react-icons/fa6"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { cart, emailAddress, setCartState, updateEnrolledCourses } from "../redux/userSlice"
+import { cart, emailAddress, enrolledCourses, setCartState, updateEnrolledCourses } from "../redux/userSlice"
 import { MainNav, MobileNav } from "./NavComponents"
 import supabase from "../supabase/clientSetup"
 import {ID } from '../redux/userSlice'
@@ -34,6 +34,7 @@ function loopr (array: any[]){
 
 export default function BlastCart(){
     const blastCart = useAppSelector(cart)
+    const enrolled = useAppSelector(enrolledCourses)
     const user_mail = useAppSelector(emailAddress)
     const dispatch = useAppDispatch()
     let user_id = useAppSelector(ID)
@@ -60,8 +61,9 @@ export default function BlastCart(){
             let element = arr[0]
             newArray.push(element)
         }
-        updateEnrolledCourses(newArray)
-        updateUserCourses(newArray, user_id)
+        updateEnrolledCourses([...enrolled, newArray])
+        updateUserCourses([...enrolled, newArray], user_id)
+
     }
     }
 
