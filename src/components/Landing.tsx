@@ -11,14 +11,14 @@ import { useEffect } from 'react'
 import supabase from '../supabase/clientSetup'
 import { useAppDispatch } from '../redux/hooks'
 import { setEmailAddress, setFirstName, setID, updatePFP } from '../redux/userSlice'
-//import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { insertGoogUser } from './SignUpIn'
 
 
 export function Landing(){
     let [nav_state, showNav]  = useState(false)
     let dispatch = useAppDispatch()
-    //let navigate = useNavigate()
+    let navigate = useNavigate()
     
     //UseEffect Call for redirecting users who sign in with Google
     useEffect(()=> {
@@ -35,7 +35,7 @@ export function Landing(){
               dispatch(setEmailAddress(email))
               dispatch(setFirstName(name))
               dispatch(updatePFP(picture))
-              //navigate('/user')
+              navigate('/user')
             }
         }
             else{

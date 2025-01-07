@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch} from "../redux/hooks";
-import { first_name, ID, pfp, setEmailAddress, setFirstName, setLastName } from "../redux/userSlice";
+import { first_name, ID, pfp, setEmailAddress, setFirstName, setLastName, updatePFP } from "../redux/userSlice";
 import { useNavigate } from "react-router";
 import { MainNav, MobileNav } from "./NavComponents";
 import { Course, useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
@@ -74,17 +74,22 @@ export function Dashboard(){
     let dispatch = useAppDispatch()   
     let id_value = useAppSelector(ID)
     let profilePicture = useAppSelector(pfp)
+    let navigate = useNavigate()
     let {data, isFetching}= useGetUserQuery()
     const new_arr = data?.filter((item) => item.id == id_value)
+    let deps = new_arr ? [
+        new_arr[0].user_courses, new_arr[0].email, new_arr[0].user_last_name, new_arr[0].user_first_name
+    ]: []
     useEffect(()=> {
         if(new_arr){
-            let {user_first_name, user_last_name, email, user_courses } = new_arr[0]
+            let {user_first_name, user_last_name, email, user_courses, user_pfp} = new_arr[0]
             dispatch(setFirstName(user_first_name));
             dispatch(setLastName(user_last_name));
             dispatch(setEmailAddress(email));
-            dispatch(updateEnrolledCourses(user_courses))
+            dispatch(updateEnrolledCourses(user_courses));
+            dispatch(updatePFP(user_pfp))
         }
-    })
+    }, deps)
 
     async function clearCourses(){
         dispatch(updateEnrolledCourses([]))
@@ -99,12 +104,12 @@ export function Dashboard(){
         <div className="w-11/12 p-2 md:p-4 my-4 mx-auto relative">
         <MainNav/>
         <div className="grid grid-cols-4 items-center">
-            <div className="grid col-span-1 justify-items-center">
+            <div className="grid col-span-1 justify-items-center" onClick={()=> navigate('/user/change_pfp')}>
             {profilePicture && profilePicture.length > 1 ?
             <>
-            <img src={profilePicture} alt="User Profile Photograph" className="rounded-full md:w-[6rem] md:h-24 md:p-4 p-2" />
+            <img src={profilePicture} alt="User Profile Photograph" className="rounded-full md:w-[10rem] md:h-40 md:p-4 p-2" />
             </> : <>
-            <img src={react} alt="User Profile Photograph" className="rounded-full md:w-[6rem] md:h-24 md:p-4 p-2"  />
+            <img src={react} alt="User Profile Photograph" className="rounded-full md:w-[10rem] md:h-40 md:p-4 p-2"  />
             </>
             }
             </div>
@@ -126,9 +131,7 @@ export function Dashboard(){
         }}
         > Clear Your Courses!</button>
         <div id="courses" className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 min-h-svh md:h-auto">
-            <div>
         <DashBody />
-        </div>
         </div>
         <MobileNav/>
         </div>

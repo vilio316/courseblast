@@ -6,7 +6,7 @@ import react from '../assets/react.svg'
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import supabase from "../supabase/clientSetup"
 import { useState,  } from "react"
-import {setID, setEmailAddress, setFirstName, setLastName, updateEnrolledCourses, pfp} from '../redux/userSlice'
+import {setID, setEmailAddress, setFirstName, setLastName, updateEnrolledCourses, pfp, updatePFP} from '../redux/userSlice'
 
 export function MobileNav(){
     let navigate = useNavigate()
@@ -74,8 +74,9 @@ export function MainNav(props: {text?: string}){
         dispatch(setID(''));
         dispatch(setEmailAddress(''));
         dispatch(setFirstName(''));
-        dispatch(setLastName(''))
-        dispatch(updateEnrolledCourses([]))
+        dispatch(setLastName(''));
+        dispatch(updateEnrolledCourses([]));
+        dispatch(updatePFP(''))
     }
     let signOut = async() =>{
         await supabase.auth.signOut()

@@ -31,7 +31,6 @@ export async function insertGoogUser(user_id: string, full_name: string, last_na
         user_course_progression: [],
         user_pfp: pfp,
         user_points_balance: 0,
-
     })
     console.log(data, error)
 }
@@ -165,7 +164,6 @@ export function SignIn(){
             password: pwd, 
         })
         if(data.user){
-            console.log(data)
             dispatch(setID(data.user.id));
             navigate('/user')
         }
