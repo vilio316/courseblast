@@ -61,6 +61,7 @@ export default function BlastCart(){
             let element = arr[0]
             newArray.push(element)
         }
+        console.log(newArray)
         updateEnrolledCourses([...enrolled, newArray])
         updateUserCourses([...enrolled, newArray], user_id)
 
