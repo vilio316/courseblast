@@ -11,7 +11,7 @@ export default function UploadProfilePicture(){
     async function updatePicture(url: string){
       await supabase.from('users').update({
         user_pfp: url
-      })
+      }).eq('id', user_id)
     }
 
     async function upload_pfp(event: any){
