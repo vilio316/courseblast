@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch} from "../redux/hooks";
-import { emailAddress, enrolledCourses, first_name, ID, last_name, pfp, setEmailAddress, setFirstName, setLastName, updatePFP } from "../redux/userSlice";
+import { first_name, ID, pfp, setEmailAddress, setFirstName, setLastName, updatePFP } from "../redux/userSlice";
 import { useNavigate } from "react-router";
 import { MainNav, MobileNav } from "./NavComponents";
 import { Course, useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
@@ -26,7 +26,7 @@ export function ShowCourse(props : propType){
 
     return(
         <>
-            <div className="rounded-2xl p-2 md:p-4 border-2 border-emerald-700 hover:bg-gray-200 group w-full bg-gray-200 max-h-[10rem] md:bg-inherit my-2">
+            <div className="rounded-2xl p-2 md:p-4 border-2 border-emerald-700 hover:bg-gray-200 group w-full bg-gray-200 max-h-[25rem] md:bg-inherit my-2">
             <p className="font-bold text-lg md:text-xl w-10/12 overflow-hidden text-ellipsis whitespace-nowrap">{course_title}</p>
             <div className="grid md:grid-cols-3 gap-4">
                 <div className="grid col-span-2 progress-bar self-center">
@@ -73,16 +73,11 @@ export function Dashboard(){
     let firstName = useAppSelector(first_name)  
     let dispatch = useAppDispatch()   
     let id_value = useAppSelector(ID)
-    let lastName = useAppSelector(last_name)
-    let email_address = useAppSelector(emailAddress)
-    let courses = useAppSelector(enrolledCourses)
     let profilePicture = useAppSelector(pfp)
     let navigate = useNavigate()
     let {data, isFetching}= useGetUserQuery()
     const new_arr = data?.filter((item) => item.id == id_value)
-    let deps = [
-        id_value, lastName, email_address, courses, profilePicture, firstName
-    ]
+
     useEffect(()=> {
         if(new_arr){
             let {user_first_name, user_last_name, email, user_courses, user_pfp} = new_arr[0]
@@ -92,7 +87,7 @@ export function Dashboard(){
             dispatch(updateEnrolledCourses(user_courses));
             dispatch(updatePFP(user_pfp))
         }
-    }, deps)
+    } )
 
     async function clearCourses(){
         dispatch(updateEnrolledCourses([]))
