@@ -26,7 +26,7 @@ export function ShowCourse(props : propType){
 
     return(
         <>
-            <div className="rounded-2xl p-2 md:p-4 border-2 border-emerald-700 hover:bg-gray-200 group w-full bg-gray-200 max-h-[25rem] md:bg-inherit my-2">
+            <div className="rounded-2xl p-2 md:p-4 border-2 border-emerald-700 hover:bg-gray-200 group w-full bg-gray-200 max-h-[17.5rem] md:bg-inherit my-2">
             <p className="font-bold text-lg md:text-xl w-10/12 overflow-hidden text-ellipsis whitespace-nowrap">{course_title}</p>
             <div className="grid md:grid-cols-3 gap-4">
                 <div className="grid col-span-2 progress-bar self-center">
@@ -76,10 +76,9 @@ export function Dashboard(){
     let profilePicture = useAppSelector(pfp)
     let navigate = useNavigate()
     let {data, isFetching}= useGetUserQuery()
-    const new_arr = data?.filter((item) => item.id == id_value)
-
     useEffect(()=> {
-        if(new_arr){
+        if(data && id_value){
+            let new_arr = data.filter((item)=> item.id == id_value)
             let {user_first_name, user_last_name, email, user_courses, user_pfp} = new_arr[0]
             dispatch(setFirstName(user_first_name));
             dispatch(setLastName(user_last_name));
@@ -87,7 +86,7 @@ export function Dashboard(){
             dispatch(updateEnrolledCourses(user_courses));
             dispatch(updatePFP(user_pfp))
         }
-    } )
+    }, [data, id_value, dispatch])
 
     async function clearCourses(){
         dispatch(updateEnrolledCourses([]))

@@ -48,11 +48,11 @@ export default function UserProfile(){
         <div className="pfp grid justify-center" onClick={()=> navigate('/user/change_pfp')}>
         <>
         { profpic && profpic.length > 1 ? <>
-        <img src={profpic} alt="User PFP" className="rounded-full h-12 w-12 md:h-24 md:w-[6rem] sm:w-[6rem] sm:h-18 object-contain" />
+        <img src={profpic} alt="User PFP" className="rounded-full h-[10rem] w-[10rem] object-contain" />
         </> : 
         <img src={react_img}
         alt="User PFP"
-        className="rounded-full h-12 w-12 md:h-24 md:w-[6rem] sm:w-[6rem] sm:h-18 object-contain"
+        className="rounded-full h-[10rem] w-[10rem] object-contain"
         />
 }
         </>

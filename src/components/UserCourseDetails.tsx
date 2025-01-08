@@ -105,9 +105,11 @@ export function UserCourseDetails(){
             </div>
             <span>{course_duration} hours</span>
             </div>
+            <ol>
             {
                 course_units?.map((course_item) => <CourseUnit unit={course_item}/>)
             }
+            </ol>
         </div>
         </>
     )
