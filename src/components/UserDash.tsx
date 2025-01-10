@@ -1,8 +1,8 @@
 import { useAppSelector, useAppDispatch} from "../redux/hooks";
-import { first_name, ID, pfp, setEmailAddress, setFirstName, setLastName, updatePFP } from "../redux/userSlice";
+import { enrolledCourses, first_name, ID, pfp, setEmailAddress, setFirstName, setLastName, updatePFP } from "../redux/userSlice";
 import { useNavigate } from "react-router";
 import { MainNav, MobileNav } from "./NavComponents";
-import { Course, useGetUserCoursesQuery, useGetUserQuery } from "../redux/apiSlice";
+import { Course, useGetUserQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { useEffect } from "react"
 import react from '../assets/react.svg'
@@ -16,6 +16,7 @@ export type UserCourseData = {
     course_blurb: string,
     courseID : string, 
 }
+
 type propType = {
     object: Course
 }
@@ -46,15 +47,15 @@ export function ShowCourse(props : propType){
 }
 
 function DashBody(){
-    let {data} = useGetUserCoursesQuery()
+    let enrolled_courses = useAppSelector(enrolledCourses)
    
     return(
         <>
-        {data ?
+        {enrolled_courses ?
         <>
-        {data[0].user_courses.length > 0 ? <>
+        {enrolled_courses.length > 0 ? <>
             {
-                data[0].user_courses.map((item: any) => <ShowCourse object={item} />)
+                enrolled_courses.map((item: any) => <ShowCourse object={item} />)
             }
         </> : <>
         <p>
@@ -84,7 +85,7 @@ export function Dashboard(){
             dispatch(setLastName(user_last_name));
             dispatch(setEmailAddress(email));
             dispatch(updateEnrolledCourses(user_courses));
-            dispatch(updatePFP(user_pfp))
+            dispatch(updatePFP(user_pfp));
         }
     }, [data, id_value, dispatch])
 
