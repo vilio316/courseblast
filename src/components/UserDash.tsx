@@ -87,7 +87,7 @@ export function Dashboard(){
             dispatch(updateEnrolledCourses(user_courses));
             dispatch(updatePFP(user_pfp));
         }
-    }, [data, id_value, dispatch])
+    }, [id_value])
 
     async function clearCourses(){
         dispatch(updateEnrolledCourses([]))

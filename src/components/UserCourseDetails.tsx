@@ -105,7 +105,7 @@ export function UserCourseDetails(){
             </div>
             <span>{course_duration} hours</span>
             </div>
-            <ol>
+            <ol className="list-decimal">
             {
                 course_units?.map((course_item) => <CourseUnit unit={course_item}/>)
             }
@@ -121,8 +121,12 @@ function CourseUnit(props: {unit: Json}){
         <li>
             <div className="grid grid-cols-12">
             <p className="col-span-8">{props.unit?.toString()}</p>
-            <div className="col-span-2 rounded-2xl text-white p-2 md:p-4">
-                Complete...
+            <div className="col-span-3 justify-items-center p-2 md:p-4">
+                <button className="
+               bg-emerald-700 text-center grid outline-none border-0 text-white rounded-sxl p-2 md:p-3 
+                ">
+                    Complete
+                    </button>
             </div>
             </div>
         </li>

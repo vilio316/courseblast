@@ -65,7 +65,6 @@ export default function BlastCart(){
         let updated_courses_array = [...enrolled, ...newArray]
         updateEnrolledCourses(updated_courses_array)
         updateUserCourses(updated_courses_array, user_id)
-
     }
     }
 
@@ -82,9 +81,7 @@ export default function BlastCart(){
         dispatch(setCartState(updated_arr))
         goToSupa(updated_arr)
     }
-
-    
-    
+        
     let payProps: PaystackButtonProps = 
         {publicKey: 'pk_test_01a7b1f00ce37286a6a3e7d6f9d3ebd29bed7d2b', email: user_mail, amount: loopr(blastCart) * 100, text: `Make Payment Now`, onSuccess: () => {
             window.alert("Successful Payment!");
