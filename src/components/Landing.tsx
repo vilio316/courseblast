@@ -4,10 +4,9 @@ import selfpaced from '../assets/self-paced.jpg'
 import security_illustration from '../assets/security_illustration.jpg'
 import expert_1 from '../assets/expert_1.jpg'
 import expert_2 from '../assets/expert_2.jpg'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
-import { useEffect } from 'react'
 import supabase from '../supabase/clientSetup'
 import { useAppDispatch } from '../redux/hooks'
 import { setEmailAddress, setFirstName, setID, updatePFP } from '../redux/userSlice'
@@ -16,7 +15,7 @@ import { insertGoogUser } from './SignUpIn'
 
 
 export function Landing(){
-    let [nav_state, showNav]  = useState(false)
+    const [nav_state, showNav]  = useState(false)
     let dispatch = useAppDispatch()
     let navigate = useNavigate()
     

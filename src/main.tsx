@@ -10,72 +10,72 @@ import { UserCourseDetails } from './components/UserCourseDetails'
 import { AllCourses } from './components/AllCourses'
 import { UnitDetails } from './components/UnitDetails'
 import { CourseDetails } from './components/CourseDetails'
-import Error from './components/Error'
 import BlastCart from './components/BlastCart'
 import UserProfile from './components/UserProfile'
 import PaystackComp from './components/PaystackTestComp'
 import UploadProfilePicture from './components/PFP_Upload'
+import ErrorHandler from './components/Error'
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <Landing/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   },
   {
     path:'/sign-up',
     element: <SignUp/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   },
   {
     path: "/sign-in",
     element: <SignIn/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   },
   {
     path: '/user',
     element: <Dashboard/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   },
   {
     path: '/user/courses/:courseID',
     element: <UserCourseDetails />,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   },
   {
     path: '/courses',
     element: <AllCourses/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   },
   {
     path: '/user/courses/:courseID/:unit_number',
     element: <UnitDetails/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   },
   {
     path: '/courses/:courseID',
     element: <CourseDetails/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   }, 
   {
     path: '/user/cart',
     element: <BlastCart/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   }, 
   {
     path: '/user/profile',
     element: <UserProfile/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   },
   {
     path: '/paystack_test',
     element: <PaystackComp/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   },
   {
     path: '/user/change_pfp',
     element: <UploadProfilePicture/>,
-    errorElement: <Error/>
+    errorElement: <ErrorHandler/>
   }
 ])
 

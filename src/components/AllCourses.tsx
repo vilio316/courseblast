@@ -1,20 +1,37 @@
 import { useEffect, useState } from "react"
 import { MainNav, MobileNav} from "./NavComponents"
-import  { Course } from '../redux/apiSlice'
+import  { Course, useGetAllCoursesQuery } from '../redux/apiSlice'
 import { useNavigate } from "react-router"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { filterValues, gradeFilter, setFiltersGrade } from "../redux/filterSlice"
-import { useGetAllCoursesQuery } from "../redux/apiSlice"
 import { FaScaleUnbalanced } from "react-icons/fa6"
+
+function CourseCard(props: {obj: Course}){
+    const navigate = useNavigate()
+    const {course_title, course_blurb, course_instructor, course_id, course_difficulty} = props.obj
+    return(
+        <div className="rounded-2xl my-4 md:my-2 group md:p-4 p-2 bg-gray-100 hover:bg-gray-200 md:bg-white border-2 border-emerald-700 md:border-0 max-h-[17.5rem] md:h-auto md:max-h-none">
+            <p className=" text-lg md:text-xl font-bold my-2">{course_title}</p>
+            <p className="my-2 font-bold">{course_instructor}</p>
+            <div className="flex items-center gap-x-2 md:gap-x-4">
+            <FaScaleUnbalanced size={'1.5rem'} fill="blue"/>
+            <p>{course_difficulty}</p>
+            </div>
+            <p className="my-2 text-sm md:text-lg">{course_blurb}</p>
+            <button className="add_course hidden group-hover:block outline-none border-none p-2 rounded-xl text-white bg-emerald-700" onClick={()=> navigate(`/courses/${course_id}`)}>
+                View Course
+            </button>
+        </div>
+    )
+}
 
 export function AllCourses(){
     let {data, isSuccess} = useGetAllCoursesQuery()
-    let navigate = useNavigate()
     let dispatch = useAppDispatch()
     let filter_values= useAppSelector(filterValues)
     let gradeValue = useAppSelector(gradeFilter)
-    let [is_filter_chosen, chooseFilter] = useState(false)
-    let [searchVal, updateSearchVal] = useState('')
+    const [is_filter_chosen, chooseFilter] = useState(false)
+    const [searchVal, updateSearchVal] = useState('')
     let search_results = data?.filter((item) => item.course_title.toLowerCase().includes(searchVal.toLowerCase()))
 
     function determineFilterOutput(){
@@ -41,7 +58,7 @@ export function AllCourses(){
         }
     }, [filter_values, is_filter_chosen, gradeValue.length])
 
-    let [null_search, setNullSearch ] = useState(false)
+    const [null_search, setNullSearch ] = useState(false)
     //this effect defines filter state
 
     useEffect(()=> {
@@ -56,24 +73,6 @@ export function AllCourses(){
         }
     }, [null_search, search_results?.length, searchVal.length])
     // this is for the search bar state
-
-    function CourseCard(props: {obj: Course}){
-        let {course_title, course_blurb, course_instructor, course_id, course_difficulty} = props.obj
-        return(
-            <div className="rounded-2xl my-4 md:my-2 group md:p-4 p-2 bg-gray-100 hover:bg-gray-200 md:bg-white border-2 border-emerald-700 md:border-0 max-h-[17.5rem] md:h-auto md:max-h-none">
-                <p className=" text-lg md:text-xl font-bold my-2">{course_title}</p>
-                <p className="my-2 font-bold">{course_instructor}</p>
-                <div className="flex items-center gap-x-2 md:gap-x-4">
-                <FaScaleUnbalanced size={'1.5rem'} fill="blue"/>
-                <p>{course_difficulty}</p>
-                </div>
-                <p className="my-2 text-sm md:text-lg">{course_blurb}</p>
-                <button className="add_course hidden group-hover:block outline-none border-none p-2 rounded-xl text-white bg-emerald-700" onClick={()=> navigate(`/courses/${course_id}`)}>
-                    View Course
-                </button>
-            </div>
-        )
-    }
 
     return(
         <>

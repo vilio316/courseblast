@@ -1,12 +1,8 @@
 import { UserCourseData } from "./UserDash";
 import { MainNav } from "./NavComponents";
 import expert from '../assets/expert_2.jpg'
-{/*
-import { useState } from "react";
-*/}
 import { FaBookOpen, FaClock, FaUser } from "react-icons/fa";
 import { useParams } from "react-router";
-//import { useGetUserCoursesQuery } from "../redux/apiSlice";
 import { FullCourse, useGetAllCoursesQuery } from "../redux/apiSlice";
 import { Json } from "../supabase";
 
@@ -76,7 +72,6 @@ export function UserCourseDetails(){
     
 
     return(
-        <>
         <div className="container mx-auto p-4">
         <MainNav/>
             <div className="img_container w-full grid  my-4">
@@ -105,31 +100,28 @@ export function UserCourseDetails(){
             </div>
             <span>{course_duration} hours</span>
             </div>
-            <ol className="list-decimal">
+            <ol className="list-decimal mx-4 p-2 md:p-4">
             {
-                course_units?.map((course_item) => <CourseUnit unit={course_item}/>)
+                course_units?.map((course_item) => <CourseUnit unit={course_item} key={course_item?.toString()}/>)
             }
             </ol>
         </div>
-        </>
     )
 }
 
-function CourseUnit(props: {unit: Json}){
+function CourseUnit(props: {readonly unit: Json}){
     return(
-        <>
         <li>
             <div className="grid grid-cols-12">
             <p className="col-span-8">{props.unit?.toString()}</p>
             <div className="col-span-3 justify-items-center p-2 md:p-4">
                 <button className="
-               bg-emerald-700 text-center grid outline-none border-0 text-white rounded-sxl p-2 md:p-3 
+               bg-emerald-700 text-center grid outline-none border-0 text-white rounded-2xl p-2 md:p-3 
                 ">
                     Complete
                     </button>
             </div>
             </div>
         </li>
-        </>
     )
 } 

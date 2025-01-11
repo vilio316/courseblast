@@ -1,7 +1,6 @@
-export default function Error(){
+export default function ErrorHandler(){
 
     return(
-        <>
         <div className="grid h-screen w-11/12 mx-auto p-4">
             <div className="place-self-center text-center">
                 <p className="font-bold text-4xl">
@@ -12,6 +11,5 @@ export default function Error(){
                 </p>
             </div>
         </div>
-        </>
     )
 }

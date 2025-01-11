@@ -12,7 +12,6 @@ export function MobileNav(){
     let navigate = useNavigate()
 
     return(
-        <>
         <div className="sticky z-20 bottom-0 grid md:hidden grid-cols-5 bg-white items-end p-2">
             <div className="grid justify-items-center" onClick={()=> navigate('/user/cart')}>
                 <div>
@@ -60,14 +59,13 @@ export function MobileNav(){
             </div>
 
         </div>
-        </>
     )
 }
 
-export function MainNav(props: {text?: string}){
+export function MainNav(props: { readonly text?: string}){
     let profilePhoto = useAppSelector(pfp)
-    let [menuState, changeMenu] = useState(false)
-    let [prof, changeProf] = useState(false)
+    const [menuState, changeMenu] = useState(false)
+    const [prof, changeProf] = useState(false)
     let navigate = useNavigate()
     let dispatch = useAppDispatch()    
     const clearAll = () => {
@@ -83,7 +81,6 @@ export function MainNav(props: {text?: string}){
     } 
 
     return(
-        <>
          <div className="hidden md:grid md:grid-cols-6 my-4"> 
     <p className="text-emerald-700 text-3xl col-span-5 font-bold">{props.text ? `${props.text}` : `Dashboard`}</p>
     <div className="col-span-1 grid grid-cols-2 justify-items-center relative">
@@ -98,9 +95,7 @@ export function MainNav(props: {text?: string}){
 <div className="grid justify-center">
 {
 profilePhoto && profilePhoto.length > 1? 
-<>
 <img src={profilePhoto} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
-</>
 : 
 <img src={react} alt="User PFP" className="rounded-full border-2 h-20 w-20 object-cover border-emerald-700"/>
 }
@@ -152,6 +147,5 @@ profilePhoto && profilePhoto.length > 1?
 </div>
     </div>
     </div>
-        </>
     )
 }

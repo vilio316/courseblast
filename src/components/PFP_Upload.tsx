@@ -40,18 +40,16 @@ export default function UploadProfilePicture(){
     }
 
     return(
-        <>
         <div className="p-2 md:p-4 w-11/12 mx-auto">
         <MainNav/>
-        <form>
-            <label htmlFor="pfp_upload" className="h-40 w-10/12 rounded-2xl border-2 border-emerald-700 border-dashed p-2 md:p-4">
+        <form className='my-2 md:my-4'>
+            <label htmlFor="pfp_upload" className="w-9/12 rounded-2xl border-2 border-emerald-700 border-dashed p-2 md:p-4">
             <input type="file" name="Profile Picture" id="pfp_upload" onChange={(event)=> upload_pfp(event)} className="h-0 opacity-0" accept="image/jpeg, image/jfif, image/png, image/jpg"/>
             <p className="text-xl md:text-2xl font-bold my-2 md:my-4">Upload Profile Image here</p>
             <p>Accepted File Types: .jpg, .jpeg, .jfif, .png</p>
             </label>
         </form>
         </div>
-        </>
     )
 }
 

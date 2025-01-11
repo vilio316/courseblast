@@ -1,12 +1,11 @@
 import { useAppSelector, useAppDispatch} from "../redux/hooks";
-import { enrolledCourses, first_name, ID, pfp, setEmailAddress, setFirstName, setLastName, updatePFP } from "../redux/userSlice";
+import { enrolledCourses, first_name, ID, pfp, setEmailAddress, setFirstName, setLastName, updatePFP, updateEnrolledCourses } from "../redux/userSlice";
 import { useNavigate } from "react-router";
 import { MainNav, MobileNav } from "./NavComponents";
 import { Course, useGetUserQuery } from "../redux/apiSlice";
 import supabase from "../supabase/clientSetup";
 import { useEffect } from "react"
 import react from '../assets/react.svg'
-import { updateEnrolledCourses } from "../redux/userSlice";
 
 export type UserCourseData = {
     course_title: string,
@@ -18,15 +17,14 @@ export type UserCourseData = {
 }
 
 type propType = {
-    object: Course
+    readonly object: Course
 }
 
 export function ShowCourse(props : propType){
     let navigate = useNavigate()
-    let {course_blurb, course_id, course_title} = props.object
+    const {course_blurb, course_id, course_title} = props.object
 
     return(
-        <>
             <div className="rounded-2xl p-2 md:p-4 border-2 border-emerald-700 hover:bg-gray-200 group w-full bg-gray-200 max-h-[17.5rem] md:bg-inherit my-2">
             <p className="font-bold text-lg md:text-xl w-10/12 overflow-hidden text-ellipsis whitespace-nowrap">{course_title}</p>
             <div className="grid md:grid-cols-3 gap-4">
@@ -42,7 +40,6 @@ export function ShowCourse(props : propType){
                 Continue
             </button>
         </div>
-        </>
     )
 }
 
@@ -55,16 +52,15 @@ function DashBody(){
         <>
         {enrolled_courses.length > 0 ? <>
             {
-                enrolled_courses.map((item: any) => <ShowCourse object={item} />)
+                enrolled_courses.map((item: Course) => <ShowCourse object={item} key={item.course_id} />)
             }
-        </> : <>
+        </> :
         <p>
             No Courses Added Yet
         </p>
-        </> }
+         }
         </> : 
-        <>
-        </>
+        null
         }
         </>
     )
@@ -98,24 +94,21 @@ export function Dashboard(){
     }
 
     return(
-        <>
         <div className="w-11/12 p-2 md:p-4 my-4 mx-auto relative">
         <MainNav/>
         <div className="grid grid-cols-4 items-center">
             <div className="grid col-span-1 justify-items-center" onClick={()=> navigate('/user/change_pfp')}>
             {profilePicture && profilePicture.length > 1 ?
-            <>
             <img src={profilePicture} alt="User Profile Photograph" className="rounded-full md:w-[10rem] md:h-40 md:p-4 p-2" />
-            </> : <>
+            : 
             <img src={react} alt="User Profile Photograph" className="rounded-full md:w-[10rem] md:h-40 md:p-4 p-2"  />
-            </>
+            
             }
             </div>
             <div className="grid col-span-3 p-4">
                 {isFetching?
-                <>
                 <p className='text-lg md:text-xl font-bold'>Loading....</p>
-                </> :
+                 :
                 <>
                 <p className="font-bold text-lg md:text-2xl">Hi, {firstName}!</p>
                 <p>Pick up from where you left off!</p>
@@ -133,7 +126,6 @@ export function Dashboard(){
         </div>
         <MobileNav/>
         </div>
-        </>
     )
 }
 

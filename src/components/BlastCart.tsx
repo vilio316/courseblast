@@ -1,16 +1,14 @@
 import { FaTrashCan } from "react-icons/fa6"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { cart, emailAddress, enrolledCourses, setCartState, updateEnrolledCourses } from "../redux/userSlice"
+import { cart, emailAddress, enrolledCourses, setCartState, updateEnrolledCourses, ID } from "../redux/userSlice"
 import { MainNav, MobileNav } from "./NavComponents"
 import supabase from "../supabase/clientSetup"
-import {ID } from '../redux/userSlice'
 import { PaystackButton } from "react-paystack"
 import { CartFiller, EmptyCart } from "./EmptyCart"
-import { ReactNode } from "react"
+import { ReactNode, useEffect } from "react"
 import { PaystackProps, callback } from "react-paystack/dist/types"
 import { updateUserCourses } from "./CourseDetails"
 import { useNavigate } from "react-router"
-import { useEffect } from "react"
 
 
 interface PaystackButtonProps extends PaystackProps {
@@ -26,8 +24,8 @@ interface PaystackButtonProps extends PaystackProps {
 function loopr (array: any[]){
     let holding_value = [...array];
     let hold_price = 0
-    for(let i= 0; i < holding_value.length; i++){
-        hold_price += holding_value[i].price
+    for (let item of holding_value){
+        hold_price += item.price
     }
     return hold_price
 }
@@ -55,9 +53,9 @@ export default function BlastCart(){
         const {data} = await supabase.from('courses').select()
         let blastCartClone = [...blastCart]
         let newArray = []
-        for (let i = 0; i < blastCartClone.length; i++){
+        for (let cart_course of blastCartClone){
             if(data){
-            let arr = data.filter((item) => item.course_id == blastCartClone[i].id)
+            let arr = data.filter((item) => item.course_id == cart_course.id)
             let element = arr[0]
             newArray.push(element)
         }
@@ -92,7 +90,6 @@ export default function BlastCart(){
         }}
 
     return(
-        <>
         <div className="w-11/12 mx-auto p-2 md:p-4 h-dvh md:h-auto">
         <MainNav text="Your BlastCart"/>
         <div className="grid">
@@ -105,9 +102,7 @@ export default function BlastCart(){
         </div>
         <p className="font-bold text-lg md:text-xl">{blastCart.length} Items in Cart</p>
         {blastCart.length < 1 ?
-        <>
         <EmptyCart/>
-        </>
         :
         <div className="block h-svh w-full">
         <table className="w-full md:w-9/12 my-2 md:my-4 table-auto border-collapse border-2 border-emerald-300">
@@ -135,10 +130,9 @@ export default function BlastCart(){
         </tbody>
         </table>
         {
-            blastCart.length < 3 ?<>
+            blastCart.length < 3 ?
             <CartFiller/>
-            </>: <>
-            </>
+            : null
         }
         { loopr(blastCart) > 0 ?
         <p>Total to Pay: <span className="bold">NGN {loopr(blastCart)}</span></p>: <p>
@@ -151,6 +145,5 @@ export default function BlastCart(){
         
         <MobileNav/>
         </div>
-        </>
     )
 }

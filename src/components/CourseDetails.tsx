@@ -63,7 +63,7 @@ export function CourseDetails(){
     
     let {course_difficulty, course_duration, course_title,course_price, course_instructor, course_id, course_long_desc, course_units} = course
     
-    let [course_modal, showMod] = useState(false)
+    const [course_modal, showMod] = useState(false)
     let blast_cart = useAppSelector(cart)
 
     function setCourseInCart(title:string ,price: number, id: string ){
@@ -109,7 +109,7 @@ export function CourseDetails(){
         <p className="my-4 font-bold text-xl md:text-2xl">
             Units
         </p>
-        <ol className="list-decimal">
+        <ol className="list-decimal mx-4 p-2 md:p-4">
         {
             course_units?.map((item) => (
                 <li>
@@ -134,11 +134,11 @@ export function CourseDetails(){
                 <button onClick={()=> {
                     let ids_arr = [];
                     if(user_mail.length > 1){
-                    for(let i =0; i < your_course_data.length; i++){
-                        ids_arr.push(your_course_data[i].course_id)
+                    for (let course of your_course_data){
+                        ids_arr.push(course.course_id)
                     }
-                    for(let i = 0; i < your_cart_data.length; i++){
-                        ids_arr.push(your_cart_data[i].id)
+                    for (let cart_course of your_cart_data){
+                        ids_arr.push(cart_course.id)
                     }
                     
                     if(params.courseID && ids_arr.indexOf(params.courseID) !== -1){

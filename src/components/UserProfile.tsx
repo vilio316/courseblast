@@ -23,13 +23,11 @@ export default function UserProfile(){
         dispatch(updateEnrolledCourses([]));
         dispatch(updatePFP(''))
     }
-
     let signOut = async() =>{
         await supabase.auth.signOut()
     } 
 
     return(
-        <>
         <div className="w-11/12 p-2 md:p-4 mx-auto">
         <MainNav text="Your Profile"/>
         <p className="md:hidden font-bold text-xl ">Your Profile</p>
@@ -46,16 +44,14 @@ export default function UserProfile(){
         <div className="grid justify-items-center md:justify-items-start md:flex md:gap-x-8 md:h-auto">
         
         <div className="pfp grid justify-center" onClick={()=> navigate('/user/change_pfp')}>
-        <>
-        { profpic && profpic.length > 1 ? <>
+        { profpic && profpic.length > 1 ? 
         <img src={profpic} alt="User PFP" className="rounded-full h-[10rem] w-[10rem] object-contain" />
-        </> : 
+        : 
         <img src={react_img}
         alt="User PFP"
         className="rounded-full h-[10rem] w-[10rem] object-contain"
         />
 }
-        </>
         </div>
         
         </div>
@@ -77,33 +73,28 @@ export default function UserProfile(){
                 </li>
             )
         )}
-            </> : <>
+            </> : 
             <div>            
             <p>No Courses Added Yet</p>
             <p>Add Courses using the link <a className="underline" href='/courses'>here</a></p>
             </div>
-            </>
            }
         </ul>
         </> : 
         <>
         {
-        isFetching ? <p>Loading... {isFetching}</p>: <>{error ? <>
+        isFetching ? <p>Loading... {isFetching}</p>: <>{error ?
         <p>Oops! We've encountered an error and can't find your profile at the moment. Click here to log back into your CourseBlast account. </p>
-        </> : <>
-        <p></p>
-        </>}</>
+        : null }</>
         }
         </> }
         </div>
         </div>
-        </> : <>
+        </> :
         <NotSignedInError/>
-        </>
         }
         <MobileNav/>
         </div>
-        </>
     )
 
 }
@@ -111,11 +102,9 @@ export default function UserProfile(){
 export function NotSignedInError(){
 
     return (
-        <>
          <div className="w-6/12 mx-auto h-svh md:h-auto">
         <p className="text-center text-2xl">Oops!</p>
         <p>Looks like you're not logged in yet. Click <a href='/sign-in' className="underline">here</a> to sign in if you already have an account and <a href="/sign-up" className="underline">here</a> to sign up for CourseBlast.</p>
         </div>
-        </>
     )
 }

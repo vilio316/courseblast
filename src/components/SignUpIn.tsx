@@ -36,11 +36,11 @@ export async function insertGoogUser(user_id: string, full_name: string, last_na
 }
 
 export function SignUp(){
-   let [password_show, changeState] = useState(false)
-   let [full_name, setName] = useState('')
-   let [email, setMail] = useState('')
-   let [pass, setPwd] = useState('')
-   let [last_name, setLName] = useState('')
+   const [password_show, changeState] = useState(false)
+   const [full_name, setName] = useState('')
+   const [email, setMail] = useState('')
+   const [pass, setPwd] = useState('')
+   const [last_name, setLName] = useState('')
    let navigate = useNavigate()
 
     async function signUp(email:string, pwd:string){
@@ -67,7 +67,6 @@ export function SignUp(){
 
 
     return(
-        <>
         <div className="grid place-items-center p-2 w-11/12 mx-auto">
                 <div className="w-11/12 shadow-md shadow-black rounded-xl p-4">
                 <p className="text-3xl font-bold text-emerald-700">CourseBlast</p>
@@ -147,16 +146,15 @@ export function SignUp(){
 
                 </div>
         </div>
-        </>
     )
 }
 
 export function SignIn(){
     let dispatch = useAppDispatch()
     let navigate = useNavigate()
-    let [email, setEmail] = useState('')
-    let [pwd, setPass] = useState('')
-    let [err, errorState] = useState(false)
+    const [email, setEmail] = useState('')
+    const [pwd, setPass] = useState('')
+    const [err, errorState] = useState(false)
 
     async function signIn(email:string, pwd:string){
         const {data, error} = await supabase.auth.signInWithPassword({
@@ -175,7 +173,6 @@ export function SignIn(){
 
     }
     return(
-        <>
         <div className="grid place-items-center w-11/12 md:w-9/12 mx-auto h-screen">
             <div className="w-11/12 shadow-md shadow-black rounded-2xl p-4">
             <p className="text-3xl text-emerald-700 font-bold">CourseBlast</p>
@@ -232,6 +229,5 @@ export function SignIn(){
             </p>
             </div>
         </div>
-        </>
     )
 }
