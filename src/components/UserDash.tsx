@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch} from "../redux/hooks";
-import { enrolledCourses, first_name, ID, pfp, setEmailAddress, setFirstName, setLastName, updatePFP, updateEnrolledCourses } from "../redux/userSlice";
+import { ID, setEmailAddress, setFirstName, setLastName, updatePFP, updateEnrolledCourses } from "../redux/userSlice";
 import { useNavigate } from "react-router";
 import { MainNav, MobileNav } from "./NavComponents";
 import { Course, useGetUserQuery } from "../redux/apiSlice";
@@ -44,15 +44,16 @@ export function ShowCourse(props : propType){
 }
 
 function DashBody(){
-    let enrolled_courses = useAppSelector(enrolledCourses)
+    let {data} = useGetUserQuery()
    
     return(
         <>
-        {enrolled_courses ?
+        { data && data[0]?
         <>
-        {enrolled_courses.length > 0 ? <>
+        { 
+        data[0].user_courses && data[0].user_courses.length > 0? <>
             {
-                enrolled_courses.map((item: Course) => <ShowCourse object={item} key={item.course_id} />)
+                data[0].user_courses?.map((item: any) => <ShowCourse object={item} key={item.course_id} />)
             }
         </> :
         <p>
@@ -66,13 +67,13 @@ function DashBody(){
     )
 }
 
-export function Dashboard(){
-    let firstName = useAppSelector(first_name)  
+export function Dashboard(){ 
     let dispatch = useAppDispatch()   
     let id_value = useAppSelector(ID)
-    let profilePicture = useAppSelector(pfp)
     let navigate = useNavigate()
     let {data, isFetching}= useGetUserQuery()
+    let user_array
+    if (data){ user_array = data[0]}
     useEffect(()=> {
         if(data && id_value){
             let new_arr = data.filter((item)=> item.id == id_value)
@@ -83,7 +84,7 @@ export function Dashboard(){
             dispatch(updateEnrolledCourses(user_courses));
             dispatch(updatePFP(user_pfp));
         }
-    }, [id_value])
+    }, [id_value, data])
 
     async function clearCourses(){
         dispatch(updateEnrolledCourses([]))
@@ -98,8 +99,8 @@ export function Dashboard(){
         <MainNav/>
         <div className="grid grid-cols-4 items-center">
             <div className="grid col-span-1 justify-items-center" onClick={()=> navigate('/user/change_pfp')}>
-            {profilePicture && profilePicture.length > 1 ?
-            <img src={profilePicture} alt="User Profile Photograph" className="rounded-full md:w-[10rem] md:h-40 md:p-4 p-2" />
+            {user_array?.user_pfp &&  user_array.user_pfp.length > 1 ?
+            <img src={user_array.user_pfp} alt="User Profile Photograph" className="rounded-full md:w-[10rem] md:h-40 md:p-4 p-2" />
             : 
             <img src={react} alt="User Profile Photograph" className="rounded-full md:w-[10rem] md:h-40 md:p-4 p-2"  />
             
@@ -110,7 +111,7 @@ export function Dashboard(){
                 <p className='text-lg md:text-xl font-bold'>Loading....</p>
                  :
                 <>
-                <p className="font-bold text-lg md:text-2xl">Hi, {firstName}!</p>
+                <p className="font-bold text-lg md:text-2xl">Hi, {user_array?.user_first_name}!</p>
                 <p>Pick up from where you left off!</p>
                 </>
 }
