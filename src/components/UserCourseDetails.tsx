@@ -111,10 +111,10 @@ export function UserCourseDetails(){
 
 function CourseUnit(props: {readonly unit: Json}){
     return(
-        <li>
-            <div className="grid grid-cols-12">
-            <p className="col-span-8">{props.unit?.toString()}</p>
-            <div className="col-span-3 justify-items-center p-2 md:p-4">
+        <li className="text-lg md:text-xl">
+            <div className="grid grid-cols-12 items-center">
+            <p className="col-span-10">{props.unit?.toString()}</p>
+            <div className="col-span-2 justify-items-center p-2 md:p-4">
                 <button className="
                bg-emerald-700 text-center grid outline-none border-0 text-white rounded-2xl p-2 md:p-3 
                 ">
